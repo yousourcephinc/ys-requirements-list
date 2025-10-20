@@ -10,15 +10,24 @@ Usage:
 import os
 import re
 import shutil
+import json
+import time
 from collections import defaultdict
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from threading import Lock
 
 from dotenv import load_dotenv
 from notion_client import Client
+import numpy as np
+from sentence_transformers import SentenceTransformer
+import faiss
 
 # --- CONFIGURATION ---
 GUIDES_ROOT_DIR = Path("guides")  # The root folder for the guides repository
 NOTION_PAGE_SIZE = 100
+MAX_WORKERS = 5  # Number of parallel workers for fetching content
+RATE_LIMIT_DELAY = 0.3  # Delay between requests in seconds (Notion allows ~3 requests/sec)
 
 # --- HELPER FUNCTIONS ---
 
@@ -86,8 +95,13 @@ def notion_blocks_to_markdown(blocks: list) -> str:
 
     return "\n".join(markdown_lines)
 
-def fetch_block_children(notion: Client, block_id: str, indent_level: int = 0) -> str:
+def fetch_block_children(notion: Client, block_id: str, indent_level: int = 0, rate_limiter: Lock = None) -> str:
     """Recursively fetches children of a block and converts to markdown."""
+    # Rate limiting
+    if rate_limiter:
+        with rate_limiter:
+            time.sleep(RATE_LIMIT_DELAY)
+    
     try:
         children_response = notion.blocks.children.list(block_id=block_id)
         children_blocks = children_response.get("results", [])
@@ -132,7 +146,7 @@ def fetch_block_children(notion: Client, block_id: str, indent_level: int = 0) -
             
             # Recursively fetch children if block has them
             if block.get("has_children"):
-                children_content = fetch_block_children(notion, block["id"], indent_level + 1)
+                children_content = fetch_block_children(notion, block["id"], indent_level + 1, rate_limiter)
                 if children_content:
                     markdown_lines.append(children_content)
         
@@ -140,6 +154,136 @@ def fetch_block_children(notion: Client, block_id: str, indent_level: int = 0) -
     except Exception as e:
         print(f"  Warning: Could not fetch children for block: {e}")
         return ""
+
+# --- SEMANTIC SEARCH FUNCTIONS ---
+
+def build_semantic_index(guides_dir: Path):
+    """Builds semantic search index from all guide files."""
+    print("Building semantic search index...")
+    
+    # Load sentence transformer model
+    model = SentenceTransformer('all-MiniLM-L6-v2')  # Fast and good performance
+    
+    documents = []
+    metadata = []
+    
+    # Walk through all guide files
+    for division_dir in guides_dir.iterdir():
+        if division_dir.is_dir() and division_dir.name != "README.md":
+            for guide_dir in division_dir.iterdir():
+                if guide_dir.is_dir():
+                    index_file = guide_dir / "index.md"
+                    if index_file.exists():
+                        try:
+                            with open(index_file, 'r', encoding='utf-8') as f:
+                                content = f.read()
+                            
+                            # Extract title from frontmatter
+                            lines = content.split('\n')
+                            title = "Unknown"
+                            division = division_dir.name
+                            
+                            for line in lines:
+                                if line.startswith('title:'):
+                                    title = line.split(':', 1)[1].strip().strip('"')
+                                    break
+                            
+                            # Split content into chunks for better search
+                            chunks = split_into_chunks(content, chunk_size=500, overlap=50)
+                            
+                            for i, chunk in enumerate(chunks):
+                                documents.append(chunk)
+                                metadata.append({
+                                    'title': title,
+                                    'division': division,
+                                    'file_path': str(index_file.relative_to(guides_dir)),
+                                    'chunk_id': i,
+                                    'total_chunks': len(chunks)
+                                })
+                                
+                        except Exception as e:
+                            print(f"  Warning: Could not process {index_file}: {e}")
+    
+    if not documents:
+        print("  No documents found to index")
+        return
+    
+    print(f"  Processing {len(documents)} document chunks...")
+    
+    # Generate embeddings
+    embeddings = model.encode(documents, show_progress_bar=True)
+    
+    # Create FAISS index
+    dimension = embeddings.shape[1]
+    index = faiss.IndexFlatIP(dimension)  # Inner product (cosine similarity)
+    
+    # Normalize embeddings for cosine similarity
+    faiss.normalize_L2(embeddings)
+    index.add(embeddings)
+    
+    # Save index and metadata
+    index_dir = guides_dir / "semantic_index"
+    index_dir.mkdir(exist_ok=True)
+    
+    # Save FAISS index
+    faiss.write_index(index, str(index_dir / "guides.index"))
+    
+    # Save metadata
+    with open(index_dir / "metadata.json", 'w', encoding='utf-8') as f:
+        json.dump(metadata, f, indent=2)
+    
+    # Save documents for reference
+    with open(index_dir / "documents.json", 'w', encoding='utf-8') as f:
+        json.dump(documents, f, indent=2)
+    
+    print(f"  Saved semantic index with {len(documents)} chunks to {index_dir}")
+
+def split_into_chunks(text: str, chunk_size: int = 500, overlap: int = 50) -> list:
+    """Split text into overlapping chunks for better semantic search."""
+    words = text.split()
+    chunks = []
+    
+    for i in range(0, len(words), chunk_size - overlap):
+        chunk = ' '.join(words[i:i + chunk_size])
+        if len(chunk.strip()) > 50:  # Only keep chunks with meaningful content
+            chunks.append(chunk)
+    
+    return chunks
+
+def search_semantic_index(query: str, guides_dir: Path, top_k: int = 5) -> list:
+    """Search the semantic index for relevant guides."""
+    index_dir = guides_dir / "semantic_index"
+    
+    if not (index_dir / "guides.index").exists():
+        print("Semantic index not found. Run build_semantic_index first.")
+        return []
+    
+    # Load model, index, and metadata
+    model = SentenceTransformer('all-MiniLM-L6-v2')
+    index = faiss.read_index(str(index_dir / "guides.index"))
+    
+    with open(index_dir / "metadata.json", 'r', encoding='utf-8') as f:
+        metadata = json.load(f)
+    
+    with open(index_dir / "documents.json", 'r', encoding='utf-8') as f:
+        documents = json.load(f)
+    
+    # Encode query
+    query_embedding = model.encode([query])
+    faiss.normalize_L2(query_embedding)
+    
+    # Search
+    scores, indices = index.search(query_embedding, top_k)
+    
+    results = []
+    for score, idx in zip(scores[0], indices[0]):
+        if idx < len(metadata):  # Valid index
+            result = metadata[idx].copy()
+            result['score'] = float(score)
+            result['content_preview'] = documents[idx][:200] + "..." if len(documents[idx]) > 200 else documents[idx]
+            results.append(result)
+    
+    return results
 
 # --- CORE LOGIC ---
 
@@ -160,16 +304,24 @@ def fetch_all_database_pages(notion: Client, database_id: str, view_id: str = No
     
     while True:
         query_params["start_cursor"] = start_cursor
+        print(f"  📥 Fetching batch (cursor: {start_cursor[:20] if start_cursor else 'initial'}...)")
         response = notion.databases.query(**query_params)
+        batch_size = len(response["results"])
         pages.extend(response["results"])
+        print(f"  ✓ Retrieved {batch_size} pages (total: {len(pages)})")
         if not response["has_more"]:
             break
         start_cursor = response["next_cursor"]
-    print(f"Found {len(pages)} pages in the Notion database.")
+    print(f"✅ Found {len(pages)} pages in the Notion database.")
     return pages
 
-def process_page(notion: Client, page: dict) -> dict:
+def process_page(notion: Client, page: dict, rate_limiter: Lock = None) -> dict:
     """Processes a single Notion page and writes it to a file."""
+    # Rate limiting
+    if rate_limiter:
+        with rate_limiter:
+            time.sleep(RATE_LIMIT_DELAY)
+    
     properties = page.get("properties", {})
     title = properties.get("Name", {}).get("title", [{}])[0].get("plain_text", "Untitled")
     
@@ -243,7 +395,7 @@ def process_page(notion: Client, page: dict) -> dict:
         
         # Fetch children if block has them
         if block.get("has_children"):
-            children_content = fetch_block_children(notion, block["id"], indent_level=1)
+            children_content = fetch_block_children(notion, block["id"], indent_level=1, rate_limiter=rate_limiter)
             if children_content:
                 markdown_lines.append(children_content)
     
@@ -259,14 +411,14 @@ def process_page(notion: Client, page: dict) -> dict:
     if file_path.exists():
         existing_content = file_path.read_text(encoding="utf-8")
         if existing_content == new_content:
-            print(f"  Skipped (unchanged): {file_path}")
+            print(f"  ⏭️  Skipped (unchanged): {division}/{clean_title}")
             return {"division": division, "title": clean_title, "path": f"./{division_slug}/{title_slug}/", "file_path": str(file_path)}
         else:
             action = "updated"
     
     # --- Write the File ---
     file_path.write_text(new_content, encoding="utf-8")
-    print(f"  {action.capitalize()}: {file_path}")
+    print(f"  {('✨' if action == 'created' else '📝')} {action.capitalize()}: {division}/{clean_title}")
     
     return {"division": division, "title": clean_title, "path": f"./{division_slug}/{title_slug}/", "file_path": str(file_path)}
 
@@ -290,7 +442,9 @@ def generate_master_catalog(processed_pages: list):
 
 def main():
     """Main function to run the sync process."""
-    print("Starting Notion to Git sync...")
+    print("\n🚀 Starting Notion to Git sync...")
+    print(f"📁 Working directory: {os.getcwd()}")
+    
     load_dotenv()
     
     notion_api_key = os.getenv("NOTION_API_KEY")
@@ -298,27 +452,57 @@ def main():
     notion_view_id = os.getenv("NOTION_VIEW_ID", "1aea172b65a3801e8f5b000c48917d78")  # Default to "All" view
 
     if not notion_api_key or not notion_database_id:
-        print("Error: NOTION_API_KEY and NOTION_DATABASE_ID must be set in .env file.")
+        print("❌ Error: NOTION_API_KEY and NOTION_DATABASE_ID must be set in .env file.")
         return
+
+    print("\n✅ Environment variables loaded:")
+    print(f"   Database ID: {notion_database_id}")
+    print(f"   View ID: {notion_view_id}")
+    print(f"   API Key: {notion_api_key[:15]}...")
 
     # Ensure guides directory exists
     if not GUIDES_ROOT_DIR.exists():
         GUIDES_ROOT_DIR.mkdir()
+        print(f"\n📁 Created guides directory: {GUIDES_ROOT_DIR.absolute()}")
+    else:
+        print(f"\n📂 Using guides directory: {GUIDES_ROOT_DIR.absolute()}")
 
+    print("\n🔗 Connecting to Notion API...")
     notion = Client(auth=notion_api_key)
+    print("✅ Connected successfully\n")
+    
+    print("📋 Fetching database pages...")
     pages = fetch_all_database_pages(notion, notion_database_id, notion_view_id)
     
     # Track all synced files
     synced_files = set()
     processed_pages = []
+    rate_limiter = Lock()
     
-    for page in pages:
-        result = process_page(notion, page)
-        processed_pages.append(result)
-        synced_files.add(result["file_path"])
+    print(f"\n📝 Processing {len(pages)} pages in parallel (max {MAX_WORKERS} workers)...\n")
+    
+    # Process pages in parallel with progress tracking
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        # Submit all tasks
+        future_to_page = {
+            executor.submit(process_page, notion, page, rate_limiter): (i, page) 
+            for i, page in enumerate(pages, 1)
+        }
+        
+        # Process completed tasks as they finish
+        for future in as_completed(future_to_page):
+            i, page = future_to_page[future]
+            try:
+                print(f"[{i}/{len(pages)}]", end=" ")
+                result = future.result()
+                processed_pages.append(result)
+                synced_files.add(result["file_path"])
+            except Exception as e:
+                page_title = page.get("properties", {}).get("Name", {}).get("title", [{}])[0].get("plain_text", "Unknown")
+                print(f"\n❌ Error processing page '{page_title}': {e}")
     
     # Delete files that are no longer in Notion
-    print("\nCleaning up removed pages...")
+    print("\n\n🧹 Cleaning up removed pages...")
     deleted_count = 0
     if GUIDES_ROOT_DIR.exists():
         for module_dir in GUIDES_ROOT_DIR.iterdir():
@@ -327,19 +511,42 @@ def main():
                     if guide_dir.is_dir():
                         index_file = guide_dir / "index.md"
                         if index_file.exists() and str(index_file) not in synced_files:
-                            print(f"  Deleted: {index_file}")
+                            print(f"  🗑️  Deleted: {index_file}")
                             shutil.rmtree(guide_dir)
                             deleted_count += 1
                 # Remove empty module directories
                 if not any(module_dir.iterdir()):
+                    print(f"  📁 Removed empty directory: {module_dir.name}")
                     shutil.rmtree(module_dir)
     
     if deleted_count > 0:
-        print(f"Removed {deleted_count} obsolete page(s)")
-        
+        print(f"✅ Removed {deleted_count} obsolete page(s)")
+    else:
+        print("✅ No obsolete pages to remove")
+    
+    print("\n📚 Generating master catalog...")
     generate_master_catalog(processed_pages)
     
-    print("\nSync complete!")
+    print("\n🧠 Building semantic search index...")
+    build_semantic_index(GUIDES_ROOT_DIR)
+    
+    print("\n" + "="*60)
+    print("✅ Sync complete!")
+    print("="*60)
+    print(f"\n📊 Summary:")
+    print(f"   • Total pages processed: {len(processed_pages)}")
+    print(f"   • Files synced: {len(synced_files)}")
+    print(f"   • Obsolete files removed: {deleted_count}")
+    
+    # Count by division
+    division_counts = defaultdict(int)
+    for page in processed_pages:
+        division_counts[page['division']] += 1
+    
+    print(f"\n📂 By Division:")
+    for division in sorted(division_counts.keys()):
+        print(f"   • {division}: {division_counts[division]} guides")
+    print()
 
 if __name__ == "__main__":
     main()

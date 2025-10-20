@@ -17,6 +17,7 @@ Your repository is now configured for automated Notion syncing with the followin
 - **Toggle content support** - Captures nested content in Notion toggles
 - **Division-based organization** - Files organized by PM/QA/SE/EXD divisions
 - **Smart updates** - Only updates changed files, skips unchanged ones
+- **Semantic search** - AI-powered search using embeddings and vector similarity
 - **Cleanup** - Removes files that no longer exist in Notion
 
 ## Next Steps
@@ -106,6 +107,10 @@ ys-requirements-list/
 │       └── sync.yml
 ├── guides/
 │   ├── README.md          # Auto-generated catalog
+│   ├── semantic_index/    # AI search index (generated)
+│   │   ├── guides.index   # FAISS vector index
+│   │   ├── metadata.json  # Search metadata
+│   │   └── documents.json # Document chunks
 │   ├── pm/                # PM division guides
 │   ├── qa/                # QA division guides
 │   ├── se/                # SE division guides
@@ -114,8 +119,35 @@ ys-requirements-list/
 ├── .gitignore
 ├── requirements.txt
 ├── sync_notion.py
+├── test_semantic_search.py
 └── README.md
 \`\`\`
+
+## Semantic Search
+
+Your repository now includes AI-powered semantic search! After each sync, the system automatically:
+
+1. **Chunks** all guide content into searchable segments
+2. **Generates embeddings** using sentence transformers
+3. **Creates FAISS index** for fast similarity search
+4. **Enables natural language queries** like "authentication setup" or "database patterns"
+
+### Testing Semantic Search
+
+Run the test script locally:
+
+\`\`\`bash
+python test_semantic_search.py "authentication setup"
+python test_semantic_search.py "API security best practices"
+python test_semantic_search.py "database design patterns"
+\`\`\`
+
+### How It Works
+
+- **Model**: Uses `all-MiniLM-L6-v2` for fast, high-quality embeddings
+- **Similarity**: Cosine similarity for semantic matching
+- **Chunking**: 500-word chunks with 50-word overlap for context
+- **Storage**: FAISS index for sub-second search on 1000+ documents
 
 ## Updating the Workflow
 
