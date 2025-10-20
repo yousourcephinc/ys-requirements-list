@@ -1,0 +1,146 @@
+# Implementation Guides Catalog
+
+This repository contains the official, curated implementation guides for all engineering teams, synced from Notion.
+
+## EXD
+
+- **[Dashboard](./exd/dashboard/)**
+- **[Navigation Menu Growth 1](./exd/navigation-menu-growth-1/)**
+- **[Navigation Menu Intro 1](./exd/navigation-menu-intro-1/)**
+- **[Navigation Menu Intro 2](./exd/navigation-menu-intro-2/)**
+- **[Notification System Intro 1](./exd/notification-system-intro-1/)**
+- **[Notification System Intro 2](./exd/notification-system-intro-2/)**
+- **[Payments and Recurring Payments Growth 1](./exd/payments-and-recurring-payments-growth-1/)**
+- **[Payments and Recurring Payments Intro 1](./exd/payments-and-recurring-payments-intro-1/)**
+- **[Payments and Recurring Payments Intro 2](./exd/payments-and-recurring-payments-intro-2/)**
+- **[Settings and Preferences Growth 1](./exd/settings-and-preferences-growth-1/)**
+- **[Settings and Preferences Intro 1](./exd/settings-and-preferences-intro-1/)**
+- **[Settings and Preferences Intro 2](./exd/settings-and-preferences-intro-2/)**
+- **[Third-Party API Integration Intro 1](./exd/third-party-api-integration-intro-1/)**
+- **[User Management Growth 1](./exd/user-management-growth-1/)**
+- **[User Management Intro 1](./exd/user-management-intro-1/)**
+- **[User Management Intro 2](./exd/user-management-intro-2/)**
+- **[User Profile -](./exd/user-profile--/)**
+- **[User Profile -](./exd/user-profile--/)**
+- **[User Profile - Intro 1](./exd/user-profile---intro-1/)**
+
+## PM
+
+- **[Dashboard](./pm/dashboard/)**
+- **[File Upload and Download Module - Growth I - PM Implementation](./pm/file-upload-and-download-module---growth-i---pm-implementation/)**
+- **[File Upload and Download Module - Introduction I - PM Implementation](./pm/file-upload-and-download-module---introduction-i---pm-implementation/)**
+- **[File Upload and Download Module - Introduction II - PM Implementation](./pm/file-upload-and-download-module---introduction-ii---pm-implementation/)**
+- **[Navigation Menu Module - Growth I - PM Implementation](./pm/navigation-menu-module---growth-i---pm-implementation/)**
+- **[Navigation Menu Module - Introduction I - PM Implementation](./pm/navigation-menu-module---introduction-i---pm-implementation/)**
+- **[Navigation Menu Module - Introduction II - PM Implementation](./pm/navigation-menu-module---introduction-ii---pm-implementation/)**
+- **[New Module Implementation](./pm/new-module-implementation/)**
+- **[Notifications Module - Growth I - PM Implementation](./pm/notifications-module---growth-i---pm-implementation/)**
+- **[Notifications Module - Introduction I - PM Implementation](./pm/notifications-module---introduction-i---pm-implementation/)**
+- **[Notifications Module - Introduction II - PM Implementation](./pm/notifications-module---introduction-ii---pm-implementation/)**
+- **[Payment Processing Module - Introduction I - PM Implementation](./pm/payment-processing-module---introduction-i---pm-implementation/)**
+- **[Search Module - Growth I - PM Implementation](./pm/search-module---growth-i---pm-implementation/)**
+- **[Search Module - Introduction I - PM Implementation](./pm/search-module---introduction-i---pm-implementation/)**
+- **[Search Module - Introduction II - PM Implementation](./pm/search-module---introduction-ii---pm-implementation/)**
+- **[Settings & Preferences Module - Growth I - PM Implementation](./pm/settings--preferences-module---growth-i---pm-implementation/)**
+- **[Settings & Preferences Module - Introduction I - PM Implementation](./pm/settings--preferences-module---introduction-i---pm-implementation/)**
+- **[Settings & Preferences Module - Introduction II - PM Implementation](./pm/settings--preferences-module---introduction-ii---pm-implementation/)**
+- **[Subscriptions Management Module - Growth I - PM Implementation](./pm/subscriptions-management-module---growth-i---pm-implementation/)**
+- **[Subscriptions Management Module - Introduction I - PM Implementation](./pm/subscriptions-management-module---introduction-i---pm-implementation/)**
+- **[User Management](./pm/user-management/)**
+- **[User Profile Module - Growth I - PM Implementation](./pm/user-profile-module---growth-i---pm-implementation/)**
+- **[User Profile Module - Introduction I - PM Implementation](./pm/user-profile-module---introduction-i---pm-implementation/)**
+- **[User Profile Module - Introduction II - PM Implementation](./pm/user-profile-module---introduction-ii---pm-implementation/)**
+
+## QA
+
+- **[API Integration Growth 1](./qa/api-integration-growth-1/)**
+- **[API Integration Intro 1](./qa/api-integration-intro-1/)**
+- **[API Integration Intro 2](./qa/api-integration-intro-2/)**
+- **[API Module Growth 1](./qa/api-module-growth-1/)**
+- **[API Module Introduction 1](./qa/api-module-introduction-1/)**
+- **[API Module Introduction 2](./qa/api-module-introduction-2/)**
+- **[Dashboard Growth 1](./qa/dashboard-growth-1/)**
+- **[Dashboard Intro 1](./qa/dashboard-intro-1/)**
+- **[Dashboard Intro 2](./qa/dashboard-intro-2/)**
+- **[QA -User Management Intro 1](./qa/qa--user-management-intro-1/)**
+- **[QA- Navigation Menu Growth 1](./qa/qa--navigation-menu-growth-1/)**
+- **[QA- Navigation Menu Intro 1](./qa/qa--navigation-menu-intro-1/)**
+- **[QA- Navigation Menu Intro 2](./qa/qa--navigation-menu-intro-2/)**
+- **[QA- User Profile Growth 1](./qa/qa--user-profile-growth-1/)**
+- **[QA- User Profile Intro 1](./qa/qa--user-profile-intro-1/)**
+- **[QA- User Profile Intro 2](./qa/qa--user-profile-intro-2/)**
+- **[User Management Growth 1](./qa/user-management-growth-1/)**
+- **[User Management Intro 2](./qa/user-management-intro-2/)**
+
+## SE
+
+- **[Application Performance Monitoring Module - Introduction 1](./se/application-performance-monitoring-module---introduction-1/)**
+- **[Audit Module - Introduction 1](./se/audit-module---introduction-1/)**
+- **[Authentication Module - Growth 1](./se/authentication-module---growth-1/)**
+- **[Authentication Module - Introduction 1](./se/authentication-module---introduction-1/)**
+- **[Authentication Module - Introduction 2](./se/authentication-module---introduction-2/)**
+- **[Base Module](./se/base-module/)**
+- **[CRUD Grid Module - Growth 1](./se/crud-grid-module---growth-1/)**
+- **[CRUD Grid Module - Introduction 1](./se/crud-grid-module---introduction-1/)**
+- **[CRUD Grid Module - Introduction 2](./se/crud-grid-module---introduction-2/)**
+- **[Dashboard Module - Growth 1](./se/dashboard-module---growth-1/)**
+- **[Dashboard Module - Introduction 1](./se/dashboard-module---introduction-1/)**
+- **[Dashboard Module - Introduction 2](./se/dashboard-module---introduction-2/)**
+- **[Diagnostics Module - Growth 1](./se/diagnostics-module---growth-1/)**
+- **[Diagnostics Module - Introduction 1](./se/diagnostics-module---introduction-1/)**
+- **[Diagnostics Module - Introduction 2](./se/diagnostics-module---introduction-2/)**
+- **[Email Notification Service Module - Introduction 1](./se/email-notification-service-module---introduction-1/)**
+- **[FAQ Page Module - Growth 1](./se/faq-page-module---growth-1/)**
+- **[FAQ Page Module - Introduction 1](./se/faq-page-module---introduction-1/)**
+- **[Feedback Module - Growth 1](./se/feedback-module---growth-1/)**
+- **[Feedback Module - Introduction 1](./se/feedback-module---introduction-1/)**
+- **[Feedback Module - Introduction 2](./se/feedback-module---introduction-2/)**
+- **[File Upload and Download Module - Growth 1](./se/file-upload-and-download-module---growth-1/)**
+- **[File Upload and Download Module - Introduction 1](./se/file-upload-and-download-module---introduction-1/)**
+- **[File Upload and Download Module - Introduction 2](./se/file-upload-and-download-module---introduction-2/)**
+- **[File Upload and Management Module -  Introduction 1](./se/file-upload-and-management-module---introduction-1/)**
+- **[File Upload and Management Module - Introduction 2](./se/file-upload-and-management-module---introduction-2/)**
+- **[Form Module - Growth 1](./se/form-module---growth-1/)**
+- **[Form Module - Introduction 1](./se/form-module---introduction-1/)**
+- **[Form Module - Introduction 2](./se/form-module---introduction-2/)**
+- **[Image Pre-Processing Module - Introduction 1](./se/image-pre-processing-module---introduction-1/)**
+- **[List View Module - Growth 1](./se/list-view-module---growth-1/)**
+- **[List View Module - Introduction 1](./se/list-view-module---introduction-1/)**
+- **[List View Module - Introduction 2](./se/list-view-module---introduction-2/)**
+- **[Navigation Menu Module - Growth 1](./se/navigation-menu-module---growth-1/)**
+- **[Navigation Menu Module - Introduction 1](./se/navigation-menu-module---introduction-1/)**
+- **[Navigation Menu Module - Introduction 2](./se/navigation-menu-module---introduction-2/)**
+- **[Notification System Module - Growth 1](./se/notification-system-module---growth-1/)**
+- **[Notification System Module - Introduction 1](./se/notification-system-module---introduction-1/)**
+- **[Notification System Module - Introduction 2](./se/notification-system-module---introduction-2/)**
+- **[Payment Processing Module - Introduction 1](./se/payment-processing-module---introduction-1/)**
+- **[Payments and Recurring Payments Module - Growth 1](./se/payments-and-recurring-payments-module---growth-1/)**
+- **[Payments and Recurring Payments Module - Introduction 1](./se/payments-and-recurring-payments-module---introduction-1/)**
+- **[Payments and Recurring Payments Module - Introduction 2](./se/payments-and-recurring-payments-module---introduction-2/)**
+- **[Privacy Policy and Terms of Service Module - Growth 1](./se/privacy-policy-and-terms-of-service-module---growth-1/)**
+- **[Privacy Policy and Terms of Service Module - Introduction 1](./se/privacy-policy-and-terms-of-service-module---introduction-1/)**
+- **[RESTFul API Module - Introduction 1](./se/restful-api-module---introduction-1/)**
+- **[RESTFul API Module - Introduction 2](./se/restful-api-module---introduction-2/)**
+- **[Reporting Module - Growth 1](./se/reporting-module---growth-1/)**
+- **[Reporting Module - Introduction 1](./se/reporting-module---introduction-1/)**
+- **[Reporting Module - Introduction 2](./se/reporting-module---introduction-2/)**
+- **[Responsive Design Module - Introduction 1](./se/responsive-design-module---introduction-1/)**
+- **[Search Module - Growth 1](./se/search-module---growth-1/)**
+- **[Search Module - Introduction 1 - SE Implementation](./se/search-module---introduction-1---se-implementation/)**
+- **[Search Module - Introduction 2 - SE Implementation](./se/search-module---introduction-2---se-implementation/)**
+- **[Server-Side API Integration Module - Growth 1](./se/server-side-api-integration-module---growth-1/)**
+- **[Server-Side API Integration Module - Introduction 1](./se/server-side-api-integration-module---introduction-1/)**
+- **[Server-Side API Integration Module - Introduction 2](./se/server-side-api-integration-module---introduction-2/)**
+- **[Settings and Preferences Module - Growth 1](./se/settings-and-preferences-module---growth-1/)**
+- **[Settings and Preferences Module - Introduction 1](./se/settings-and-preferences-module---introduction-1/)**
+- **[Settings and Preferences Module - Introduction 2](./se/settings-and-preferences-module---introduction-2/)**
+- **[Subscription Management Module - Growth 1](./se/subscription-management-module---growth-1/)**
+- **[Subscription Management Module - Introduction 1](./se/subscription-management-module---introduction-1/)**
+- **[Support Module - Introduction 1](./se/support-module---introduction-1/)**
+- **[Support Module - Introduction 2](./se/support-module---introduction-2/)**
+- **[User Management Module - Growth 1](./se/user-management-module---growth-1/)**
+- **[User Management Module - Introduction 1](./se/user-management-module---introduction-1/)**
+- **[User Management Module - Introduction 2](./se/user-management-module---introduction-2/)**
+- **[User Profile Module - Growth 1](./se/user-profile-module---growth-1/)**
+- **[User Profile Module - Introduction 1](./se/user-profile-module---introduction-1/)**
+- **[User Profile Module - Introduction 2](./se/user-profile-module---introduction-2/)**
