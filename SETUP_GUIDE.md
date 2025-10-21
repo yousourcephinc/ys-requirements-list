@@ -2,57 +2,45 @@
 
 ## Current Status ✅
 
-Your repository is now configured for automated Notion syncing with the following:
+Your repository is configured for automated Notion syncing with the following:
 
 ### Files Created:
-- ✅ `.github/workflows/sync.yml` - GitHub Action for automated syncing
-- ✅ `.gitignore` - Already configured to ignore `.env` and cache files
+- ✅ `.github/workflows/main.yml` - GitHub Action for automated syncing
+- ✅ `.github/workflows/deploy.yml` - GitHub Action for Cloud Run deployment
+- ✅ `.gitignore` - Configured to ignore `.env` and cache files
 - ✅ `sync_notion.py` - Script that syncs from Notion with toggle support
+- ✅ `guides_mcp_api.py` - REST API server deployed on Cloud Run
+- ✅ `vector_search.py` - Vertex AI embeddings + Firestore vector search
 - ✅ `requirements.txt` - Python dependencies
 - ✅ `.env` - Local environment variables (not committed to Git)
 
 ### Features:
-- **Daily automatic sync** at 2 AM UTC
+- **Daily automatic sync** at 2 AM UTC from Notion to GitHub
 - **Manual trigger** available via GitHub Actions UI
 - **Toggle content support** - Captures nested content in Notion toggles
 - **Division-based organization** - Files organized by PM/QA/SE/EXD divisions
 - **Smart updates** - Only updates changed files, skips unchanged ones
-- **Semantic search** - AI-powered search using embeddings and vector similarity
+- **AI-powered semantic search** - Google Vertex AI text-embedding-004 model
+- **Vector storage** - Firestore Native database with similarity search
+- **Cloud deployment** - Scale-to-zero Cloud Run service
 - **Cleanup** - Removes files that no longer exist in Notion
 
 ## Next Steps
 
-### 1. Push to GitHub
+### 1. Verify GitHub Secrets
 
-First, commit and push your changes:
+Your GitHub secrets should already be configured at:
+`https://github.com/yousourcephinc/ys-requirements-list/settings/secrets/actions`
 
-\`\`\`bash
-git add .
-git commit -m "feat: Add automated Notion sync workflow"
-git push origin main
-\`\`\`
+Required secrets:
+- `NOTION_API_KEY` - Your Notion integration API key
+- `NOTION_DATABASE_ID` - Your Notion database ID
+- `NOTION_VIEW_ID` - Your Notion view ID
+- `GCP_SA_KEY` - Google Cloud service account key (JSON)
 
-### 2. Configure GitHub Secrets
+⚠️ **Never commit these values to the repository**
 
-Go to your GitHub repository: `https://github.com/yousourcephinc/ys-requirements-list`
-
-Navigate to: **Settings** → **Secrets and variables** → **Actions**
-
-Click **New repository secret** and add the following three secrets:
-
-#### Secret 1: NOTION_API_KEY
-- **Name:** `NOTION_API_KEY`
-- **Value:** `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`
-
-#### Secret 2: NOTION_DATABASE_ID
-- **Name:** `NOTION_DATABASE_ID`
-- **Value:** `12aa172b65a380048ed7c2f9ee5e1bfe`
-
-#### Secret 3: NOTION_VIEW_ID
-- **Name:** `NOTION_VIEW_ID`
-- **Value:** `1aea172b65a3801e8f5b000c48917d78`
-
-### 3. Test the Workflow
+### 2. Test the Notion Sync Workflow
 
 Once secrets are configured:
 
@@ -64,11 +52,11 @@ Once secrets are configured:
 
 The workflow will:
 - Check out your code
-- Install Python dependencies
+- Install Python dependencies (notion-client, python-dotenv only)
 - Run the sync script
 - Commit and push any changes back to the repository
 
-### 4. Monitor the Workflow
+### 3. Monitor the Workflow
 
 After triggering:
 - Watch the workflow run in real-time
@@ -100,73 +88,112 @@ The workflow runs automatically:
 
 After sync, your repository will look like:
 
-\`\`\`
+```
 ys-requirements-list/
 ├── .github/
 │   └── workflows/
-│       └── sync.yml
+│       ├── main.yml        # Notion sync workflow
+│       └── deploy.yml      # Cloud Run deployment
 ├── guides/
 │   ├── README.md          # Auto-generated catalog
-│   ├── semantic_index/    # AI search index (generated)
-│   │   ├── guides.index   # FAISS vector index
-│   │   ├── metadata.json  # Search metadata
-│   │   └── documents.json # Document chunks
 │   ├── pm/                # PM division guides
 │   ├── qa/                # QA division guides
 │   ├── se/                # SE division guides
 │   └── exd/               # EXD division guides
 ├── .env                   # Local only (not in Git)
 ├── .gitignore
+├── guides_mcp_api.py      # REST API server
+├── vector_search.py       # Vertex AI + Firestore search
+├── sync_notion.py         # Notion sync script
 ├── requirements.txt
-├── sync_notion.py
-├── test_semantic_search.py
+├── Dockerfile             # Cloud Run container
 └── README.md
-\`\`\`
+```
 
-## Semantic Search
+## Cloud Deployment
 
-Your repository now includes AI-powered semantic search! After each sync, the system automatically:
+### Production Service
 
-1. **Chunks** all guide content into searchable segments
-2. **Generates embeddings** using sentence transformers
-3. **Creates FAISS index** for fast similarity search
-4. **Enables natural language queries** like "authentication setup" or "database patterns"
+**URL**: https://mcp-server-375955300575.us-central1.run.app
+**Authentication**: Google Workspace (domain:you-source.com)
+**Platform**: Google Cloud Run (us-central1)
+**Configuration**: 
+- Scale: 0-5 instances
+- Memory: 2Gi
+- CPU: 1
+- Budget: $20 USD max
 
-### Testing Semantic Search
+### Semantic Search Architecture
 
-Run the test script locally:
+The deployed service uses:
 
-\`\`\`bash
-python test_semantic_search.py "authentication setup"
-python test_semantic_search.py "API security best practices"
-python test_semantic_search.py "database design patterns"
-\`\`\`
+1. **Vertex AI** - Google's text-embedding-004 model for generating embeddings
+   - Cost: ~$0.00002 per 1,000 characters
+   - Fast, high-quality embeddings
+   
+2. **Firestore** - Native mode for vector storage
+   - Cosine similarity search
+   - 130 guides indexed
+   - Free tier enabled
 
-### How It Works
+3. **Cloud Run** - Serverless container platform
+   - Automatic scaling (including to zero)
+   - No cold start issues with managed services
 
-- **Model**: Uses `all-MiniLM-L6-v2` for fast, high-quality embeddings
-- **Similarity**: Cosine similarity for semantic matching
-- **Chunking**: 500-word chunks with 50-word overlap for context
-- **Storage**: FAISS index for sub-second search on 1000+ documents
+### Testing the Deployed API
+
+```bash
+# Health check
+curl -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
+  https://mcp-server-375955300575.us-central1.run.app/health
+
+# List divisions
+curl -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
+  https://mcp-server-375955300575.us-central1.run.app/divisions
+
+# Semantic search
+curl -X POST \
+  -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "authentication setup", "top_k": 3}' \
+  https://mcp-server-375955300575.us-central1.run.app/search
+```
 
 ## Updating the Workflow
 
-To change the sync schedule, edit `.github/workflows/sync.yml`:
+To change the sync schedule, edit `.github/workflows/main.yml`:
 
-\`\`\`yaml
+```yaml
 schedule:
   - cron: '0 2 * * *'  # Change this cron expression
-\`\`\`
+```
 
 Cron examples:
 - `'0 */6 * * *'` - Every 6 hours
 - `'0 0 * * *'` - Daily at midnight
 - `'0 9 * * 1-5'` - Weekdays at 9 AM
 
+## Cost Management
+
+### Budget Alerts
+- **Limit**: $20 USD per month
+- **Alerts**: 50%, 75%, 90%, 100% thresholds
+- **Action**: Email notifications to billing admins
+
+### Resource Quotas
+- **Cloud Run**: Max 5 instances (0-5 autoscaling)
+- **Memory**: 2Gi per instance
+- **Timeout**: 300 seconds
+- **Vertex AI**: Pay-per-use embedding generation
+
+View current spending: https://console.cloud.google.com/billing
+
 ## Success Indicators
 
 ✅ Workflow runs without errors
-✅ New commits appear automatically
+✅ New commits appear automatically with "[skip ci]" message
 ✅ `guides/` directory stays up-to-date with Notion
 ✅ README.md catalog is regenerated
 ✅ Only changed files are updated
+✅ Cloud Run service responds to API requests
+✅ Semantic search returns relevant results
