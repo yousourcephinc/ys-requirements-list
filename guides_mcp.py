@@ -13,6 +13,7 @@ import json
 import os
 import sys
 import logging
+import argparse
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 
@@ -494,7 +495,13 @@ async def main():
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Run the Guides MCP Server")
+    parser.add_argument("--host", default="127.0.0.1", help="Host to bind the server to")
+    parser.add_argument("--port", default=8080, type=int, help="Port to bind the server to")
+    args = parser.parse_args()
+    
     try:
+        # Start server with command line arguments
         asyncio.run(main())
     except KeyboardInterrupt:
         logger.info("Server stopped by user")

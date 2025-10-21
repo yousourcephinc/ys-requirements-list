@@ -21,9 +21,9 @@ python sync_notion.py
 
 The script will create a `guides/` directory with one subfolder per module and guide.
 
-## MCP Server
+## Guides REST API
 
-This repository includes a Model Context Protocol (MCP) server that exposes tools to interact with the guides.
+This repository includes a REST API server that exposes endpoints to interact with the guides.
 
 ### Setup
 
@@ -33,41 +33,43 @@ Install the dependencies:
 pip install -r requirements.txt
 ```
 
-### Running the Server
+### Running the Server Locally
 
-Start the MCP server:
-
-```bash
-python guides_mcp.py
-```
-
-Or use the make target:
+Start the API server:
 
 ```bash
-make mcp
+python guides_mcp_api.py
 ```
+
+The server will start on `http://localhost:8080`
 
 ### Testing
 
-You can test the MCP server functionality by running:
+You can test the API functionality by running:
 
 ```bash
-python test_guides_mcp.py
+pip install requests  # Install requests library for testing
+python test_guides_api.py
 ```
 
-Or use the make target:
+Or test a deployed server:
 
 ```bash
-make test-mcp
+python test_guides_api.py https://your-cloud-run-url.run.app
 ```
 
-### Available Tools
+### Available Endpoints
 
-The MCP server provides the following tools:
+The API provides the following endpoints:
 
-- **list_guide_divisions**: List all divisions (categories) of guides
-- **list_guides_by_division**: List all guides in a specific division
-- **get_guide_content**: Get the content of a specific guide
-- **search_guides**: Search guides using semantic search
-- **rebuild_semantic_index**: Rebuild the semantic search index
-- **get_guide_recommendations**: Get guide recommendations based on topics and filters 
+- **GET /divisions**: List all divisions (categories) of guides
+- **GET /divisions/{division}/guides**: List all guides in a specific division
+- **GET /guides/{path}**: Get the content of a specific guide
+- **POST /search**: Search guides using semantic search (body: `{"query": "...", "top_k": 5}`)
+- **POST /rebuild-index**: Rebuild the semantic search index
+- **POST /recommendations**: Get guide recommendations (body: `{"topics": [...], "maturity_level": "...", "division": "..."}`)
+- **GET /health**: Health check endpoint
+
+### Deploying to Google Cloud Run
+
+See the deployment guide in the repository for instructions on deploying to GCP Cloud Run. 
