@@ -16,13 +16,6 @@ from typing import Dict, List, Any, Optional
 
 from flask import Flask, jsonify, request
 
-# Import guide-related functions from sync_notion
-from sync_notion import (
-    search_semantic_index,
-    GUIDES_ROOT_DIR,
-    build_semantic_index,
-)
-
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -31,6 +24,22 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
+
+# Lazy imports for dependencies
+def get_guides_root():
+    """Get the guides root directory path."""
+    # Default to guides/ directory
+    return Path("guides")
+
+def get_search_function():
+    """Lazy import for search functionality."""
+    from vector_search import search_guides
+    return search_guides
+
+def get_build_index_function():
+    """Lazy import for index building functionality."""
+    from vector_search import build_index_from_guides
+    return build_index_from_guides
 
 # --- API Endpoints ---
 
@@ -62,7 +71,7 @@ def list_guide_divisions():
     """
     divisions = []
     
-    guides_dir = Path(GUIDES_ROOT_DIR)
+    guides_dir = get_guides_root()
     if not guides_dir.exists():
         return jsonify(divisions)
     
@@ -94,7 +103,7 @@ def list_guides_by_division(division: str):
     """
     guides = []
     
-    guides_dir = Path(GUIDES_ROOT_DIR)
+    guides_dir = get_guides_root()
     division_dir = guides_dir / division
     
     if not division_dir.exists() or not division_dir.is_dir():
@@ -140,7 +149,7 @@ def get_guide_content(guide_path: str):
     Returns:
         JSON object with guide content and metadata
     """
-    guides_dir = Path(GUIDES_ROOT_DIR)
+    guides_dir = get_guides_root()
     guide_file = guides_dir / guide_path
     
     if not guide_file.exists():
@@ -204,20 +213,9 @@ def search_guides():
     query = data['query']
     top_k = data.get('top_k', 5)
     
-    guides_dir = Path(GUIDES_ROOT_DIR)
-    
-    # Check if index exists, if not build it
-    index_dir = guides_dir / "semantic_index"
-    if not (index_dir / "guides.index").exists():
-        logger.info("Semantic index not found, building it first...")
-        try:
-            build_semantic_index(guides_dir)
-        except Exception as e:
-            logger.error(f"Error building semantic index: {str(e)}")
-            return jsonify({"error": f"Failed to build semantic index: {str(e)}"}), 500
-    
     try:
-        results = search_semantic_index(query, guides_dir, top_k=top_k)
+        search_func = get_search_function()
+        results = search_func(query, top_k=top_k)
         
         # Convert to expected return format
         formatted_results = []
@@ -239,25 +237,23 @@ def search_guides():
 @app.route("/rebuild-index", methods=["POST"])
 def rebuild_semantic_index():
     """
-    Rebuild the semantic search index for guides.
+    Rebuild the vector search index for guides.
     
     Returns:
         JSON object with status of the indexing operation
     """
-    guides_dir = Path(GUIDES_ROOT_DIR)
+    guides_dir = get_guides_root()
     
     try:
-        logger.info("Rebuilding semantic search index...")
-        build_semantic_index(guides_dir)
-        return jsonify({
-            "success": True,
-            "message": "Semantic index rebuilt successfully"
-        })
+        logger.info("Rebuilding vector search index...")
+        build_index = get_build_index_function()
+        result = build_index(guides_dir)
+        return jsonify(result)
     except Exception as e:
-        logger.error(f"Error rebuilding semantic index: {str(e)}")
+        logger.error(f"Error rebuilding index: {str(e)}")
         return jsonify({
             "success": False,
-            "error": f"Error rebuilding semantic index: {str(e)}"
+            "error": f"Error rebuilding index: {str(e)}"
         }), 500
 
 
@@ -285,36 +281,29 @@ def get_guide_recommendations():
     if not isinstance(topics, list):
         return jsonify({"error": "'topics' must be an array"}), 400
     
-    guides_dir = Path(GUIDES_ROOT_DIR)
+    guides_dir = get_guides_root()
     
     # Build combined query from topics
     query = " ".join(topics)
     
     try:
-        # Get initial results from semantic search
-        results = search_semantic_index(query, guides_dir, top_k=10)
+        # Get initial results from vector search
+        search_func = get_search_function()
+        results = search_func(query, top_k=10, division_filter=division)
         
-        # Filter results if needed
+        # Filter by maturity level if specified
         filtered_results = []
         for result in results:
-            include = True
-            
-            if maturity_level and "maturity" in result:
-                # Check if maturity level matches (case-insensitive)
-                if result.get("maturity", "").lower() != maturity_level.lower():
-                    include = False
-                    
-            if division and result["division"].lower() != division.lower():
-                include = False
+            if maturity_level and result.get("maturity", "").lower() != maturity_level.lower():
+                continue
                 
-            if include:
-                filtered_results.append({
-                    "title": result["title"],
-                    "division": result["division"],
-                    "file_path": result["file_path"],
-                    "score": result["score"],
-                    "content_preview": result["content_preview"]
-                })
+            filtered_results.append({
+                "title": result["title"],
+                "division": result["division"],
+                "file_path": result["file_path"],
+                "score": result["score"],
+                "content_preview": result["content_preview"]
+            })
         
         # Return top 5 after filtering
         return jsonify(filtered_results[:5])

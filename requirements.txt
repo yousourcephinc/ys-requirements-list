@@ -1,6 +1,7 @@
 notion-client==2.0.0
 python-dotenv==1.0.0
-sentence-transformers==2.7.0
-faiss-cpu==1.7.4
 flask==3.0.0
 gunicorn==21.2.0
+google-cloud-aiplatform==1.70.0
+google-cloud-firestore==2.20.0
+numpy==1.26.4
