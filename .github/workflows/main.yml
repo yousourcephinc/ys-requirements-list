@@ -10,17 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install --upgrade pip
+          pip install notion-client python-dotenv
 
       - name: Run Notion Sync Script
         run: python sync_notion.py
@@ -31,8 +35,8 @@ jobs:
 
       - name: Commit and push if there are changes
         run: |
-          git config --global user.name "Guides Sync Bot"
-          git config --global user.email "bot@github.com"
+          git config --local user.name "Guides Sync Bot"
+          git config --local user.email "bot@github.com"
           git add guides/
           # Check if there are staged changes
           if git diff --staged --quiet; then
