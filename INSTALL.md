@@ -1,115 +1,51 @@
 # Quick Install Guide
 
-## For GitHub Copilot Users (Primary)
+## For GitHub Copilot Users
 
-The easiest way to use implementation guides is through GitHub Copilot in VS Code.
+The implementation guides are now available directly through GitHub Copilot in VS Code with a zero-setup configuration.
 
 ### Prerequisites
-1. **Install uv:**
-   ```bash
-   curl -LsSf https://astral.sh/uv/install.sh | sh
-   ```
 
-2. **Authenticate with Google Cloud:**
-   ```bash
-   gcloud auth login
-   ```
+1.  **Visual Studio Code** with the **GitHub Copilot** extension installed and enabled.
+2.  You are part of the `yousourcephinc` GitHub organization.
 
 ### Setup
 
-**Option 1: Use Workspace Settings (Recommended)**
+**It's automatic!**
 
-This repository includes `.vscode/settings.json` with MCP configuration.
+This repository contains a `.vscode/settings.json` file that configures Copilot to connect to the hosted Implementation Guides server.
 
-1. Open this repository in VS Code
-2. Settings are automatically loaded
-3. Reload window (Cmd+Shift+P → "Developer: Reload Window")
+1.  **Open this repository (`ys-requirements-list`) in VS Code.**
+2.  If prompted, **trust the workspace** to allow the settings to be applied.
+3.  Reload the VS Code window (Go to `View > Command Palette` or press `Cmd+Shift+P`, then type `Developer: Reload Window`).
 
-**Option 2: Manual Configuration**
-
-Add to your VS Code User Settings:
-
-1. Open Settings (Cmd+, or Ctrl+,)
-2. Search for "copilot mcp"
-3. Edit `settings.json`:
-   ```json
-   {
-     "github.copilot.chat.mcp.servers": {
-       "implementation-guides": {
-         "command": "uv",
-         "args": [
-           "--quiet",
-           "run",
-           "--with",
-           "mcp>=1.2.0",
-           "--with",
-           "httpx>=0.27.0",
-           "https://raw.githubusercontent.com/yousourcephinc/ys-requirements-list/main/mcp/guides_mcp_server.py"
-         ]
-       }
-     }
-   }
-   ```
+That's it! The tool is now active.
 
 ### Usage
 
-In GitHub Copilot Chat, use `@workspace`:
+In the GitHub Copilot Chat panel, you can now use `@workspace` to access the guides:
 
-```
-@workspace What guide divisions are available?
-@workspace Search for authentication guides
-@workspace Recommend payment guides at Introduction 1 level for SE
-@workspace Implement user authentication following the guide
-```
+*   **`@workspace What guide divisions are available?`**
+*   **`@workspace Search for authentication guides`**
+*   **`@workspace Recommend payment guides at Introduction 1 level for SE`**
 
-See [COPILOT_SETUP.md](docs/COPILOT_SETUP.md) for detailed usage examples.
-
----
-
-## For Claude Desktop Users
-
-Install the MCP server to Claude Desktop:
-
-### Prerequisites
-Same as above (uv + gcloud auth)
-
-### Installation
-
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
-```json
-{
-  "mcpServers": {
-    "implementation-guides": {
-      "command": "uv",
-      "args": [
-        "--quiet",
-        "run",
-        "--with",
-        "mcp>=1.2.0",
-        "--with",
-        "httpx>=0.27.0",
-        "https://raw.githubusercontent.com/yousourcephinc/ys-requirements-list/main/mcp/guides_mcp_server.py"
-      ]
-    }
-  }
-}
-```
-
-Restart Claude Desktop and ask:
-- "What guide divisions are available?"
-- "Search for authentication guides"
+See [COPILOT_SETUP.md](docs/COPILOT_SETUP.md) for more detailed usage examples and commands.
 
 ---
 
 ## For API Users
 
-If you prefer REST API:
+You can still interact with the guides through the REST API.
+
+**Note:** The authentication has been simplified for this testing phase. You no longer need a `gcloud` token.
 
 ```bash
-TOKEN=$(gcloud auth print-identity-token)
+# Use the hardcoded test API key
+API_KEY="test-key"
 
+# Example: Search for guides
 curl -X POST \
-  -H "Authorization: Bearer $TOKEN" \
+  -H "Authorization: Bearer $API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"query": "authentication", "top_k": 3}' \
   https://mcp-server-375955300575.us-central1.run.app/search
@@ -119,15 +55,6 @@ curl -X POST \
 
 ## Documentation
 
-- [GitHub Copilot Setup](docs/COPILOT_SETUP.md) - Detailed Copilot integration guide
-- [Claude Desktop Setup](docs/MCP_SETUP.md) - Claude Desktop installation
-- [REST API Documentation](docs/README_MCP.md) - Direct API usage
-- [Deployment Guide](docs/DEPLOYMENT.md) - Backend infrastructure
-
----
-
-## Quick Links
-
-- **API Endpoint:** https://mcp-server-375955300575.us-central1.run.app
-- **MCP Server:** [guides_mcp_server.py](mcp/guides_mcp_server.py)
-- **Repository:** https://github.com/yousourcephinc/ys-requirements-list
+-   [GitHub Copilot Setup](docs/COPILOT_SETUP.md) - Detailed Copilot integration guide.
+-   [REST API Documentation](docs/README_MCP.md) - Guide for direct API usage.
+-   [Deployment Guide](docs/DEPLOYMENT.md) - Information about the backend infrastructure.

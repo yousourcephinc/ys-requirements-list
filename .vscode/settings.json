@@ -16,5 +16,18 @@
                 "PYTHONUNBUFFERED": "1"
             }
         }
+    },
+    "github.copilot.advanced": {
+        "tools": {
+            "implementation-guides": {
+                "type": "http",
+                "url": "https://mcp-server-375955300575.us-central1.run.app/mcp",
+                "auth": {
+                    "type": "header",
+                    "header": "Authorization",
+                    "value": "Bearer test-key"
+                }
+            }
+        }
     }
 }

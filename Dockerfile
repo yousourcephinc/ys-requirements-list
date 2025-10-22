@@ -21,4 +21,4 @@ ENV PYTHONPATH=/app
 
 # Command to run the MCP server with gunicorn
 WORKDIR /app/mcp
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 guides_mcp_api:app
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 guides_mcp_http_server:app

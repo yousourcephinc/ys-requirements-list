@@ -1,241 +1,88 @@
-# GitHub Copilot MCP Setup
+# GitHub Copilot Setup Guide
 
-Configure the Implementation Guides MCP server for GitHub Copilot in VS Code.
+This guide explains how to use the Implementation Guides directly within VS Code via GitHub Copilot.
+
+## How It Works
+
+The system is now a "zero-setup" configuration. The MCP (Model Context Protocol) server is hosted remotely on Google Cloud Run. This repository contains a `.vscode/settings.json` file that tells your local VS Code and Copilot how to connect to it securely.
+
+There is **no local server or script to run**.
 
 ## Prerequisites
 
-1. **VS Code** with GitHub Copilot extension installed
-2. **GitHub Copilot subscription** (Individual, Business, or Enterprise)
-3. **uv package manager:**
-   ```bash
-   curl -LsSf https://astral.sh/uv/install.sh | sh
-   ```
-4. **Google Cloud SDK authenticated:**
-   ```bash
-   gcloud auth login
-   ```
+1.  **Visual Studio Code** with the latest **GitHub Copilot** extension installed.
+2.  You must be a member of the `yousourcephinc` GitHub organization to access this repository.
 
 ## Installation
 
-### Option 1: Workspace Settings (Recommended for Teams)
+The installation is automatic when you open this project in VS Code.
 
-1. Create or edit `.vscode/settings.json` in your project:
-   ```json
-   {
-     "github.copilot.chat.mcp.servers": {
-       "implementation-guides": {
-         "command": "uv",
-         "args": [
-           "--quiet",
-           "run",
-           "--with",
-           "mcp>=1.2.0",
-           "--with",
-           "httpx>=0.27.0",
-           "https://raw.githubusercontent.com/yousourcephinc/ys-requirements-list/main/mcp/guides_mcp_server.py"
-         ],
-         "env": {
-           "PYTHONUNBUFFERED": "1"
-         }
-       }
-     }
-   }
-   ```
-
-2. Reload VS Code window (Cmd+Shift+P → "Developer: Reload Window")
-
-### Option 2: User Settings (Global for All Projects)
-
-1. Open VS Code Settings (Cmd+, or Ctrl+,)
-2. Search for "copilot mcp"
-3. Click "Edit in settings.json"
-4. Add the same configuration as above
-
-## Usage in GitHub Copilot Chat
-
-Once configured, you can use these commands in Copilot Chat:
-
-### Ask About Guides
-```
-@workspace What implementation guides are available?
-```
-
-### Search for Specific Topics
-```
-@workspace Search guides for user authentication and OAuth
-```
-
-### Get Recommendations
-```
-@workspace Recommend payment processing guides at Introduction 1 level for software engineers
-```
-
-### Implement with Guide Context
-```
-@workspace Implement user authentication following the SE Introduction 1 guide
-```
-
-### Browse by Division
-```
-@workspace Show me all Quality Assurance guides
-```
-
-## Available Tools
-
-GitHub Copilot can use these MCP tools:
-
-1. **list_guide_divisions** - List all divisions (PM, QA, SE, EXD)
-2. **list_guides_by_division** - List guides in a specific division
-3. **get_guide_content** - Get full guide content and requirements
-4. **search_guides** - Semantic search with AI embeddings
-5. **get_guide_recommendations** - Personalized recommendations
+1.  **Clone or open the `ys-requirements-list` repository in VS Code.**
+2.  A dialog may appear asking if you "trust the authors of the files in this folder". **You must select "Yes, I trust the authors"**. This allows VS Code to read the `.vscode/settings.json` file.
+3.  **Reload the VS Code window** to ensure Copilot loads the new tool.
+    *   Open the Command Palette (`View > Command Palette` or `Cmd+Shift+P`).
+    *   Type `Developer: Reload Window` and press Enter.
 
 ## Verification
 
-To verify the MCP server is working:
+To verify that the `implementation-guides` tool is active:
 
-1. Open Copilot Chat in VS Code
-2. Type: `@workspace /help`
-3. You should see "implementation-guides" listed under available tools
+1.  Open the Copilot Chat view in VS Code.
+2.  Type `@workspace /help`.
+3.  You should see `implementation-guides` listed as an available tool.
 
-## Example Workflows
+If you don't see it, try reloading the window again or ensure you have trusted the workspace.
 
-### 1. Implementing Authentication
-```
-You: @workspace I need to implement user authentication for a new project
+## Usage in GitHub Copilot Chat
 
-Copilot: [Uses search_guides to find auth guides]
-Let me search for authentication implementation guides...
+Always start your query with `@workspace` to give Copilot access to the guides.
 
-[Shows relevant guides with requirements]
+### Example Commands
 
-Based on the Authentication Module - Introduction 1 guide for SE:
-- Functional requirements include...
-- Security requirements include...
-- Here's a code implementation...
-```
+*   **List all categories:**
+    `@workspace What are the available guide divisions?`
 
-### 2. Code Review with Guide Standards
-```
-You: @workspace Review this payment processing code against our guides
+*   **List guides in a category:**
+    `@workspace Show me all guides for Software Engineering (se)`
 
-Copilot: [Uses search_guides + get_guide_content]
-Let me check this against the Payment Processing guides...
+*   **Search for a specific topic:**
+    `@workspace Search for guides about user authentication and SSO`
 
-[Compares code with guide requirements]
+*   **Get the content of a guide:**
+    `@workspace Get the content of the guide with path "se/authentication-module---introduction-1/index.md"`
 
-Your code is missing:
-1. PCI DSS compliance checks (required by Payment Processing - Introduction 1)
-2. Idempotency keys for transaction safety
-...
-```
+### Example Workflows
 
-### 3. Project Planning
-```
-You: @workspace What guides should I follow for a user management system at Introduction 1 level?
+#### 1. Starting a New Feature
+> **You:** `@workspace I need to build a notification system. What guides are available?`
+>
+> **Copilot:** (Uses `search_guides`) "I found the following guides related to notifications:..."
 
-Copilot: [Uses get_guide_recommendations]
-For a user management system at Introduction 1, you should follow:
-
-1. User Management Module - Introduction 1 (SE)
-2. Authentication Module - Introduction 1 (SE)
-3. Settings & Preferences - Introduction 1 (EXD)
-...
-```
-
-## Troubleshooting
-
-### MCP Server Not Found
-
-Check VS Code Output panel:
-1. View → Output
-2. Select "GitHub Copilot Chat" from dropdown
-3. Look for MCP server connection errors
-
-### Authentication Errors
-
-Verify gcloud authentication:
-```bash
-gcloud auth login
-gcloud auth print-identity-token
-```
-
-### Server Not Loading
-
-1. Check that `uv` is in PATH: `which uv`
-2. Try running server manually:
-   ```bash
-   uv run --with mcp --with httpx https://raw.githubusercontent.com/yousourcephinc/ys-requirements-list/main/mcp/guides_mcp_server.py
-   ```
-3. Check for Python errors in terminal
-
-### Slow Responses
-
-- First request may be slow (Cloud Run cold start)
-- Subsequent requests should be fast
-- Consider keeping a browser tab open to the API to keep it warm
-
-## Best Practices
-
-### 1. Use @workspace Mention
-Always mention `@workspace` to give Copilot access to MCP tools:
-```
-✅ @workspace Search for authentication guides
-❌ Search for authentication guides (Copilot won't use MCP tools)
-```
-
-### 2. Be Specific About Division/Level
-```
-✅ @workspace Recommend SE guides at Introduction 1 for authentication
-❌ @workspace Find auth stuff
-```
-
-### 3. Reference Guides in Code Comments
-```python
-# Following User Management Module - Introduction 1 (SE)
-class UserManager:
-    """Implements user CRUD operations per guide requirements"""
-```
-
-## Team Setup
-
-For team-wide adoption:
-
-1. **Add to repository's `.vscode/settings.json`**
-   - Commit to version control
-   - All team members get MCP automatically
-
-2. **Add to README.md**
-   ```markdown
-   ## AI-Assisted Development
-   
-   This project uses implementation guides via MCP.
-   GitHub Copilot users: The guides are automatically available.
-   Just use @workspace in Copilot Chat!
-   ```
-
-3. **Onboarding Checklist**
-   - [ ] VS Code with Copilot installed
-   - [ ] uv package manager installed
-   - [ ] gcloud auth configured
-   - [ ] Workspace settings loaded
+#### 2. Implementing Code
+> **You:** `@workspace Based on the 'notifications-intro-1' guide, generate the initial Python code for a notification service.`
+>
+> **Copilot:** (Uses `get_guide_content` to read the guide, then generates code) "Certainly. Here is a Flask-based notification service that follows the requirements outlined in the guide..."
 
 ## Architecture
 
+The new, simplified architecture:
+
 ```
-GitHub Copilot Chat (VS Code)
-    ↓ MCP Protocol (stdio)
-Local MCP Server (Python)
-    ↓ HTTPS + OAuth
-Cloud Run REST API
-    ↓
-Vertex AI + Firestore
+GitHub Copilot Chat (in VS Code)
+    │
+    └─> HTTPS Request (with API Key)
+        │
+        ▼
+Google Cloud Run Endpoint (`/mcp`)
+    │
+    ├─> Reads guide files from its own filesystem
+    └─> Queries Vertex AI + Firestore for semantic search
 ```
 
-The MCP server runs locally and authenticates using your gcloud credentials.
+Authentication is handled by a simple API key, which is pre-configured for you in the workspace settings. You no longer need to authenticate with `gcloud` for Copilot to work.
 
-## Links
+## Troubleshooting
 
-- [GitHub Copilot MCP Docs](https://docs.github.com/en/copilot/using-github-copilot/using-mcp-with-github-copilot)
-- [MCP Protocol](https://modelcontextprotocol.io)
-- [Cloud Run Endpoint](https://mcp-server-375955300575.us-central1.run.app)
+*   **Tool not showing up:** The most common issue is not "trusting" the workspace. Make sure you've trusted it and reloaded the window.
+*   **Authentication Errors:** The API key is hardcoded to `test-key`. If you see auth errors, it might mean the deployed server has a different key. The `.vscode/settings.json` file would need to be updated.
+*   **Slow First Request:** The Cloud Run service can "scale to zero," meaning it might be asleep. The very first request you make in a while might take a few seconds to "wake up" the server. Subsequent requests will be fast.
