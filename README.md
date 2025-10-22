@@ -1,14 +1,48 @@
 # ys-requirements-list
 
-Repository of implementation guides organized by software modules and maturity levels. Provides automated syncing from Notion and a REST API with AI-powered semantic search.
+Repository of implementation guides organized by software modules and maturity levels. Accessible through GitHub Copilot, Claude Desktop, or REST API.
+
+## 🤖 For Developers: GitHub Copilot Integration
+
+**Use implementation guides directly in VS Code with GitHub Copilot!**
+
+This repository includes an MCP (Model Context Protocol) server that connects your guides to GitHub Copilot Chat.
+
+### Quick Setup
+
+1. Install prerequisites:
+   ```bash
+   # Install uv
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   
+   # Authenticate with Google Cloud
+   gcloud auth login
+   ```
+
+2. Open this repository in VS Code - settings are pre-configured in `.vscode/settings.json`
+
+3. Reload VS Code (Cmd+Shift+P → "Developer: Reload Window")
+
+4. Use Copilot Chat with `@workspace`:
+   ```
+   @workspace Search for authentication guides
+   @workspace Recommend payment guides at Introduction 1 for SE
+   @workspace Implement user management following the guide
+   ```
+
+**See [INSTALL.md](INSTALL.md) for detailed setup** | **[Copilot Usage Guide](docs/COPILOT_SETUP.md)**
+
+---
 
 ## Architecture
 
 - **Content Storage**: Notion database → GitHub repository
+- **MCP Server**: Local Python script (PEP 723, zero-install)
 - **API Platform**: Google Cloud Run (serverless, scale-to-zero)
 - **Semantic Search**: Google Vertex AI (text-embedding-004) + Firestore vector store
 - **Authentication**: Google Workspace SSO (domain:you-source.com)
 - **Automation**: GitHub Actions for daily Notion sync
+- **AI Integration**: GitHub Copilot + Claude Desktop via MCP
 
 ## Notion Sync
 

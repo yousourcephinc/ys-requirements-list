@@ -1,39 +1,35 @@
-# GitHub Copilot Instructions for Guides API
+# GitHub Copilot Instructions for Implementation Guides
 
-## MCP Server Available
+## Available Guides API
 
-This workspace includes an MCP server (`guides_mcp_server.py`) built with FastMCP that provides access to implementation guides through the Model Context Protocol.
-
-**Installation Pattern:**
-```bash
-# Authenticate first
-gcloud auth login
-
-# Install to Claude Desktop (zero manual setup)
-cd /path/to/ys-requirements-list
-uv run mcp install mcp/guides_mcp_server.py --name "Implementation Guides"
-```
-
-**Key Features:**
-- ✅ **PEP 723 Inline Dependencies** - No manual `pip install` needed
-- ✅ **FastMCP Framework** - Uses official MCP Python SDK
-- ✅ **5 AI Tools** - Search, browse, and get recommendations
-- ✅ **Google Cloud Auth** - Leverages your gcloud credentials
-
-Dependencies (`mcp>=1.2.0`, `httpx>=0.27.0`) are automatically installed by `uv run`.
-
-## Available Implementation Guides API
-
-This workspace has access to a REST API containing implementation guides for software modules across different maturity levels.
+This workspace provides access to implementation guides for software modules via a REST API.
 
 **API Endpoint:** `https://mcp-server-375955300575.us-central1.run.app`
 
-**Authentication:** Requires Google Workspace authentication
+**Authentication:** Google Workspace SSO (automatic via gcloud)
 ```bash
 TOKEN=$(gcloud auth print-identity-token)
 ```
 
-## Available Endpoints
+## GitHub Copilot MCP Integration
+
+When developers use `@workspace` in Copilot Chat, you can access implementation guides through the MCP server configured in `.vscode/settings.json`.
+
+**Available MCP Tools:**
+- `list_guide_divisions` - List all divisions (PM, QA, SE, EXD) with guide counts
+- `list_guides_by_division` - List all guides in a specific division
+- `get_guide_content` - Get full guide content with requirements and metadata
+- `search_guides` - Semantic search using AI embeddings
+- `get_guide_recommendations` - Get personalized guide recommendations
+
+**Example Usage:**
+```
+User: @workspace Search for authentication guides
+Copilot: [Calls search_guides("authentication")] 
+Returns relevant guides with similarity scores
+```
+
+## Quick API Reference
 
 ### List Divisions
 ```bash
