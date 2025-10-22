@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install notion-client python-dotenv
+          pip install -r requirements.txt
 
       - name: Run Notion Sync Script
         run: python scripts/sync_notion.py
