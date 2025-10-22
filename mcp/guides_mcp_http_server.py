@@ -175,7 +175,7 @@ def search_guides(query: str, top_k: int = 3) -> List[Dict[str, Any]]:
 
 @app.before_request
 def check_api_key():
-    """Check for API key on protected endpoints."""
+    """Check for API key on MCP endpoint."""
     if request.path == "/mcp":
         auth_header = request.headers.get('Authorization')
         if not auth_header or not auth_header.startswith('Bearer '):
@@ -196,33 +196,12 @@ async def mcp_endpoint():
 
 @app.route("/", methods=["GET"])
 def index():
-    """API information endpoint."""
+    """Service information endpoint."""
     return jsonify({
-        "service": "Guides API + MCP Server",
+        "service": "Implementation Guides MCP Server",
         "version": "0.2.0",
+        "mcp_endpoint": "/mcp"
     })
-
-@app.route("/divisions", methods=["GET"])
-def api_list_divisions():
-    return jsonify(do_list_guide_divisions())
-
-@app.route("/divisions/<division>/guides", methods=["GET"])
-def api_list_guides(division: str):
-    return jsonify(do_list_guides_by_division(division))
-
-@app.route("/guides/<path:guide_path>", methods=["GET"])
-def api_get_content(guide_path: str):
-    try:
-        return jsonify(do_get_guide_content(guide_path))
-    except FileNotFoundError:
-        return jsonify({"error": "Guide not found"}), 404
-
-@app.route("/search", methods=["POST"])
-def api_search():
-    data = request.get_json()
-    if not data or 'query' not in data:
-        return jsonify({"error": "Missing 'query' parameter"}), 400
-    return jsonify(do_search_guides(data['query'], data.get('top_k', 5)))
 
 @app.route("/health", methods=["GET"])
 def health_check():
