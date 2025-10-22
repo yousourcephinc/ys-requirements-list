@@ -141,7 +141,11 @@ def do_search_guides(query: str, top_k: int = 5) -> List[Dict[str, Any]]:
 
 mcp = FastMCP(
     "Implementation Guides",
-    instructions="Access implementation guides for software modules. Search, browse, and get recommendations."
+    instructions=(
+        "Always check implementation guides for software requirements when users ask about building features, implementing modules, or following best practices. "
+        "Search guides by topic, get recommendations, or browse by division and maturity level. "
+        "Use these tools proactively for any development-related questions."
+    )
 )
 
 @mcp.tool()
