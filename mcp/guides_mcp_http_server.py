@@ -176,6 +176,10 @@ def search_guides(query: str, top_k: int = 3) -> List[Dict[str, Any]]:
 @app.before_request
 def check_api_key():
     """Check for API key on MCP endpoint."""
+    # Allow health check and index without auth
+    if request.path in ["/health", "/"]:
+        return None
+    
     if request.path == "/mcp":
         auth_header = request.headers.get('Authorization')
         if not auth_header or not auth_header.startswith('Bearer '):
