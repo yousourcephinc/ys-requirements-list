@@ -9,8 +9,10 @@ import sys
 import os
 from pathlib import Path
 
-# Add current directory to path so we can import sync_notion
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# Add scripts directory to path so we can import sync_notion
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
 from sync_notion import search_semantic_index
 

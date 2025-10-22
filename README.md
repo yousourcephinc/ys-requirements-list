@@ -28,7 +28,7 @@ NOTION_VIEW_ID="..."
 
 ```bash
 pip install notion-client python-dotenv
-python sync_notion.py
+python scripts/sync_notion.py
 ```
 
 The script creates a `guides/` directory organized by division (PM, QA, SE, EXD).
@@ -86,7 +86,7 @@ gcloud auth application-default login
 3. Run the server:
 
 ```bash
-python guides_mcp_api.py
+python mcp/guides_mcp_api.py
 ```
 
 Server starts on `http://localhost:8080`
@@ -140,14 +140,20 @@ ys-requirements-list/
 ├── .github/workflows/
 │   ├── main.yml          # Daily Notion sync
 │   └── deploy.yml        # Cloud Run deployment
+├── mcp/                  # MCP server implementations
+│   ├── guides_mcp_server.py  # FastMCP server (PEP 723)
+│   ├── guides_mcp_api.py     # Cloud Run API
+│   └── guides_mcp.py         # Alternative MCP implementation
+├── scripts/              # Utility scripts
+│   ├── sync_notion.py        # Notion sync script
+│   └── vector_search.py      # Vertex AI + Firestore search
+├── tests/                # Test files
 ├── guides/               # Synced from Notion
 │   ├── pm/              # Product Management
 │   ├── qa/              # Quality Assurance  
 │   ├── se/              # Software Engineering
 │   └── exd/             # Experience Design
-├── guides_mcp_api.py     # Flask REST API
-├── vector_search.py      # Vertex AI + Firestore search
-├── sync_notion.py        # Notion sync script
+├── docs/                 # Documentation
 ├── requirements.txt      # Python dependencies
 └── Dockerfile           # Cloud Run container
 ``` 

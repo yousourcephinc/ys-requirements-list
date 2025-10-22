@@ -17,6 +17,8 @@ ENV PORT=8080
 ENV PYTHONUNBUFFERED=1
 ENV GCP_PROJECT_ID=requirements-mcp-server
 ENV GCP_LOCATION=us-central1
+ENV PYTHONPATH=/app
 
 # Command to run the MCP server with gunicorn
+WORKDIR /app/mcp
 CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 guides_mcp_api:app

@@ -32,6 +32,10 @@ from mcp import (
 )
 
 # Import guide-related functions from sync_notion
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
+
 from sync_notion import (
     search_semantic_index,
     GUIDES_ROOT_DIR,

@@ -1,0 +1,22 @@
+[project]
+name = "ys-implementation-guides"
+version = "1.0.0"
+description = "Implementation Guides MCP Server"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.2.0",
+    "httpx>=0.27.0",
+]
+
+[project.optional-dependencies]
+api = [
+    "flask==3.0.0",
+    "gunicorn==21.2.0",
+    "google-cloud-aiplatform==1.70.0",
+    "google-cloud-firestore==2.20.0",
+    "numpy==1.26.4",
+]
+notion = [
+    "notion-client==2.0.0",
+    "python-dotenv==1.0.0",
+]

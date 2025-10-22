@@ -33,6 +33,9 @@ def get_guides_root():
 
 def get_search_function():
     """Lazy import for search functionality."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
     from vector_search import search_guides
     return search_guides
 
