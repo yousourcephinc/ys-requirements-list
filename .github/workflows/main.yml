@@ -27,7 +27,7 @@ jobs:
           pip install notion-client python-dotenv
 
       - name: Run Notion Sync Script
-        run: python sync_notion.py
+        run: python scripts/sync_notion.py
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
