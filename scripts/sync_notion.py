@@ -19,9 +19,6 @@ from threading import Lock
 
 from dotenv import load_dotenv
 from notion_client import Client
-import numpy as np
-from sentence_transformers import SentenceTransformer
-import faiss
 
 # --- CONFIGURATION ---
 GUIDES_ROOT_DIR = Path("guides")  # The root folder for the guides repository
@@ -156,134 +153,8 @@ def fetch_block_children(notion: Client, block_id: str, indent_level: int = 0, r
         return ""
 
 # --- SEMANTIC SEARCH FUNCTIONS ---
-
-def build_semantic_index(guides_dir: Path):
-    """Builds semantic search index from all guide files."""
-    print("Building semantic search index...")
-    
-    # Load sentence transformer model
-    model = SentenceTransformer('all-MiniLM-L6-v2')  # Fast and good performance
-    
-    documents = []
-    metadata = []
-    
-    # Walk through all guide files
-    for division_dir in guides_dir.iterdir():
-        if division_dir.is_dir() and division_dir.name != "README.md":
-            for guide_dir in division_dir.iterdir():
-                if guide_dir.is_dir():
-                    index_file = guide_dir / "index.md"
-                    if index_file.exists():
-                        try:
-                            with open(index_file, 'r', encoding='utf-8') as f:
-                                content = f.read()
-                            
-                            # Extract title from frontmatter
-                            lines = content.split('\n')
-                            title = "Unknown"
-                            division = division_dir.name
-                            
-                            for line in lines:
-                                if line.startswith('title:'):
-                                    title = line.split(':', 1)[1].strip().strip('"')
-                                    break
-                            
-                            # Split content into chunks for better search
-                            chunks = split_into_chunks(content, chunk_size=500, overlap=50)
-                            
-                            for i, chunk in enumerate(chunks):
-                                documents.append(chunk)
-                                metadata.append({
-                                    'title': title,
-                                    'division': division,
-                                    'file_path': str(index_file.relative_to(guides_dir)),
-                                    'chunk_id': i,
-                                    'total_chunks': len(chunks)
-                                })
-                                
-                        except Exception as e:
-                            print(f"  Warning: Could not process {index_file}: {e}")
-    
-    if not documents:
-        print("  No documents found to index")
-        return
-    
-    print(f"  Processing {len(documents)} document chunks...")
-    
-    # Generate embeddings
-    embeddings = model.encode(documents, show_progress_bar=True)
-    
-    # Create FAISS index
-    dimension = embeddings.shape[1]
-    index = faiss.IndexFlatIP(dimension)  # Inner product (cosine similarity)
-    
-    # Normalize embeddings for cosine similarity
-    faiss.normalize_L2(embeddings)
-    index.add(embeddings)
-    
-    # Save index and metadata
-    index_dir = guides_dir / "semantic_index"
-    index_dir.mkdir(exist_ok=True)
-    
-    # Save FAISS index
-    faiss.write_index(index, str(index_dir / "guides.index"))
-    
-    # Save metadata
-    with open(index_dir / "metadata.json", 'w', encoding='utf-8') as f:
-        json.dump(metadata, f, indent=2)
-    
-    # Save documents for reference
-    with open(index_dir / "documents.json", 'w', encoding='utf-8') as f:
-        json.dump(documents, f, indent=2)
-    
-    print(f"  Saved semantic index with {len(documents)} chunks to {index_dir}")
-
-def split_into_chunks(text: str, chunk_size: int = 500, overlap: int = 50) -> list:
-    """Split text into overlapping chunks for better semantic search."""
-    words = text.split()
-    chunks = []
-    
-    for i in range(0, len(words), chunk_size - overlap):
-        chunk = ' '.join(words[i:i + chunk_size])
-        if len(chunk.strip()) > 50:  # Only keep chunks with meaningful content
-            chunks.append(chunk)
-    
-    return chunks
-
-def search_semantic_index(query: str, guides_dir: Path, top_k: int = 5) -> list:
-    """Search the semantic index for relevant guides."""
-    index_dir = guides_dir / "semantic_index"
-    
-    if not (index_dir / "guides.index").exists():
-        print("Semantic index not found. Run build_semantic_index first.")
-        return []
-    
-    # Load model, index, and metadata
-    model = SentenceTransformer('all-MiniLM-L6-v2')
-    index = faiss.read_index(str(index_dir / "guides.index"))
-    
-    with open(index_dir / "metadata.json", 'r', encoding='utf-8') as f:
-        metadata = json.load(f)
-    
-    with open(index_dir / "documents.json", 'r', encoding='utf-8') as f:
-        documents = json.load(f)
-    
-    # Encode query
-    query_embedding = model.encode([query])
-    faiss.normalize_L2(query_embedding)
-    
-    # Search
-    scores, indices = index.search(query_embedding, top_k)
-    
-    results = []
-    for score, idx in zip(scores[0], indices[0]):
-        if idx < len(metadata):  # Valid index
-            result = metadata[idx].copy()
-            result['score'] = float(score)
-            result['content_preview'] = documents[idx][:200] + "..." if len(documents[idx]) > 200 else documents[idx]
-            results.append(result)
-    
-    return results
+# Note: Semantic search has been moved to vector_search.py using Vertex AI
+# These functions are kept for backward compatibility but are no longer called
 
 # --- CORE LOGIC ---
 
@@ -526,9 +397,6 @@ def main():
     
     print("\n📚 Generating master catalog...")
     generate_master_catalog(processed_pages)
-    
-    print("\n🧠 Building semantic search index...")
-    build_semantic_index(GUIDES_ROOT_DIR)
     
     print("\n" + "="*60)
     print("✅ Sync complete!")
