@@ -10,9 +10,12 @@ import os
 import logging
 from pathlib import Path
 from typing import Dict, List, Any, Optional
+import requests
 
-from flask import Flask, jsonify, request, Response
+from flask import Flask, jsonify, request, Response, redirect, session, url_for
 from mcp.server.fastmcp import FastMCP
+from google.oauth2 import id_token
+from google.auth.transport import requests as google_requests
 from mcp.model import PublicTool
 
 # --- Configuration ---
@@ -23,8 +26,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Hardcoded API key for testing purposes
-API_KEY = "test-key"
+# Google Cloud Project ID
+PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT", "requirements-mcp-server")
 
 # --- Flask App Initialization ---
 
@@ -174,8 +177,8 @@ def search_guides(query: str, top_k: int = 3) -> List[Dict[str, Any]]:
 # --- HTTP Server Endpoints ---
 
 @app.before_request
-def check_api_key():
-    """Check for API key on MCP endpoint."""
+def check_auth():
+    """Check for Google identity token authentication."""
     # Allow health check and index without auth
     if request.path in ["/health", "/"]:
         return None
@@ -185,9 +188,18 @@ def check_api_key():
         if not auth_header or not auth_header.startswith('Bearer '):
             return jsonify({"error": "Authorization header missing or invalid"}), 401
         
-        key = auth_header.split(' ')[1]
-        if key != API_KEY:
-            return jsonify({"error": "Invalid API Key"}), 403
+        token = auth_header.split(' ')[1]
+        
+        try:
+            # Validate the Google identity token
+            id_info = id_token.verify_oauth2_token(token, google_requests.Request(), PROJECT_ID)
+            # Check if the email domain is allowed (you-source.com)
+            email = id_info.get('email', '')
+            if not email.endswith('@you-source.com'):
+                return jsonify({"error": "Access denied: Invalid domain"}), 403
+        except Exception as e:
+            logger.error(f"Token validation failed: {e}")
+            return jsonify({"error": "Invalid authentication token"}), 403
 
 @app.route("/mcp", methods=["POST"])
 async def mcp_endpoint():
