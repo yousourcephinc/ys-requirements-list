@@ -16,7 +16,6 @@ from flask import Flask, jsonify, request, Response, redirect, session, url_for
 from mcp.server.fastmcp import FastMCP
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
-from mcp.model import PublicTool
 
 # --- Configuration ---
 
@@ -40,16 +39,67 @@ def get_guides_root() -> Path:
     return Path("guides")
 
 def get_search_function():
-    """Lazy import for search functionality."""
+    """Lazy import for search functionality with fallback."""
     import sys
     sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
-    from vector_search import search_guides
-    return search_guides
+    try:
+        from vector_search import search_guides
+        return search_guides
+    except ImportError as e:
+        logger.warning(f"Could not import vector_search: {e}. Using simple text search.")
+        # Fallback to simple text search
+        def simple_search_guides(query: str, top_k: int = 5) -> List[Dict[str, Any]]:
+            """Simple text-based search through guide content."""
+            results = []
+            guides_dir = get_guides_root()
+            
+            # Search through all guide files
+            for guide_file in guides_dir.rglob("*.md"):
+                try:
+                    with open(guide_file, 'r', encoding='utf-8') as f:
+                        content = f.read()
+                    
+                    # Simple text matching
+                    if query.lower() in content.lower():
+                        # Extract basic info
+                        title = guide_file.stem.replace('-', ' ').title()
+                        division = guide_file.parent.parent.name if guide_file.parent.parent != guides_dir else 'unknown'
+                        
+                        # Get preview
+                        lines = content.split('\n')
+                        preview = ' '.join(lines[:3])[:200] + '...'
+                        
+                        results.append({
+                            "title": title,
+                            "division": division,
+                            "file_path": str(guide_file.relative_to(guides_dir)),
+                            "score": 0.5,  # Placeholder score
+                            "content_preview": preview
+                        })
+                        
+                        if len(results) >= top_k:
+                            break
+                            
+                except Exception as e:
+                    logger.warning(f"Error reading {guide_file}: {e}")
+                    continue
+                    
+            return results
+        
+        return simple_search_guides
 
 def get_build_index_function():
-    """Lazy import for index building functionality."""
-    from vector_search import build_index_from_guides
-    return build_index_from_guides
+    """Lazy import for index building functionality with fallback."""
+    import sys
+    sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
+    try:
+        from vector_search import build_index_from_guides
+        return build_index_from_guides
+    except ImportError as e:
+        logger.warning(f"Could not import vector_search: {e}. Index building not available.")
+        def placeholder_build_index():
+            return {"status": "not implemented", "error": str(e)}
+        return placeholder_build_index
 
 def do_list_guide_divisions() -> List[Dict[str, Any]]:
     """Logic for listing all guide divisions."""
@@ -171,7 +221,7 @@ def get_guide_content(path: str) -> Dict[str, Any]:
 
 @mcp.tool()
 def search_guides(query: str, top_k: int = 3) -> List[Dict[str, Any]]:
-    """Search for guides using semantic search."""
+    """Search for guides using semantic search (Vertex AI) when available, otherwise text search."""
     return do_search_guides(query, top_k)
 
 # --- HTTP Server Endpoints ---
@@ -209,10 +259,41 @@ def check_auth():
 async def mcp_endpoint():
     """MCP endpoint to handle JSON-RPC requests."""
     request_json = request.get_json()
-    response_json = await mcp.handle(request_json)
-    if response_json:
-        return jsonify(response_json)
-    return Response(status=204)
+    
+    # Handle MCP JSON-RPC requests manually
+    method = request_json.get("method")
+    params = request_json.get("params", {})
+    request_id = request_json.get("id")
+    
+    try:
+        if method == "tools/list":
+            tools = await mcp.list_tools()
+            # Convert Tool objects to dicts
+            tools_data = [tool.model_dump() for tool in tools]
+            result = {"tools": tools_data}
+        elif method == "tools/call":
+            tool_name = params.get("name")
+            arguments = params.get("arguments", {})
+            result = await mcp.call_tool(tool_name, arguments)
+        else:
+            return jsonify({
+                "jsonrpc": "2.0",
+                "id": request_id,
+                "error": {"code": -32601, "message": f"Method not found: {method}"}
+            }), 404
+        
+        return jsonify({
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "result": result
+        })
+    except Exception as e:
+        logger.error(f"MCP endpoint error: {e}")
+        return jsonify({
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "error": {"code": -32603, "message": str(e)}
+        }), 500
 
 @app.route("/", methods=["GET"])
 def index():
