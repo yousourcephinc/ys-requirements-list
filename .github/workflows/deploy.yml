@@ -42,6 +42,7 @@ jobs:
           gcloud run deploy mcp-server \
             --image gcr.io/requirements-mcp-server/mcp-server \
             --platform managed \
+            --allow-unauthenticated \
             --region us-central1 \
             --min-instances 0 \
             --max-instances 5 \
