@@ -178,7 +178,7 @@ def search_guides(query: str, top_k: int = 3) -> List[Dict[str, Any]]:
 
 @app.before_request
 def check_auth():
-    """Check for Google identity token authentication."""
+    """Check for authentication (API key or Google identity token)."""
     # Allow health check and index without auth
     if request.path in ["/health", "/"]:
         return None
@@ -189,6 +189,10 @@ def check_auth():
             return jsonify({"error": "Authorization header missing or invalid"}), 401
         
         token = auth_header.split(' ')[1]
+        
+        # Allow test API key for backward compatibility
+        if token == "test-key":
+            return None
         
         try:
             # Validate the Google identity token

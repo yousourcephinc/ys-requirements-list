@@ -4,32 +4,69 @@ This guide explains how to use the Implementation Guides directly within VS Code
 
 ## How It Works
 
-The system is now a "zero-setup" configuration. The MCP (Model Context Protocol) server is hosted remotely on Google Cloud Run. This repository contains a `.vscode/settings.json` file that tells your local VS Code and Copilot how to connect to it securely.
+The Implementation Guides are accessible through a remote MCP (Model Context Protocol) server hosted on Google Cloud Run. You can configure GitHub Copilot to connect to this server by adding a simple configuration to your VS Code workspace settings.
 
-There is **no local server or script to run**.
+There is **no local server or script to run**, and **no repository cloning required**.
 
 ## Prerequisites
 
-1.  **Visual Studio Code** with the latest **GitHub Copilot** extension installed.
-2.  You must be a member of the `yousourcephinc` GitHub organization to access this repository.
+1. **Visual Studio Code** with the latest **GitHub Copilot** extension installed.
+2. **Google Cloud SDK authenticated** with an account from the `you-source.com` domain:
+   ```bash
+   gcloud auth login
+   ```
 
 ## Installation
 
-The installation is automatic when you open this project in VS Code.
+Add the following configuration to your project's `.vscode/settings.json` file (create the file if it doesn't exist):
 
-1.  **Clone or open the `ys-requirements-list` repository in VS Code.**
-2.  A dialog may appear asking if you "trust the authors of the files in this folder". **You must select "Yes, I trust the authors"**. This allows VS Code to read the `.vscode/settings.json` file.
-3.  **Reload the VS Code window** to ensure Copilot loads the new tool.
-    *   Open the Command Palette (`View > Command Palette` or `Cmd+Shift+P`).
-    *   Type `Developer: Reload Window` and press Enter.
+```json
+{
+  "github.copilot.advanced": {
+    "tools": {
+      "implementation-guides": {
+        "type": "http",
+        "url": "https://mcp-server-375955300575.us-central1.run.app/mcp",
+        "auth": {
+          "type": "header",
+          "header": "Authorization",
+          "value": "Bearer test-key"
+        }
+      }
+    }
+  }
+}
+```
+
+**Note:** For GitHub Copilot, use the `test-key` as shown above. For other AI tools that support dynamic authentication, you can use Google OAuth tokens instead:
+
+```json
+{
+  "github.copilot.advanced": {
+    "tools": {
+      "implementation-guides": {
+        "type": "http",
+        "url": "https://mcp-server-375955300575.us-central1.run.app/mcp",
+        "auth": {
+          "type": "header",
+          "header": "Authorization",
+          "value": "Bearer $(gcloud auth print-identity-token)"
+        }
+      }
+    }
+  }
+}
+```
+
+If your tool doesn't support the `$(...)` syntax, run `gcloud auth print-identity-token` manually and paste the token.
 
 ## Verification
 
 To verify that the `implementation-guides` tool is active:
 
-1.  Open the Copilot Chat view in VS Code.
-2.  Type `@workspace /help`.
-3.  You should see `implementation-guides` listed as an available tool.
+1. Open the Copilot Chat view in VS Code.
+2. Type `@workspace /help`.
+3. You should see `implementation-guides` listed as an available tool.
 
 If you don't see it, try reloading the window again or ensure you have trusted the workspace.
 
@@ -65,24 +102,24 @@ Always start your query with `@workspace` to give Copilot access to the guides.
 
 ## Architecture
 
-The new, simplified architecture:
+The architecture supports both API key authentication (for Copilot) and Google OAuth (for other tools):
 
 ```
 GitHub Copilot Chat (in VS Code)
     │
-    └─> HTTPS Request (with API Key)
+    └─> HTTPS Request (with API Key: "test-key")
         │
         ▼
 Google Cloud Run Endpoint (`/mcp`)
     │
+    ├─> Validates API key or Google identity token
     ├─> Reads guide files from its own filesystem
     └─> Queries Vertex AI + Firestore for semantic search
+
+Other AI Tools
+    │
+    └─> HTTPS Request (with Google OAuth token)
+        │
+        ▼
+    Same Cloud Run Endpoint
 ```
-
-Authentication is handled by a simple API key, which is pre-configured for you in the workspace settings. You no longer need to authenticate with `gcloud` for Copilot to work.
-
-## Troubleshooting
-
-*   **Tool not showing up:** The most common issue is not "trusting" the workspace. Make sure you've trusted it and reloaded the window.
-*   **Authentication Errors:** The API key is hardcoded to `test-key`. If you see auth errors, it might mean the deployed server has a different key. The `.vscode/settings.json` file would need to be updated.
-*   **Slow First Request:** The Cloud Run service can "scale to zero," meaning it might be asleep. The very first request you make in a while might take a few seconds to "wake up" the server. Subsequent requests will be fast.

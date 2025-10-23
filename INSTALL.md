@@ -33,26 +33,6 @@ See [COPILOT_SETUP.md](docs/COPILOT_SETUP.md) for more detailed usage examples a
 
 ---
 
-## For API Users
-
-You can still interact with the guides through the REST API.
-
-**Note:** The authentication has been simplified for this testing phase. You no longer need a `gcloud` token.
-
-```bash
-# Use the hardcoded test API key
-API_KEY="test-key"
-
-# Example: Search for guides
-curl -X POST \
-  -H "Authorization: Bearer $API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"query": "authentication", "top_k": 3}' \
-  https://mcp-server-375955300575.us-central1.run.app/search
-```
-
----
-
 ## Documentation
 
 -   [GitHub Copilot Setup](docs/COPILOT_SETUP.md) - Detailed Copilot integration guide.
