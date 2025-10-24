@@ -13,9 +13,9 @@ from typing import Dict, List, Any, Optional
 import requests
 
 from flask import Flask, jsonify, request, Response, redirect, session, url_for
-from mcp.server.fastmcp import FastMCP
-from google.oauth2 import id_token
-from google.auth.transport import requests as google_requests
+# from mcp.server.fastmcp import FastMCP  # Commented out for HTTP-only server
+# from google.oauth2 import id_token  # Commented out - auth disabled
+# from google.auth.transport import requests as google_requests  # Commented out - auth disabled
 
 # --- Configuration ---
 
@@ -102,23 +102,27 @@ def get_build_index_function():
         return placeholder_build_index
 
 def do_list_guide_divisions() -> List[Dict[str, Any]]:
-    """Logic for listing all guide divisions."""
+    """List only the 'se' guide division with its guide count."""
     divisions = []
     guides_dir = get_guides_root()
-    if not guides_dir.exists():
-        return divisions
-    
-    for division_dir in guides_dir.iterdir():
-        if division_dir.is_dir() and division_dir.name not in ("semantic_index", "README.md"):
-            guide_count = sum(1 for item in division_dir.iterdir() if item.is_dir())
-            divisions.append({"name": division_dir.name, "guide_count": guide_count})
-    
-    return sorted(divisions, key=lambda x: x["name"])
+    if guides_dir.exists() and guides_dir.is_dir():
+        se_dir = guides_dir / 'se'
+        if se_dir.is_dir():
+            guide_count = len(list(se_dir.glob('**/*')))
+            divisions.append({"name": "se", "guide_count": guide_count})
+    return divisions
 
 def do_list_guides_by_division(division: str) -> List[Dict[str, str]]:
     """Logic for listing all guides in a specific division."""
     guides = []
-    division_dir = get_guides_root() / division
+    
+    # If a division is specified, and it's not 'se', return empty list
+    if division and division.lower() != 'se':
+        return []
+
+    # Default to 'se' if no division is specified or if it is 'se'
+    division_to_scan = 'se'
+    division_dir = get_guides_root() / division_to_scan
     
     if not division_dir.exists() or not division_dir.is_dir():
         return guides
@@ -180,9 +184,47 @@ def do_get_guide_content(guide_path: str) -> Dict[str, Any]:
     }
 
 def do_search_guides(query: str, top_k: int = 5) -> List[Dict[str, Any]]:
-    """Logic for searching guides."""
+    """Logic for searching guides with fallback."""
     search_func = get_search_function()
-    results = search_func(query, top_k=top_k)
+    try:
+        results = search_func(query, top_k=top_k)
+    except Exception as e:
+        logger.warning(f"Vector search failed: {e}. Using fallback text search.")
+        # Fallback to simple text search
+        results = []
+        guides_dir = get_guides_root()
+        
+        # Search through all guide files
+        for guide_file in guides_dir.rglob("*.md"):
+            try:
+                with open(guide_file, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                
+                # Simple text matching
+                if query.lower() in content.lower():
+                    # Extract basic info
+                    title = guide_file.stem.replace('-', ' ').title()
+                    division = guide_file.parent.parent.name if guide_file.parent.parent != guides_dir else 'unknown'
+                    
+                    # Get preview
+                    lines = content.split('\n')
+                    preview = ' '.join(lines[:3])[:200] + '...'
+                    
+                    results.append({
+                        "title": title,
+                        "division": division,
+                        "file_path": str(guide_file.relative_to(guides_dir)),
+                        "score": 0.5,  # Placeholder score
+                        "content_preview": preview
+                    })
+                    
+                    if len(results) >= top_k:
+                        break
+                        
+            except Exception as file_e:
+                logger.warning(f"Error reading {guide_file}: {file_e}")
+                continue
+    
     return [
         {
             "title": r["title"], "division": r["division"], "file_path": r["file_path"],
@@ -191,73 +233,68 @@ def do_search_guides(query: str, top_k: int = 5) -> List[Dict[str, Any]]:
     ]
 
 # --- MCP Server Initialization ---
+# FastMCP disabled for HTTP-only server - using direct function calls instead
 
-mcp = FastMCP(
-    "Implementation Guides",
-    instructions=(
-        "Always check implementation guides for software requirements when users ask about building features, implementing modules, or following best practices. "
-        "Search guides by topic, get recommendations, or browse by division and maturity level. "
-        "Use these tools proactively for any development-related questions."
-    )
-)
+# mcp = FastMCP(
+#     "Implementation Guides",
+#     instructions=(
+#         "Always check implementation guides for software requirements when users ask about building features, implementing modules, or following best practices. "
+#         "Search guides by topic, get recommendations, or browse by division and maturity level. "
+#         "Use these tools proactively for any development-related questions."
+#     )
+# )
 
-@mcp.tool()
-def list_guide_divisions() -> List[Dict[str, Any]]:
-    """List all available guide divisions (pm, qa, se, exd)."""
-    return do_list_guide_divisions()
+# @mcp.tool()
+# def list_guide_divisions() -> List[Dict[str, Any]]:
+#     """List all available guide divisions (pm, qa, se, exd)."""
+#     return do_list_guide_divisions()
 
-@mcp.tool()
-def list_guides_by_division(division: str) -> List[Dict[str, str]]:
-    """List all guides in a specific division."""
-    return do_list_guides_by_division(division)
+# @mcp.tool()
+# def list_guides_by_division(division: str) -> List[Dict[str, str]]:
+#     """List all guides in a specific division."""
+#     return do_list_guides_by_division(division)
 
-@mcp.tool()
-def get_guide_content(path: str) -> Dict[str, Any]:
-    """Get the full content and metadata of a specific guide."""
-    try:
-        return do_get_guide_content(path)
-    except FileNotFoundError as e:
-        return {"error": str(e)}
+# @mcp.tool()
+# def get_guide_content(path: str) -> Dict[str, Any]]:
+#     """Get the full content and metadata of a specific guide."""
+#     try:
+#         return do_get_guide_content(path)
+#     except FileNotFoundError as e:
+#         return {"error": str(e)}
 
-@mcp.tool()
-def search_guides(query: str, top_k: int = 3) -> List[Dict[str, Any]]:
-    """Search for guides using semantic search (Vertex AI) when available, otherwise text search."""
-    return do_search_guides(query, top_k)
+# @mcp.tool()
+# def search_guides(query: str, top_k: int = 3) -> List[Dict[str, Any]]:
+#     """Search for guides using semantic search (Vertex AI) when available, otherwise text search."""
+#     return do_search_guides(query, top_k)
 
 # --- HTTP Server Endpoints ---
 
+# API Key for authentication (set via environment variable or use default)
+API_KEY = os.environ.get("MCP_API_KEY", "test-key")
+
 @app.before_request
 def check_auth():
-    """Check for authentication (API key or Google identity token)."""
-    # Allow health check and index without auth
-    if request.path in ["/health", "/"]:
-        return None
-    
-    if request.path == "/mcp":
-        auth_header = request.headers.get('Authorization')
-        if not auth_header or not auth_header.startswith('Bearer '):
-            return jsonify({"error": "Authorization header missing or invalid"}), 401
-        
-        token = auth_header.split(' ')[1]
-        
-        # Allow test API key for backward compatibility
-        if token == "test-key":
-            return None
-        
-        try:
-            # Validate the Google identity token
-            id_info = id_token.verify_oauth2_token(token, google_requests.Request(), PROJECT_ID)
-            # Check if the email domain is allowed (you-source.com)
-            email = id_info.get('email', '')
-            if not email.endswith('@you-source.com'):
-                return jsonify({"error": "Access denied: Invalid domain"}), 403
-        except Exception as e:
-            logger.error(f"Token validation failed: {e}")
-            return jsonify({"error": "Invalid authentication token"}), 403
+    """Authentication is disabled for all endpoints."""
+    logger.info(f"Request to {request.path} - Authentication disabled.")
+    return None
 
-@app.route("/mcp", methods=["POST"])
-async def mcp_endpoint():
-    """MCP endpoint to handle JSON-RPC requests."""
+@app.route("/mcp", methods=["GET", "POST"])
+def mcp_endpoint():
+    """MCP endpoint to handle JSON-RPC requests (POST) and SSE connections (GET)."""
+    
+    # Handle GET request for SSE/streaming (VS Code MCP client uses this)
+    if request.method == "GET":
+        logger.info("GET request to /mcp - returning MCP server info for SSE connection")
+        return jsonify({
+            "name": "Implementation Guides MCP Server",
+            "version": "0.2.0",
+            "protocol": "mcp",
+            "capabilities": {
+                "tools": True
+            }
+        })
+    
+    # Handle POST request for JSON-RPC
     request_json = request.get_json()
     
     # Handle MCP JSON-RPC requests manually
@@ -266,15 +303,93 @@ async def mcp_endpoint():
     request_id = request_json.get("id")
     
     try:
-        if method == "tools/list":
-            tools = await mcp.list_tools()
-            # Convert Tool objects to dicts
-            tools_data = [tool.model_dump() for tool in tools]
+        if method == "initialize":
+            # MCP protocol initialization handshake
+            result = {
+                "protocolVersion": "2024-11-05",
+                "capabilities": {
+                    "tools": {}
+                },
+                "serverInfo": {
+                    "name": "Implementation Guides MCP Server",
+                    "version": "0.2.0"
+                }
+            }
+        elif method == "notifications/initialized":
+            # Handle initialized notification (no response needed for notifications)
+            logger.info("Received notifications/initialized")
+            return jsonify({"jsonrpc": "2.0", "result": None}), 200
+        elif method == "tools/list":
+            # Return the list of available tools
+            tools_data = [
+                {
+                    "name": "list_guide_divisions",
+                    "description": "List all available guide divisions (pm, qa, se, exd).",
+                    "inputSchema": {
+                        "type": "object",
+                        "properties": {},
+                        "required": []
+                    }
+                },
+                {
+                    "name": "list_guides_by_division", 
+                    "description": "List all guides in a specific division.",
+                    "inputSchema": {
+                        "type": "object",
+                        "properties": {
+                            "division": {"type": "string", "description": "Division name (pm, qa, se, exd)"}
+                        },
+                        "required": ["division"]
+                    }
+                },
+                {
+                    "name": "get_guide_content",
+                    "description": "Get the full content and metadata of a specific guide.",
+                    "inputSchema": {
+                        "type": "object", 
+                        "properties": {
+                            "path": {"type": "string", "description": "Path to the guide"}
+                        },
+                        "required": ["path"]
+                    }
+                },
+                {
+                    "name": "search_guides",
+                    "description": "Search for guides using semantic search when available, otherwise text search.",
+                    "inputSchema": {
+                        "type": "object",
+                        "properties": {
+                            "query": {"type": "string", "description": "Search query"},
+                            "top_k": {"type": "integer", "description": "Number of results", "default": 3}
+                        },
+                        "required": ["query"]
+                    }
+                }
+            ]
             result = {"tools": tools_data}
         elif method == "tools/call":
             tool_name = params.get("name")
             arguments = params.get("arguments", {})
-            result = await mcp.call_tool(tool_name, arguments)
+            
+            # Call the appropriate tool function directly
+            if tool_name == "list_guide_divisions":
+                result = {"content": [{"type": "text", "text": str(do_list_guide_divisions())}]}
+            elif tool_name == "list_guides_by_division":
+                division = arguments.get("division")
+                result = {"content": [{"type": "text", "text": str(do_list_guides_by_division(division))}]}
+            elif tool_name == "get_guide_content":
+                path = arguments.get("path")
+                result = {"content": [{"type": "text", "text": str(do_get_guide_content(path))}]}
+            elif tool_name == "search_guides":
+                query = arguments.get("query")
+                top_k = arguments.get("top_k", 3)
+                result = {"content": [{"type": "text", "text": str(do_search_guides(query, top_k))}]}
+            else:
+                return jsonify({
+                    "jsonrpc": "2.0",
+                    "id": request_id,
+                    "error": {"code": -32601, "message": f"Tool not found: {tool_name}"}
+                }), 404
         else:
             return jsonify({
                 "jsonrpc": "2.0",

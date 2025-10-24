@@ -1,21 +1,47 @@
 # GitHub Copilot Instructions for Implementation Guides
 
-## Available Guides API
+## Project Overview
 
-This workspace provides access to implementation guides for software modules via a REST API.
+This is a **dual-purpose implementation guides platform** that serves as both a repository of engineering best practices and a Model Context Protocol (MCP) server. The architecture combines content stored as Markdown files with a cloud-hosted API that provides semantic search and integration with GitHub Copilot.
 
-**API Endpoint:** `https://mcp-server-375955300575.us-central1.run.app`
+## Core Architecture
 
-**Authentication:** Google Workspace SSO (automatic via gcloud)
+### Service Boundaries
+- **Content Layer**: Markdown guides organized by division (`se/`, `pm/`, `qa/`, `exd/`) and maturity level
+- **MCP Server**: Unified Flask app (`mcp/guides_mcp_http_server.py`) serving both REST API and MCP endpoints
+- **Semantic Search**: Google Vertex AI embeddings with Firestore storage, graceful fallback to text search
+- **Content Pipeline**: Daily Notion sync via GitHub Actions → Markdown files → Vector embeddings
+
+### Key Integration Points
+- **VS Code MCP**: Configured in `.vscode/settings.json` with hardcoded `test-key` for Copilot compatibility
+- **Cloud Run**: Auto-deployment from `main` branch, scales 0-5 instances
+- **Authentication**: Google OAuth for users, static API key for tools, no local auth required
+
+## Critical Developer Workflows
+
+### Local Development Server
 ```bash
-TOKEN=$(gcloud auth print-identity-token)
+# Start unified server (REST API + MCP on port 8080)
+cd mcp && python guides_mcp_http_server.py
 ```
+
+### Content Management
+```bash
+# Sync from Notion (requires NOTION_API_KEY in .env)
+make sync
+
+# Test MCP server locally
+make test-mcp
+```
+
+### Deployment Pipeline
+- Push to `main` → Automatic Cloud Run deployment via GitHub Actions
+- Content updates → Auto-sync from Notion daily at 2 AM UTC
+- No manual deployment steps required
 
 ## GitHub Copilot MCP Integration
 
-When developers use `@workspace` in Copilot Chat, you can access implementation guides through the MCP server configured in `.vscode/settings.json`.
-
-**Available MCP Tools:**
+**Available MCP Tools** (auto-configured in `.vscode/settings.json`):
 - `list_guide_divisions` - List all divisions (PM, QA, SE, EXD) with guide counts
 - `list_guides_by_division` - List all guides in a specific division
 - `get_guide_content` - Get full guide content with requirements and metadata

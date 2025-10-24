@@ -1,33 +1,9 @@
 {
-    "python-envs.pythonProjects": [],
-    "github.copilot.chat.mcp.servers": {
-        "implementation-guides": {
-            "command": "uv",
-            "args": [
-                "--quiet",
-                "run",
-                "--with",
-                "mcp>=1.2.0",
-                "--with",
-                "httpx>=0.27.0",
-                "https://raw.githubusercontent.com/yousourcephinc/ys-requirements-list/main/mcp/guides_mcp_server.py"
-            ],
-            "env": {
-                "PYTHONUNBUFFERED": "1"
-            }
-        }
-    },
-    "github.copilot.advanced": {
-        "tools": {
-            "implementation-guides": {
-                "type": "http",
-                "url": "https://mcp-server-375955300575.us-central1.run.app/mcp",
-                "auth": {
-                    "type": "header",
-                    "header": "Authorization",
-                    "value": "Bearer test-key"
-                }
-            }
-        }
+  "github.copilot.chat.mcp.enabled": true,
+  "github.copilot.chat.mcp.servers": {
+    "implementation-guides": {
+      "type": "http",
+      "url": "http://127.0.0.1:8080/mcp"
     }
+  }
 }
