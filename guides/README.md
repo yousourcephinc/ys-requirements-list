@@ -10,6 +10,9 @@ This repository contains the official, curated implementation guides for all eng
 - **[Navigation Menu Intro 2](./exd/navigation-menu-intro-2/)**
 - **[Notification System Intro 1](./exd/notification-system-intro-1/)**
 - **[Notification System Intro 2](./exd/notification-system-intro-2/)**
+- **[Onboarding Growth 1](./exd/onboarding-growth-1/)**
+- **[Onboarding Intro 1](./exd/onboarding-intro-1/)**
+- **[Onboarding Intro 2](./exd/onboarding-intro-2/)**
 - **[Payments and Recurring Payments Growth 1](./exd/payments-and-recurring-payments-growth-1/)**
 - **[Payments and Recurring Payments Intro 1](./exd/payments-and-recurring-payments-intro-1/)**
 - **[Payments and Recurring Payments Intro 2](./exd/payments-and-recurring-payments-intro-2/)**
