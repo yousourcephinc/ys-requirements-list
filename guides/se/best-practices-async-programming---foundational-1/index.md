@@ -1,0 +1,81 @@
+---
+content_hash: 041a417dc69fabfef7588bae36f50db2
+created_at: '2025-10-31T06:40:23.370667'
+division: se
+maturity: foundational-1
+title: Best Practices  Async Programming
+---
+
+The content below was extracted from the official Microsoft documentation. Their explanation is better than us trying to create our own.
+
+---
+
+If you have any I/O-bound needs (such as requesting data from a network, accessing a database, or reading and writing to a file system), you'll want to utilize asynchronous programming. You could also have CPU-bound code, such as performing an expensive calculation, which is also a good scenario for writing async code.
+
+<br>
+
+The core of async programming is the `Task` and `Task<T>` objects, which model asynchronous operations. They are supported by the `async` and `await` keywords. The model is fairly simple in most cases:
+
+- For I/O-bound code, you await an operation that returns a `Task` or `Task<T>` inside of an `async` method.
+- For CPU-bound code, you await an operation that is started on a background thread with the [Task.Run](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.run) method.
+
+The `await` keyword is where the magic happens. It yields control to the caller of the method that performed `await`, and it ultimately allows a UI to be responsive or a service to be elastic. While [there are ways](https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap) to approach async code other than `async` and `await`, this article focuses on the language-level constructs.
+
+<br>
+
+**Summary of Asynchronous Programming Guidelines**
+
+| **Name**          | **Description**                                   | **Exceptions**                   |
+| ----------------- | ------------------------------------------------- | -------------------------------- |
+| Avoid async void  | Prefer async Task methods over async void methods | Event handlers                   |
+| Async all the way | Don't mix blocking and async code                 | Console main method (C# \<= 7.0) |
+| Configure context | Use `ConfigureAwait(false)` when you can          | Methods that require context     |
+
+**The Async Way of Doing Things**
+
+| **To Do This ...**                       | **Instead of This ...**    | **Use This**         |
+| ---------------------------------------- | -------------------------- | -------------------- |
+| Retrieve the result of a background task | `Task.Wait or Task.Result` | `await`              |
+| Wait for any task to complete            | `Task.WaitAny`             | `await Task.WhenAny` |
+| Retrieve the results of multiple tasks   | `Task.WaitAll`             | `await Task.WhenAll` |
+| Wait a period of time                    | `Thread.Sleep`             | `await Task.Delay`   |
+
+**Best practice**
+
+The async/await is the best for IO bound tasks (networking communication, database communication, http request, etc.) but it is not good to apply on computational bound tasks (traverse on the huge list, render a hugge image, etc.). Because it will release the holding thread to the thread pool and CPU/cores available will not involve to process those tasks. Therefore, we should avoid using Async/Await for computional bound tasks.
+
+For dealing with computational bound tasks, prefer to use `Task.Factory.CreateNew` with `TaskCreationOptions` is `LongRunning`. It will start a new background thread to process a heavy computational bound task without release it back to the thread pool until the task being completed.
+
+**Know Your Tools**
+
+There's a lot to learn about async and await, and it's natural to get a little disoriented. Here's a quick reference of solutions to common problems.
+
+**Solutions to Common Async Problems**
+
+| **Problem**                                     | **Solution**                                                                      |
+| ----------------------------------------------- | --------------------------------------------------------------------------------- |
+| Create a task to execute code                   | `Task.Run` or `TaskFactory.StartNew` (not the `Task` constructor or `Task.Start`) |
+| Create a task wrapper for an operation or event | `TaskFactory.FromAsync` or `TaskCompletionSource<T>`                              |
+| Support cancellation                            | `CancellationTokenSource` and `CancellationToken`                                 |
+| Report progress                                 | `IProgress<T>` and `Progress<T>`                                                  |
+| Handle streams of data                          | TPL Dataflow or Reactive Extensions                                               |
+| Synchronize access to a shared resource         | `SemaphoreSlim`                                                                   |
+| Asynchronously initialize a resource            | `AsyncLazy<T>`                                                                    |
+| Async-ready producer/consumer structures        | TPL Dataflow or `AsyncCollection<T>`                                              |
+
+Read the [Task-based Asynchronous Pattern (TAP) document](http://www.microsoft.com/download/en/details.aspx?id=19957). It is extremely well-written, and includes guidance on API design and the proper use of async/await (including cancellation and progress reporting).
+
+There are many new await-friendly techniques that should be used instead of the old blocking techniques. If you have any of these Old examples in your new async code, you're Doing It Wrong(TM):
+
+| **Old**            | **New**                              | **Description**                                               |
+| ------------------ | ------------------------------------ | ------------------------------------------------------------- |
+| `task.Wait`        | `await task`                         | Wait/await for a task to complete                             |
+| `task.Result`      | `await task`                         | Get the result of a completed task                            |
+| `Task.WaitAny`     | `await Task.WhenAny`                 | Wait/await for one of a collection of tasks to complete       |
+| `Task.WaitAll`     | `await Task.WhenAll`                 | Wait/await for every one of a collection of tasks to complete |
+| `Thread.Sleep`     | `await Task.Delay`                   | Wait/await for a period of time                               |
+| `Task` constructor | `Task.Run` or `TaskFactory.StartNew` | Create a code-based task                                      |
+
+<br>
+
+Read more [here](https://docs.microsoft.com/en-us/dotnet/csharp/async "Asynchronous programming - C#")
