@@ -372,9 +372,11 @@ def main():
                 page_title = page.get("properties", {}).get("Name", {}).get("title", [{}])[0].get("plain_text", "Unknown")
                 print(f"\n❌ Error processing page '{page_title}': {e}")
     
-    # Delete files that are no longer in Notion
+    # Delete files that are no longer in Notion (but preserve local-only guides)
     print("\n\n🧹 Cleaning up removed pages...")
     deleted_count = 0
+    skipped_local_count = 0
+    
     if GUIDES_ROOT_DIR.exists():
         for module_dir in GUIDES_ROOT_DIR.iterdir():
             if module_dir.is_dir() and module_dir.name != "README.md":
@@ -382,18 +384,37 @@ def main():
                     if guide_dir.is_dir():
                         index_file = guide_dir / "index.md"
                         if index_file.exists() and str(index_file) not in synced_files:
-                            print(f"  🗑️  Deleted: {index_file}")
-                            shutil.rmtree(guide_dir)
-                            deleted_count += 1
+                            # Check if this is a local-only guide (no source_url in frontmatter)
+                            is_local_guide = False
+                            try:
+                                import frontmatter
+                                post = frontmatter.load(index_file)
+                                # Local guides don't have a source_url
+                                if not post.metadata.get("source_url"):
+                                    is_local_guide = True
+                            except:
+                                # If we can't parse frontmatter, assume it's from Notion
+                                pass
+                            
+                            if is_local_guide:
+                                print(f"  � Preserved local guide: {index_file}")
+                                skipped_local_count += 1
+                            else:
+                                print(f"  �🗑️  Deleted: {index_file}")
+                                shutil.rmtree(guide_dir)
+                                deleted_count += 1
                 # Remove empty module directories
                 if not any(module_dir.iterdir()):
                     print(f"  📁 Removed empty directory: {module_dir.name}")
                     shutil.rmtree(module_dir)
     
+    print(f"\n📊 Cleanup Summary:")
     if deleted_count > 0:
-        print(f"✅ Removed {deleted_count} obsolete page(s)")
-    else:
-        print("✅ No obsolete pages to remove")
+        print(f"   • Removed {deleted_count} obsolete Notion page(s)")
+    if skipped_local_count > 0:
+        print(f"   • Preserved {skipped_local_count} local-only guide(s)")
+    if deleted_count == 0 and skipped_local_count == 0:
+        print("   • No changes needed")
     
     print("\n📚 Generating master catalog...")
     generate_master_catalog(processed_pages)

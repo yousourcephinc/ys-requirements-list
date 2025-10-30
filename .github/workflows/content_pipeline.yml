@@ -1,0 +1,55 @@
+name: Content Pipeline - Update Search Index
+
+on:
+  workflow_dispatch: # Allows manual triggering
+  push:
+    branches: [ main ]
+    paths:
+      - 'guides/**/*.md' # Triggers on any change to guide files
+
+jobs:
+  update-embeddings:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write' # Required for Workload Identity Federation
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install google-cloud-aiplatform google-cloud-firestore python-frontmatter
+
+      - name: Generate and Upload Embeddings
+        run: python scripts/generate_embeddings.py
+        env:
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Content Pipeline Results" >> $GITHUB_STEP_SUMMARY
+          echo "- **Workflow**: Update Search Index" >> $GITHUB_STEP_SUMMARY
+          echo "- **Trigger**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "All implementation guides have been processed and the search index has been updated." >> $GITHUB_STEP_SUMMARY
