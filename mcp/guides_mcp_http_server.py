@@ -36,7 +36,15 @@ app = Flask(__name__)
 
 def get_guides_root() -> Path:
     """Get the guides root directory path."""
-    return Path("guides")
+    # If running from /app/mcp (Cloud Run), guides are at /app/guides
+    # If running from project root locally, guides are at ./guides
+    guides_path = Path("guides")
+    if not guides_path.exists():
+        # Try parent directory (for when running from mcp/ subdirectory)
+        parent_guides = Path(__file__).parent.parent / "guides"
+        if parent_guides.exists():
+            return parent_guides
+    return guides_path.absolute()
 
 def get_search_function():
     """Lazy import for search functionality with fallback."""
