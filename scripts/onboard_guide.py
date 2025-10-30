@@ -11,9 +11,10 @@ Usage:
     python scripts/onboard_guide.py ~/code/additional/staging
 
 Features:
-    - Intelligent metadata detection based on filename and content analysis
-    - Batch processing with preview table showing all presumed values
-    - Interactive editing of metadata before processing
+    - Batch division and maturity selection for entire directory
+    - Intelligent title detection based on filename cleanup
+    - Preview table showing all presumed values before processing
+    - Interactive editing of titles before processing
     - Single approval step for entire batch
 """
 
@@ -123,40 +124,15 @@ def check_existing_guide(target_file, source_file):
         return "update"  # Content has changed
 
 
-def analyze_file(md_file, division):
+def analyze_file(md_file, division, maturity):
     """Analyze a file and determine presumed metadata."""
     # Generate presumed title from filename
     presumed_title = md_file.stem.replace('-', ' ').replace('_', ' ').title()
     
-    # Analyze content for maturity level
-    try:
-        with open(md_file, 'r', encoding='utf-8') as f:
-            content = f.read().lower()
-        
-        # Presumed maturity based on content complexity and keywords
-        if any(word in content for word in ['basic', 'introduction', 'getting started', 'simple', 'beginner']):
-            presumed_maturity = 'introduction-1'
-        elif any(word in content for word in ['advanced', 'complex', 'optimization', 'performance', 'scaling']):
-            presumed_maturity = 'growth-2'
-        elif any(word in content for word in ['best practices', 'patterns', 'architecture', 'design']):
-            presumed_maturity = 'growth-1'
-        else:
-            # Default based on content length
-            word_count = len(content.split())
-            if word_count < 200:
-                presumed_maturity = 'introduction-1'
-            elif word_count < 500:
-                presumed_maturity = 'introduction-2'
-            else:
-                presumed_maturity = 'growth-1'
-                
-    except Exception:
-        presumed_maturity = 'introduction-1'
-    
     return {
         'title': presumed_title,
         'division': division,  # Use the batch division
-        'maturity': presumed_maturity
+        'maturity': maturity   # Use the batch maturity
     }
 
 
@@ -346,11 +322,31 @@ def main():
         except ValueError:
             print("Invalid input. Please enter a number.")
 
+    # Ask for maturity once for the entire batch
+    if len(md_files) == 1:
+        print(f"\n📊 Select the maturity level for this guide:")
+    else:
+        print(f"\n📊 Select the maturity level for all {len(md_files)} guides:")
+    
+    for i, mat in enumerate(MATURITY_LEVELS, 1):
+        print(f"  {i}. {mat}")
+    
+    while True:
+        try:
+            mat_choice = int(input(f"Enter number (1-{len(MATURITY_LEVELS)}): "))
+            if 1 <= mat_choice <= len(MATURITY_LEVELS):
+                batch_maturity = MATURITY_LEVELS[mat_choice - 1]
+                break
+            else:
+                print("Invalid number. Please try again.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
     # Analyze all files and generate presumed metadata
-    print(f"\n🤖 Analyzing files and generating presumed metadata for division '{batch_division}'...")
+    print(f"\n🤖 Generating presumed titles for division '{batch_division}', maturity '{batch_maturity}'...")
     file_analyses = {}
     for md_file in md_files:
-        file_analyses[md_file] = analyze_file(md_file, batch_division)
+        file_analyses[md_file] = analyze_file(md_file, batch_division, batch_maturity)
 
     # Display analysis table
     display_analysis_table(file_analyses)
