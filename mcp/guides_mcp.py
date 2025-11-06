@@ -31,23 +31,31 @@ from mcp import (
     MCPSchemaRegistry,
 )
 
-# Import guide-related functions from sync_notion
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
-
-from sync_notion import (
-    search_semantic_index,
-    GUIDES_ROOT_DIR,
-    build_semantic_index,
-)
-
-# Configure logging
+# Configure logging early
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
+
+# Import guide-related functions from scripts
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
+
+# Import from sync_notion for guide directory constant
+try:
+    from sync_notion import GUIDES_ROOT_DIR
+except ImportError:
+    GUIDES_ROOT_DIR = Path("guides")
+
+# Import search functionality from vector_search
+try:
+    from vector_search import search_guides as vector_search_guides, build_index_from_guides
+except ImportError:
+    logger.warning("Could not import vector_search. Search functionality will be limited.")
+    vector_search_guides = None
+    build_index_from_guides = None
 
 # Service information
 SERVICE_INFO = MCPServiceInfo(
@@ -189,26 +197,42 @@ async def get_guide_content(guide_path: str) -> Dict[str, Any]:
 
 
 @tool
-async def search_guides(query: str, top_k: int = 5) -> List[Dict[str, Any]]:
+async def search_guides(
+    query: str, 
+    top_k: int = 5,
+    maturity_filter: Optional[str] = None,
+    include_foundational: bool = True
+) -> List[Dict[str, Any]]:
     """
-    Search guides using semantic search.
+    Search guides using semantic search with optional maturity filtering.
     
     Args:
         query: The search query
         top_k: Maximum number of results to return (default: 5)
+        maturity_filter: Filter by maturity level (e.g., 'introduction-1', 'growth-1')
+        include_foundational: Whether to always include foundational guides (default: True)
         
     Returns:
         A list of matching guide results
     """
+    if vector_search_guides is None:
+        return []
+    
     guides_dir = Path(GUIDES_ROOT_DIR)
     
     # Check if index exists, if not build it
-    index_dir = guides_dir / "semantic_index"
-    if not (index_dir / "guides.index").exists():
-        logger.info("Semantic index not found, building it first...")
-        build_semantic_index(guides_dir)
-    
-    results = search_semantic_index(query, guides_dir, top_k=top_k)
+    # Note: For Firestore-based search, the index is maintained via the sync workflow
+    # This check is primarily for local development
+    try:
+        results = vector_search_guides(
+            query, 
+            top_k=top_k,
+            maturity_filter=maturity_filter,
+            include_foundational=include_foundational
+        )
+    except Exception as e:
+        logger.error(f"Error searching guides: {e}")
+        return []
     
     # Convert to expected return format
     formatted_results = []
@@ -232,15 +256,18 @@ async def rebuild_semantic_index() -> Dict[str, Any]:
     Returns:
         Status of the indexing operation
     """
+    if build_index_from_guides is None:
+        return {
+            "success": False,
+            "error": "Index building functionality not available"
+        }
+    
     guides_dir = Path(GUIDES_ROOT_DIR)
     
     try:
         logger.info("Rebuilding semantic search index...")
-        build_semantic_index(guides_dir)
-        return {
-            "success": True,
-            "message": "Semantic index rebuilt successfully"
-        }
+        result = build_index_from_guides(guides_dir)
+        return result
     except Exception as e:
         logger.error(f"Error rebuilding semantic index: {str(e)}")
         return {
@@ -266,36 +293,40 @@ async def get_guide_recommendations(
     Returns:
         A list of recommended guides
     """
+    if vector_search_guides is None:
+        return []
+    
     guides_dir = Path(GUIDES_ROOT_DIR)
     
     # Build combined query from topics
     query = " ".join(topics)
     
-    # Get initial results from semantic search
-    results = search_semantic_index(query, guides_dir, top_k=10)
+    # Get initial results from semantic search with maturity filtering
+    try:
+        results = vector_search_guides(
+            query, 
+            top_k=10,
+            division_filter=division,
+            maturity_filter=maturity_level,
+            include_foundational=True
+        )
+    except Exception as e:
+        logger.error(f"Error getting recommendations: {e}")
+        return []
     
-    # Filter results if needed
-    filtered_results = []
+    # Format results
+    formatted_results = []
     for result in results:
-        include = True
-        
-        if maturity_level and "maturity" in result:
-            # Check if maturity level matches (case-insensitive)
-            if result["maturity"].lower() != maturity_level.lower():
-                include = False
-                
-        if division and result["division"].lower() != division.lower():
-            include = False
-            
-        if include:
-            filtered_results.append({
-                "title": result["title"],
-                "division": result["division"],
-                "file_path": result["file_path"],
-                "score": result["score"],
-                "content_preview": result["content_preview"]
-            })
+        formatted_results.append({
+            "title": result["title"],
+            "division": result["division"],
+            "file_path": result["file_path"],
+            "score": result["score"],
+            "content_preview": result["content_preview"]
+        })
     
+    # Return top 5 recommendations
+    return formatted_results[:5]
     # Return top 5 after filtering
     return filtered_results[:5]
 

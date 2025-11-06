@@ -101,14 +101,22 @@ def index_guide(guide_id: str, title: str, division: str, content: str,
         raise
 
 
-def search_guides(query: str, top_k: int = 5, division_filter: str = None) -> List[Dict[str, Any]]:
+def search_guides(
+    query: str, 
+    top_k: int = 5, 
+    division_filter: str = None,
+    maturity_filter: str = None,
+    include_foundational: bool = True
+) -> List[Dict[str, Any]]:
     """
-    Search guides using semantic similarity.
+    Search guides using semantic similarity with maturity filtering.
     
     Args:
         query: Search query
         top_k: Number of results to return
         division_filter: Optional division to filter by
+        maturity_filter: Optional maturity level to filter by (e.g., 'introduction-1')
+        include_foundational: Whether to always include foundational guides (default: True)
         
     Returns:
         List of matching guides with scores
@@ -132,16 +140,38 @@ def search_guides(query: str, top_k: int = 5, division_filter: str = None) -> Li
             data = doc.to_dict()
             doc_embedding = data.get("embedding", [])
             
-            if doc_embedding:
-                similarity = cosine_similarity(query_embedding, doc_embedding)
-                results.append({
-                    "title": data.get("title"),
-                    "division": data.get("division"),
-                    "file_path": data.get("file_path"),
-                    "maturity": data.get("maturity"),
-                    "score": similarity,
-                    "content_preview": data.get("content", "")[:200] + "..."
-                })
+            if not doc_embedding:
+                continue
+            
+            guide_maturity = data.get("maturity", "Unknown")
+            
+            # Apply maturity filtering
+            # 1. Always include foundational guides if include_foundational is True
+            # 2. Include guides matching the maturity_filter
+            # 3. If no maturity_filter set, include all guides
+            if maturity_filter and guide_maturity != "Unknown":
+                is_foundational = guide_maturity == "foundational-1"
+                matches_maturity = guide_maturity == maturity_filter
+                
+                # Skip if doesn't match maturity and isn't foundational (when foundational is included)
+                if not matches_maturity:
+                    if not (include_foundational and is_foundational):
+                        continue
+            
+            similarity = cosine_similarity(query_embedding, doc_embedding)
+            
+            # Apply foundational boost: increase score by 10% for foundational guides
+            if include_foundational and guide_maturity == "foundational-1":
+                similarity = min(1.0, similarity * 1.1)  # Cap at 1.0
+            
+            results.append({
+                "title": data.get("title"),
+                "division": data.get("division"),
+                "file_path": data.get("file_path"),
+                "maturity": guide_maturity,
+                "score": similarity,
+                "content_preview": data.get("content", "")[:200] + "..."
+            })
         
         # Sort by similarity and return top k
         results.sort(key=lambda x: x["score"], reverse=True)
