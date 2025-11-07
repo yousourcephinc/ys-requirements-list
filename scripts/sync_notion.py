@@ -195,7 +195,10 @@ def process_page(notion: Client, page: dict, rate_limiter: Lock = None) -> dict:
     
     properties = page.get("properties", {})
     title_property = properties.get("Name", {}).get("title", [])
-    title = title_property[0].get("plain_text", "Untitled") if title_property else "Untitled"
+    if title_property and len(title_property) > 0 and title_property[0].get("plain_text"):
+        title = title_property[0].get("plain_text", "Untitled")
+    else:
+        title = "Untitled"
     
     # Get division from property
     division_prop = properties.get("Division", {}).get("select")
@@ -372,7 +375,10 @@ def main():
             except Exception as e:
                 page_properties = page.get("properties", {})
                 title_property = page_properties.get("Name", {}).get("title", [])
-                page_title = title_property[0].get("plain_text", "Unknown") if title_property else "Unknown"
+                if title_property and len(title_property) > 0 and title_property[0].get("plain_text"):
+                    page_title = title_property[0].get("plain_text", "Unknown")
+                else:
+                    page_title = "Unknown"
                 print(f"\n❌ Error processing page '{page_title}': {e}")
     
     # Delete files that are no longer in Notion (but preserve local-only guides)
