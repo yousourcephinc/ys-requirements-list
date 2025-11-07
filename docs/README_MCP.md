@@ -77,23 +77,49 @@ Retrieves the full content and metadata of a specific guide.
 **Returns:** Guide content including markdown text, metadata, and requirements
 
 ### 4. `search_guides`
-Semantic search across all guides using AI embeddings.
+Semantic search across all guides using AI embeddings with maturity filtering.
 
 **Parameters:**
 - `query` (string): Natural language search query
-- `top_k` (integer, optional): Number of results (default: 3, max: 10)
+- `top_k` (integer, optional): Number of results (default: 5, max: 10)
+- `maturity_filter` (string, optional): Filter by maturity level (e.g., 'introduction-1', 'growth-1')
+- `include_foundational` (boolean, optional): Include foundational guides (default: true)
 
 **Returns:** List of relevant guides with similarity scores
 
+**Maturity Filtering:**
+- When `maturity_filter` is set, only guides matching that maturity level are returned
+- Foundational guides (foundational-1) are **always included** when `include_foundational` is true
+- Foundational guides receive a 10% score boost for better ranking
+- Without `maturity_filter`, all guides are searched
+
+**Example:**
+```python
+# Search for authentication guides at introduction-1 stage
+search_guides(
+    query="user authentication",
+    top_k=5,
+    maturity_filter="introduction-1",
+    include_foundational=True
+)
+# Returns: foundational security guides + introduction-1 auth guides
+```
+
 ### 5. `get_guide_recommendations`
-Get personalized recommendations based on topics and filters.
+Get personalized recommendations based on topics and filters with maturity awareness.
 
 **Parameters:**
 - `topics` (list[string]): Topics like ["authentication", "security"]
-- `maturity_level` (string, optional): Filter by level like "Introduction 1"
+- `maturity_level` (string, optional): Filter by level like "introduction-1"
 - `division` (string, optional): Filter by division (pm, qa, se, or exd)
 
 **Returns:** Top 5 recommended guides matching criteria
+
+**Maturity Filtering:**
+- When `maturity_level` is provided, results include:
+  - Foundational guides (always included)
+  - Guides matching the specified maturity level
+- Foundational guides are prioritized in results
 
 ## Usage Examples
 
