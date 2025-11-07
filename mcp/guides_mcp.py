@@ -200,15 +200,17 @@ async def get_guide_content(guide_path: str) -> Dict[str, Any]:
 async def search_guides(
     query: str, 
     top_k: int = 5,
+    division_filter: Optional[str] = None,
     maturity_filter: Optional[str] = None,
     include_foundational: bool = True
 ) -> List[Dict[str, Any]]:
     """
-    Search guides using semantic search with optional maturity filtering.
+    Search guides using semantic search with optional division and maturity filtering.
     
     Args:
         query: The search query
         top_k: Maximum number of results to return (default: 5)
+        division_filter: Filter by division (e.g., 'se', 'pm', 'qa', 'exd')
         maturity_filter: Filter by maturity level (e.g., 'introduction-1', 'growth-1')
         include_foundational: Whether to always include foundational guides (default: True)
         
@@ -227,6 +229,7 @@ async def search_guides(
         results = vector_search_guides(
             query, 
             top_k=top_k,
+            division_filter=division_filter,
             maturity_filter=maturity_filter,
             include_foundational=include_foundational
         )
