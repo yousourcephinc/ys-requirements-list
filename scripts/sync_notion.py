@@ -343,7 +343,12 @@ def main():
         print(f"\n📂 Using guides directory: {GUIDES_ROOT_DIR.absolute()}")
 
     print("\n🔗 Connecting to Notion API...")
-    notion = Client(auth=notion_api_key)
+    # Use 2022-06-28 API version to avoid breaking changes from 2025-09-03
+    # The 2025-09-03 version introduces data sources which requires code changes
+    notion = Client(
+        auth=notion_api_key,
+        notion_version="2022-06-28"  # Explicitly use older stable version
+    )
     print("✅ Connected successfully\n")
     
     print("📋 Fetching database pages...")
