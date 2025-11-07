@@ -77,32 +77,39 @@ Retrieves the full content and metadata of a specific guide.
 **Returns:** Guide content including markdown text, metadata, and requirements
 
 ### 4. `search_guides`
-Semantic search across all guides using AI embeddings with maturity filtering.
+Semantic search across all guides using AI embeddings with division and maturity filtering.
 
 **Parameters:**
 - `query` (string): Natural language search query
 - `top_k` (integer, optional): Number of results (default: 5, max: 10)
+- `division_filter` (string, optional): Filter by division ('se', 'pm', 'qa', 'exd')
 - `maturity_filter` (string, optional): Filter by maturity level (e.g., 'introduction-1', 'growth-1')
 - `include_foundational` (boolean, optional): Include foundational guides (default: true)
 
 **Returns:** List of relevant guides with similarity scores
 
+**Division Filtering:**
+- When `division_filter` is set, only guides from that division are returned
+- Commonly used with `division_filter="se"` for software engineering guides
+- Filters are applied before semantic search for better performance
+
 **Maturity Filtering:**
 - When `maturity_filter` is set, only guides matching that maturity level are returned
 - Foundational guides (foundational-1) are **always included** when `include_foundational` is true
 - Foundational guides receive a 10% score boost for better ranking
-- Without `maturity_filter`, all guides are searched
+- Without `maturity_filter`, all guides (within the division) are searched
 
 **Example:**
 ```python
-# Search for authentication guides at introduction-1 stage
+# Search for SE division authentication guides at introduction-1 stage
 search_guides(
     query="user authentication",
     top_k=5,
+    division_filter="se",
     maturity_filter="introduction-1",
     include_foundational=True
 )
-# Returns: foundational security guides + introduction-1 auth guides
+# Returns: foundational security guides + SE introduction-1 auth guides
 ```
 
 ### 5. `get_guide_recommendations`
