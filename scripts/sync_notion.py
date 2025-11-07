@@ -194,7 +194,8 @@ def process_page(notion: Client, page: dict, rate_limiter: Lock = None) -> dict:
             time.sleep(RATE_LIMIT_DELAY)
     
     properties = page.get("properties", {})
-    title = properties.get("Name", {}).get("title", [{}])[0].get("plain_text", "Untitled")
+    title_property = properties.get("Name", {}).get("title", [])
+    title = title_property[0].get("plain_text", "Untitled") if title_property else "Untitled"
     
     # Get division from property
     division_prop = properties.get("Division", {}).get("select")
@@ -369,7 +370,9 @@ def main():
                 processed_pages.append(result)
                 synced_files.add(result["file_path"])
             except Exception as e:
-                page_title = page.get("properties", {}).get("Name", {}).get("title", [{}])[0].get("plain_text", "Unknown")
+                page_properties = page.get("properties", {})
+                title_property = page_properties.get("Name", {}).get("title", [])
+                page_title = title_property[0].get("plain_text", "Unknown") if title_property else "Unknown"
                 print(f"\n❌ Error processing page '{page_title}': {e}")
     
     # Delete files that are no longer in Notion (but preserve local-only guides)
