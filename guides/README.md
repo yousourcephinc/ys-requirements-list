@@ -129,6 +129,9 @@ This repository contains the official, curated implementation guides for all eng
 - **[Navigation Menu Module - Growth 1](./se/navigation-menu-module---growth-1/)**
 - **[Navigation Menu Module - Introduction 1](./se/navigation-menu-module---introduction-1/)**
 - **[Navigation Menu Module - Introduction 2](./se/navigation-menu-module---introduction-2/)**
+- **[Notification Settings and Preferences Module - Growth 1](./se/notification-settings-and-preferences-module---growth-1/)**
+- **[Notification Settings and Preferences Module - Introduction 1](./se/notification-settings-and-preferences-module---introduction-1/)**
+- **[Notification Settings and Preferences Module - Introduction 2](./se/notification-settings-and-preferences-module---introduction-2/)**
 - **[Notification System Module - Growth 1](./se/notification-system-module---growth-1/)**
 - **[Notification System Module - Introduction 1](./se/notification-system-module---introduction-1/)**
 - **[Notification System Module - Introduction 2](./se/notification-system-module---introduction-2/)**
@@ -158,9 +161,6 @@ This repository contains the official, curated implementation guides for all eng
 - **[Server-Side API Integration Module - Introduction 2](./se/server-side-api-integration-module---introduction-2/)**
 - **[Service Layer](./se/service-layer/)**
 - **[Services](./se/services/)**
-- **[Settings and Preferences Module - Growth 1](./se/settings-and-preferences-module---growth-1/)**
-- **[Settings and Preferences Module - Introduction 1](./se/settings-and-preferences-module---introduction-1/)**
-- **[Settings and Preferences Module - Introduction 2](./se/settings-and-preferences-module---introduction-2/)**
 - **[Subscription Management Module - Growth 1](./se/subscription-management-module---growth-1/)**
 - **[Subscription Management Module - Introduction 1](./se/subscription-management-module---introduction-1/)**
 - **[Support Module - Introduction 1](./se/support-module---introduction-1/)**

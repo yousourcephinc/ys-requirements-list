@@ -1,8 +1,8 @@
 ---
-title: "Settings and Preferences Module - Introduction 2"
+title: "Notification Settings and Preferences Module - Introduction 2"
 division: "SE"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/Settings-and-Preferences-Module-Introduction-2-1cba172b65a380fc9410e66ac8b36f5a
+source_url: https://www.notion.so/Notification-Settings-and-Preferences-Module-Introduction-2-1cba172b65a380fc9410e66ac8b36f5a
 ---
 
 Key focus: On/off notifications on supported channels (e.g. Email, Push, SMS, etc.)

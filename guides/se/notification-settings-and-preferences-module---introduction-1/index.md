@@ -1,8 +1,8 @@
 ---
-title: "Settings and Preferences Module - Introduction 1"
+title: "Notification Settings and Preferences Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Settings-and-Preferences-Module-Introduction-1-1cba172b65a380c582f9d290b0c4ad04
+source_url: https://www.notion.so/Notification-Settings-and-Preferences-Module-Introduction-1-1cba172b65a380c582f9d290b0c4ad04
 ---
 
 Key focus: Receive all notifications

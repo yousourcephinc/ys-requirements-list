@@ -1,8 +1,8 @@
 ---
-title: "Settings and Preferences Module - Growth 1"
+title: "Notification Settings and Preferences Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/Settings-and-Preferences-Module-Growth-1-1cba172b65a380078550d4341831065f
+source_url: https://www.notion.so/Notification-Settings-and-Preferences-Module-Growth-1-1cba172b65a380078550d4341831065f
 ---
 
 Key focus: Notification frequency
