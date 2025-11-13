@@ -16,10 +16,12 @@ ys-requirements-list/
 │   ├── DEPLOYMENT.md     # Deployment instructions
 │   └── REPOSITORY_STRUCTURE.md  # This file
 ├── mcp/                  # MCP server implementations
-│   ├── guides_mcp_server.py     # FastMCP server (PEP 723, recommended)
-│   ├── guides_mcp_api.py        # Cloud Run REST API
-│   ├── guides_mcp.py            # Alternative MCP implementation
-│   └── setup_mcp.py             # MCP setup utility
+│   ├── guides_mcp_server.py        # FastMCP stdio server (PEP 723, for Claude Desktop)
+│   ├── guides_mcp_http_server.py   # Flask HTTP server (Cloud Run + GitHub Copilot)
+│   ├── guides_mcp_stdio_proxy.py   # Stdio proxy (connects to HTTP server)
+│   ├── guides_mcp.py               # Legacy MCP implementation
+│   ├── setup_mcp.py                # MCP setup utility
+│   └── test_minimal.py             # Minimal MCP test
 ├── scripts/              # Utility scripts
 │   ├── sync_notion.py    # Notion synchronization
 │   └── vector_search.py  # Semantic search with Vertex AI
@@ -46,29 +48,52 @@ ys-requirements-list/
 
 ### MCP Servers
 
-- **guides_mcp_server.py**: FastMCP-based MCP server using PEP 723 inline dependencies
+- **guides_mcp_http_server.py**: Unified Flask HTTP server
+  - Serves both REST API and MCP endpoints
+  - Deployed on Google Cloud Run (production)
+  - Runs locally for GitHub Copilot integration
+  - Integrates with Vertex AI and Firestore
+  - Authentication via Google Cloud identity tokens
+
+- **guides_mcp_server.py**: FastMCP stdio server (PEP 723)
   - Recommended for Claude Desktop integration
   - Zero-installation with `uv run`
-  - Connects to Cloud Run API
+  - Connects to Cloud Run HTTP server via proxy
 
-- **guides_mcp_api.py**: Flask REST API deployed on Cloud Run
-  - Provides HTTP endpoints for guide access
-  - Integrates with Vertex AI and Firestore
-  - Authentication via Google Cloud
+- **guides_mcp_stdio_proxy.py**: Stdio-to-HTTP proxy
+  - Bridges stdio MCP protocol to HTTP server
+  - Used by guides_mcp_server.py to connect to Cloud Run
+  - Handles authentication and request translation
 
-- **guides_mcp.py**: Alternative MCP implementation
+- **guides_mcp.py**: Legacy MCP implementation
   - Direct file system access
-  - Legacy implementation
+  - Not actively maintained
 
 ### Scripts
 
 - **sync_notion.py**: Synchronizes implementation guides from Notion
   - Runs daily via GitHub Actions
   - Updates `guides/` directory
+  - Preserves local-only guides (no source_url)
+
+- **generate_embeddings.py**: Generate vector embeddings for guides
+  - Uses Vertex AI textembedding-gecko@003
+  - Stores embeddings in Firestore
+  - Runs after Notion sync
 
 - **vector_search.py**: Semantic search implementation
   - Uses Vertex AI embeddings
   - Stores vectors in Firestore
+  - Graceful fallback to text search
+
+- **onboard_guide.py**: Onboard standalone guides to the collection
+  - Adds frontmatter metadata
+  - Creates proper directory structure
+  - Marks as local-only (no Notion source)
+
+- **upload_foundational_to_notion.py**: Upload foundational guides to Notion
+  - Bulk upload guides to Notion database
+  - Preserves frontmatter metadata
 
 ### Documentation
 
@@ -76,6 +101,13 @@ ys-requirements-list/
 - **MCP_SETUP.md**: Step-by-step setup instructions
 - **SETUP_GUIDE.md**: General project setup
 - **DEPLOYMENT.md**: Cloud deployment guide
+- **COPILOT_SETUP.md**: GitHub Copilot MCP integration
+- **api-reference.md**: REST API endpoint documentation
+- **local-development.md**: Local development guide
+- **troubleshooting.md**: Common issues and solutions
+- **scripts.md**: Script usage documentation
+- **testing.md**: Testing guide
+- **configuration.md**: Environment variables and configuration
 
 ## Import Paths
 
@@ -116,8 +148,8 @@ uv run mcp dev mcp/guides_mcp_server.py
 # Sync guides from Notion
 python scripts/sync_notion.py
 
-# Run API locally
-python mcp/guides_mcp_api.py
+# Run HTTP server locally (REST API + MCP)
+python mcp/guides_mcp_http_server.py
 
 # Run tests
 python tests/test_guides_api.py
@@ -130,11 +162,15 @@ make test-mcp    # Test MCP server
 
 ## Development Workflow
 
-1. **Adding new guides**: Guides are synced from Notion automatically
-2. **Testing MCP server**: Use `uv run mcp dev mcp/guides_mcp_server.py`
-3. **Testing API**: Use `python mcp/guides_mcp_api.py` for local testing
-4. **Running tests**: Execute test files from the repository root
-5. **Deployment**: Push to main branch triggers Cloud Run deployment
+1. **Adding new guides**: 
+   - Automatic: Synced from Notion daily via GitHub Actions
+   - Manual: Use `scripts/onboard_guide.py` for local-only guides
+2. **Testing MCP server**:
+   - Claude Desktop: `uv run mcp dev mcp/guides_mcp_server.py`
+   - GitHub Copilot: `python mcp/guides_mcp_http_server.py` (HTTP mode)
+3. **Testing API**: Use `python mcp/guides_mcp_http_server.py` for local testing
+4. **Running tests**: Execute test files from the repository root with `pytest`
+5. **Deployment**: Push to main branch triggers automatic Cloud Run deployment
 
 ## .gitignore Coverage
 
@@ -149,14 +185,14 @@ The `.gitignore` file now includes comprehensive coverage for:
 - Large binary files (`guides/semantic_index/`)
 - Custom scratch directories (`scratch/`, `playground/`)
 
-## Migration Notes
+## Related Documentation
 
-This repository was reorganized on 2024-10-21 to improve structure and maintainability. Key changes:
-
-1. Created logical directory structure (mcp/, scripts/, tests/, docs/)
-2. Updated all import paths to reflect new organization
-3. Updated documentation references to new file locations
-4. Updated CI/CD workflows and build files
-5. Enhanced .gitignore with comprehensive development patterns
-
-All functionality remains the same; only file locations have changed.
+- [Main README](../README.md) - Project overview and quick start
+- [API Reference](api-reference.md) - REST API documentation
+- [Local Development](local-development.md) - Setup and development guide
+- [Configuration](configuration.md) - Environment variables and settings
+- [Scripts](scripts.md) - Script usage and automation
+- [Testing](testing.md) - Testing guide
+- [Troubleshooting](troubleshooting.md) - Common issues and solutions
+- [MCP Setup](MCP_SETUP.md) - MCP server setup
+- [Deployment](DEPLOYMENT.md) - Cloud deployment guide
