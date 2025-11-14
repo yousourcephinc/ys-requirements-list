@@ -24,19 +24,62 @@ This repository serves dual purposes:
 
 ## Quick Start
 
-### For AI Coding Assistants
+### For GitHub Copilot (Primary)
 
-**GitHub Copilot** (VS Code):
+The easiest way to use implementation guides with GitHub Copilot:
+
+**Option 1: Using specify CLI (Recommended)**
 ```bash
-# Configuration is auto-created by specify CLI
-# See: .vscode/settings.json
+# Initialize a new project with Copilot integration
+specify init --ai copilot --script sh
+
+# This auto-creates .vscode/settings.json with MCP configuration
 ```
 
-**Claude Desktop**:
+**Option 2: Manual Setup**
+
+1. **Authenticate with Google Cloud**:
+```bash
+gcloud auth login
+```
+
+2. **Start the local MCP server**:
+```bash
+cd ~/code/ys-requirements-list
+python mcp/guides_mcp_http_server.py
+# Server runs on http://localhost:8080
+```
+
+3. **Add to your `.vscode/settings.json`**:
+```json
+{
+  "github.copilot.chat.mcp.enabled": true,
+  "github.copilot.chat.mcp.servers": {
+    "implementation-guides": {
+      "type": "http",
+      "url": "http://127.0.0.1:8080/mcp"
+    }
+  }
+}
+```
+
+4. **Use in Copilot Chat**:
+```
+@workspace Search for authentication guides
+@workspace Show me all SE guides
+@workspace Recommend payment module guides
+```
+
+**Full Setup Guide**: [docs/COPILOT_SETUP.md](docs/COPILOT_SETUP.md)
+
+### For Claude Desktop
+
 ```bash
 cd /path/to/ys-requirements-list
 uv run mcp install mcp/guides_mcp_server.py --name "Implementation Guides"
 ```
+
+**Full Setup Guide**: [docs/MCP_SETUP.md](docs/MCP_SETUP.md)
 
 ### For API Users
 
