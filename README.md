@@ -220,7 +220,7 @@ make deploy
 
 ### For MCP Tools
 - **Local**: Uses `gcloud` authentication automatically
-- **Cloud**: Domain-based authentication for `@yoursource.ph`
+- **Cloud**: Domain-based authentication for `@you-source.com`
 
 ## Support
 

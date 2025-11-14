@@ -186,7 +186,7 @@ curl -H "X-API-Key: test-key" http://localhost:8080/search
 # Verify your email domain
 gcloud auth list
 
-# Production requires @yoursource.ph domain
+# Production requires @you-source.com domain
 ```
 
 2. **Verify IAM permissions**:

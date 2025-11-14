@@ -1,104 +1,616 @@
 # Implementation Guides MCP Server Setup
 
-Connect to implementation guides from MCP clients like Claude Desktop using the standard MCP installation process.
+Get AI coding assistants (Claude, VS Code Copilot, etc.) connected to your company's implementation guides in under 5 minutes.
 
-## Prerequisites
+## What You'll Get
 
-- **Python 3.10 or higher** installed on your system
-- **[uv](https://docs.astral.sh/uv/) package manager** - Install with:
-  ```bash
-  # macOS/Linux
-  curl -LsSf https://astral.sh/uv/install.sh | sh
-  
-  # Windows
-  powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-  ```
-- **Google Cloud SDK** (`gcloud` CLI) - [Install guide](https://cloud.google.com/sdk/docs/install)
-- **Authenticated Google Workspace account:**
-  ```bash
-  gcloud auth login
-  ```
+Once set up, you can ask your AI assistant:
+- **"Search for authentication guides"** → Finds relevant SE guides with code patterns
+- **"Show me payment module requirements"** → Returns functional & security requirements
+- **"What divisions exist?"** → Lists PM, QA, SE, EXD with guide counts
+- **"Recommend guides for user management"** → Suggests relevant guides by maturity level
 
-## Installation
+## Quick Start (3 Steps)
 
-### Option 1: Quick Install (Recommended)
+### Step 1: Install Prerequisites
 
-Single command installation:
+**Install uv package manager:**
 
+**macOS/Linux:**
 ```bash
-cd /path/to/ys-requirements-list
+# Copy and paste this entire block:
+curl -LsSf https://astral.sh/uv/install.sh | sh
+source ~/.zshrc  # or: source ~/.bashrc
+
+# Verify installation:
+uv --version  # Should show: uv 0.x.x
+```
+
+**Windows:**
+```powershell
+# Run in PowerShell as Administrator:
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# Restart PowerShell, then verify:
+uv --version  # Should show: uv 0.x.x
+```
+
+**Install Google Cloud CLI:**
+
+**macOS:**
+```bash
+# With Homebrew (recommended):
+brew install google-cloud-sdk
+
+# Without Homebrew:
+curl https://sdk.cloud.google.com | bash
+exec -l $SHELL  # Restart shell
+
+# Verify:
+gcloud --version  # Should show: Google Cloud SDK xxx.x.x
+```
+
+**Windows:**
+```powershell
+# Download and run the installer:
+# https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe
+
+# Or use PowerShell to download:
+(New-Object Net.WebClient).DownloadFile("https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe", "$env:TEMP\GoogleCloudSDKInstaller.exe")
+Start-Process "$env:TEMP\GoogleCloudSDKInstaller.exe"
+
+# After installation, restart PowerShell and verify:
+gcloud --version  # Should show: Google Cloud SDK xxx.x.x
+```
+
+**Linux:**
+```bash
+# Copy and paste this entire block:
+curl https://sdk.cloud.google.com | bash
+exec -l $SHELL  # Restart shell
+
+# Verify:
+gcloud --version  # Should show: Google Cloud SDK xxx.x.x
+```
+
+### Step 2: Authenticate with Google
+
+**macOS/Linux:**
+```bash
+# Login with your @you-source.com account:
+gcloud auth login
+
+# Follow the browser prompts to authorize
+
+# Verify authentication:
+gcloud auth print-identity-token
+# Should output a long JWT token starting with "eyJ..."
+```
+
+**Windows PowerShell:**
+```powershell
+# Login with your @you-source.com account:
+gcloud auth login
+
+# Follow the browser prompts to authorize
+
+# Verify authentication:
+gcloud auth print-identity-token
+# Should output a long JWT token starting with "eyJ..."
+```
+
+### Step 3: Connect to Claude Desktop
+
+**One command installation:**
+
+**macOS/Linux:**
+```bash
+# Navigate to the repository (update this path):
+cd ~/code/ys-requirements-list
+
+# Install MCP server to Claude:
 uv run mcp install mcp/guides_mcp_server.py --name "Implementation Guides"
 ```
 
-This command:
-- ✅ Automatically installs dependencies (`mcp`, `httpx`) via inline script metadata
-- ✅ Adds server configuration to Claude Desktop
-- ✅ Sets up authentication to use your gcloud credentials
+**Windows PowerShell:**
+```powershell
+# Navigate to the repository (update this path):
+cd $env:USERPROFILE\code\ys-requirements-list
 
-### Option 2: Manual Configuration
+# Install MCP server to Claude:
+uv run mcp install mcp/guides_mcp_server.py --name "Implementation Guides"
+```
 
-If you prefer manual setup or uv is not available:
+**Expected output:**
+```
+✓ Installed Implementation Guides to Claude Desktop
+✓ Configuration written to claude_desktop_config.json
+✓ Restart Claude Desktop to activate
+```
 
-1. **Locate Config File:**
-   - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-   - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+**Restart Claude Desktop:**
+- macOS: Quit (`Cmd+Q`) and reopen
+- Windows: Close completely and reopen
 
-2. **Add Server Configuration:**
-   ```json
-   {
-     "mcpServers": {
-       "implementation-guides": {
+## Verify It's Working
+
+Open Claude Desktop and ask:
+
+```
+What guide divisions are available?
+```
+
+**Expected response:**
+Claude should show 🔧 (tools icon) and return:
+```
+I found 4 divisions:
+- PM (Product Management): 25 guides
+- QA (Quality Assurance): 30 guides  
+- SE (Software Engineering): 70 guides
+- EXD (Experience Design): 15 guides
+```
+
+## Common Issues & Fixes
+
+### ❌ "Command not found: uv"
+
+**Problem:** Shell hasn't reloaded after uv installation.
+
+**Fix (macOS/Linux):**
+```bash
+# Reload your shell:
+source ~/.zshrc  # or: source ~/.bashrc
+
+# Or restart your terminal completely
+```
+
+**Fix (Windows):**
+```powershell
+# Restart PowerShell completely
+# Or refresh environment variables:
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+
+# Verify:
+uv --version
+```
+
+### ❌ "Command not found: gcloud"
+
+**Problem:** Google Cloud SDK not in PATH.
+
+**Fix (macOS):**
+```bash
+# Add to PATH manually:
+echo 'export PATH=$HOME/google-cloud-sdk/bin:$PATH' >> ~/.zshrc
+source ~/.zshrc
+
+# Or run the installer's init script:
+~/google-cloud-sdk/install.sh
+```
+
+**Fix (Windows):**
+```powershell
+# Check if gcloud exists:
+Test-Path "$env:LOCALAPPDATA\Google\Cloud SDK\google-cloud-sdk\bin\gcloud.cmd"
+
+# If True, add to PATH:
+[Environment]::SetEnvironmentVariable(
+    "Path",
+    "$env:Path;$env:LOCALAPPDATA\Google\Cloud SDK\google-cloud-sdk\bin",
+    "User"
+)
+
+# Restart PowerShell and verify:
+gcloud --version
+```
+
+### ❌ "Authentication failed" or "Invalid credentials"
+
+**Problem:** Not logged into gcloud or wrong Google account.
+
+**Fix:**
+```bash
+# Check current account:
+gcloud auth list
+
+# Login again with correct @you-source.com account:
+gcloud auth login
+
+# Test authentication:
+gcloud auth print-identity-token
+```
+
+### ❌ Tools not showing in Claude Desktop
+
+**Problem:** Claude didn't reload or config wasn't written.
+
+**Fix (macOS):**
+```bash
+# 1. Verify config was created:
+cat ~/Library/Application\ Support/Claude/claude_desktop_config.json
+
+# Should contain "implementation-guides" entry
+
+# 2. Completely quit Claude (Cmd+Q)
+# 3. Reopen Claude Desktop
+# 4. Look for 🔧 icon when you ask a question
+```
+
+**Fix (Windows):**
+```powershell
+# 1. Verify config was created:
+Get-Content "$env:APPDATA\Claude\claude_desktop_config.json"
+
+# Should contain "implementation-guides" entry
+
+# 2. Completely close Claude (Alt+F4)
+# 3. Reopen Claude Desktop
+# 4. Look for 🔧 icon when you ask a question
+```
+
+### ❌ "Connection timeout" or "Server not responding"
+
+**Problem:** Cloud Run service is cold-starting.
+
+**Fix:**
+- **Wait 10-15 seconds** and try again
+- Cloud Run scales from 0 → 1 instance on first request
+- Subsequent requests are fast (<200ms)
+
+### ❌ Windows: "uv.exe is not recognized"
+
+**Problem:** uv not installed correctly or not in PATH.
+
+**Fix:**
+```powershell
+# Reinstall uv:
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# Manually add to PATH:
+$uvPath = "$env:USERPROFILE\.cargo\bin"
+[Environment]::SetEnvironmentVariable("Path", "$env:Path;$uvPath", "User")
+
+# Restart PowerShell:
+exit
+# Open new PowerShell window
+uv --version
+```
+
+### ❌ Windows: "Access Denied" when running PowerShell commands
+
+**Problem:** PowerShell execution policy blocks scripts.
+
+**Fix:**
+```powershell
+# Run PowerShell as Administrator
+# Set execution policy:
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+# Retry the installation
+```
+
+## Using with VS Code Copilot
+
+VS Code uses a different configuration file. Here's the complete setup:
+
+**macOS/Linux:**
+
+```bash
+# Create directory if it doesn't exist:
+mkdir -p ~/.vscode
+
+# Create/edit settings file:
+code ~/.vscode/settings.json
+```
+
+**Windows PowerShell:**
+
+```powershell
+# Create directory if it doesn't exist:
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.vscode"
+
+# Create/edit settings file:
+code "$env:USERPROFILE\.vscode\settings.json"
+```
+
+**Add this configuration (all platforms):**
+
+```json
+{
+  "github.copilot.advanced": {
+    "mcp": {
+      "servers": {
+        "implementation-guides": {
           "command": "uv",
           "args": [
             "run",
             "/absolute/path/to/ys-requirements-list/mcp/guides_mcp_server.py"
           ]
-       }
-     }
-   }
-   ```
+        }
+      }
+    }
+  }
+}
+```
 
-3. **Update Path:** Replace `/absolute/path/to/` with your actual repository location
+**Update the path:**
 
-4. **Restart Claude Desktop**
+**macOS/Linux:**
+- Replace `/absolute/path/to/` with your actual path
+- Find it with: `pwd` when you're in the ys-requirements-list directory
+- Example: `/Users/yourname/code/ys-requirements-list/mcp/guides_mcp_server.py`
 
-## Development & Testing
+**Windows:**
+- Use Windows path format with forward slashes or escaped backslashes
+- Find it with: `pwd` in PowerShell when you're in the ys-requirements-list directory
+- Example: `C:/Users/yourname/code/ys-requirements-list/mcp/guides_mcp_server.py`
+- Or: `C:\\Users\\yourname\\code\\ys-requirements-list\\mcp\\guides_mcp_server.py`
 
-### Using MCP Inspector
+**Reload VS Code:**
+- Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows)
+- Type "Developer: Reload Window"
+- Press Enter
 
-Test your server interactively with the built-in MCP Inspector:
+**Verify in Copilot Chat:**
 
+Ask Copilot:
+```
+@workspace List available guide divisions
+```
+
+Copilot should use the MCP server to fetch divisions.
+
+## Manual Configuration (Alternative Method)
+
+If the `uv run mcp install` command doesn't work, configure manually:
+
+**1. Find your Claude config file:**
+
+**macOS:**
 ```bash
-cd /path/to/ys-requirements-list
+open ~/Library/Application\ Support/Claude/
+# Look for: claude_desktop_config.json
+```
+
+**Windows PowerShell:**
+```powershell
+explorer "$env:APPDATA\Claude"
+# Look for: claude_desktop_config.json
+```
+
+**2. Edit `claude_desktop_config.json`:**
+
+If the file doesn't exist, create it with this content:
+
+```json
+{
+  "mcpServers": {
+    "implementation-guides": {
+      "command": "uv",
+      "args": [
+        "run",
+        "/absolute/path/to/ys-requirements-list/mcp/guides_mcp_server.py"
+      ]
+    }
+  }
+}
+```
+
+**3. Update the path:**
+
+**macOS/Linux:**
 ```bash
+# Find your path:
+cd ~/code/ys-requirements-list
+pwd
+# Output example: /Users/yourname/code/ys-requirements-list
+
+# Use this output in the config file:
+# "/Users/yourname/code/ys-requirements-list/mcp/guides_mcp_server.py"
+```
+
+**Windows PowerShell:**
+```powershell
+# Find your path:
+cd $env:USERPROFILE\code\ys-requirements-list
+(Get-Location).Path
+# Output example: C:\Users\yourname\code\ys-requirements-list
+
+# Use this output in the config file with forward slashes:
+# "C:/Users/yourname/code/ys-requirements-list/mcp/guides_mcp_server.py"
+# Or with escaped backslashes:
+# "C:\\Users\\yourname\\code\\ys-requirements-list\\mcp\\guides_mcp_server.py"
+```
+
+**4. Restart Claude Desktop**
+
+## Available Tools Reference
+
+You don't need to memorize these - just ask naturally and Claude will pick the right tool:
+
+| Tool | What It Does | Example Question |
+|------|--------------|------------------|
+| `list_guide_divisions` | Shows all divisions (PM/QA/SE/EXD) | "What divisions exist?" |
+| `list_guides_by_division` | Lists guides in one division | "Show me all SE guides" |
+| `get_guide_content` | Fetches a specific guide | "Get the authentication guide" |
+| `search_guides` | Semantic search with AI | "Find OAuth guides" |
+| `get_guide_recommendations` | Suggests relevant guides | "Recommend payment guides" |
+
+## Testing the Server Directly
+
+Want to test without Claude? Use the built-in MCP Inspector:
+
+**macOS/Linux:**
+```bash
+cd ~/code/ys-requirements-list
 uv run mcp dev mcp/guides_mcp_server.py
 ```
+
+**Windows PowerShell:**
+```powershell
+cd $env:USERPROFILE\code\ys-requirements-list
+uv run mcp dev mcp/guides_mcp_server.py
 ```
 
-The inspector provides a web UI to test each tool with sample inputs.
+This opens a web UI at `http://localhost:5173` where you can:
+- ✅ Test each tool with sample inputs
+- ✅ See request/response payloads
+- ✅ Debug authentication issues
+- ✅ Verify server is working
 
-### Direct Execution
+## How It Works (Optional Reading)
 
-Run the server in stdio mode (for debugging or custom clients):
+```
+┌─────────────────────┐
+│  You ask Claude:    │  "Search for auth guides"
+│  "Find auth guides" │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│   Claude Desktop    │  Selects search_guides tool
+└──────────┬──────────┘
+           │ MCP Protocol (local)
+           ▼
+┌─────────────────────┐
+│  MCP Server (local) │  Runs on your machine
+│  guides_mcp_server  │  Gets gcloud token
+└──────────┬──────────┘
+           │ HTTPS + Google OAuth
+           ▼
+┌─────────────────────┐
+│   Cloud Run API     │  Production service
+│   (Google Cloud)    │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Vertex AI Embeddings│  Semantic search
+│ + Firestore DB      │  Returns top matches
+└─────────────────────┘
+```
 
+**Key points:**
+- MCP server runs **locally** on your machine
+- Uses **your gcloud credentials** (no API keys needed)
+- Calls **production API** in Google Cloud
+- **Real-time search** across 130+ implementation guides
+- **Automatic authentication** via Google Workspace
+
+## Security & Privacy
+
+✅ **Your credentials stay local** - Never sent to the API  
+✅ **Token-based authentication** - Temporary tokens (expire in 1 hour)  
+✅ **Domain-restricted** - Only `@you-source.com` accounts  
+✅ **Runs on your machine** - No external MCP server  
+✅ **Audit trail** - All API calls logged in Cloud Run  
+
+## Getting Help
+
+**Check logs if something goes wrong:**
+
+**macOS:**
 ```bash
-cd /path/to/ys-requirements-list
-uv run guides_mcp_server.py
+# Claude Desktop logs:
+tail -f ~/Library/Logs/Claude/mcp*.log
+
+# Look for:
+# - Authentication errors → gcloud auth login
+# - Connection errors → Check internet connection
+# - Tool errors → Run uv run mcp dev to debug
 ```
 
-**Note:** All `uv run` commands automatically handle dependency installation via PEP 723 inline script metadata. No virtual environment setup or `pip install` needed!
+**Windows PowerShell:**
+```powershell
+# Claude Desktop logs:
+Get-Content "$env:APPDATA\Claude\logs\mcp-*.log" -Tail 50
 
-## Available Tools
+# Or continuously monitor:
+Get-Content "$env:APPDATA\Claude\logs\mcp-*.log" -Wait -Tail 50
 
-Once configured, you'll have access to these tools:
-
-### 1. `list_guide_divisions`
-Lists all divisions (PM, QA, SE, EXD) with guide counts.
-
-**Example:**
+# Look for:
+# - Authentication errors → gcloud auth login
+# - Connection errors → Check internet connection
+# - Tool errors → Run uv run mcp dev to debug
 ```
-Can you list all the guide divisions?
+
+**Still stuck?**
+
+1. Run the MCP Inspector: `uv run mcp dev mcp/guides_mcp_server.py`
+2. Test authentication: `gcloud auth print-identity-token`
+3. Check Claude config:
+   - macOS: `cat ~/Library/Application\ Support/Claude/claude_desktop_config.json`
+   - Windows: `Get-Content "$env:APPDATA\Claude\claude_desktop_config.json"`
+4. Verify uv works: `uv --version`
+
+## Next Steps
+
+Once you're connected:
+
+1. **Try natural questions:**
+   - "Search for guides about user authentication and security"
+   - "What PM guides are at Introduction 1 level?"
+   - "Show me the payment module requirements"
+
+2. **Use in your workflow:**
+   - Ask before implementing new features
+   - Reference guides when reviewing code
+   - Find architectural patterns for common modules
+
+3. **Combine with coding:**
+   - "Using the auth guide, generate a login controller"
+   - "Following SE best practices, create a payment service"
+   - "Based on QA guides, write tests for user registration"
+
+## Alternative: Direct API Access
+
+If MCP setup doesn't work, you can call the REST API directly:
+
+**macOS/Linux:**
+```bash
+# Get a token:
+TOKEN=$(gcloud auth print-identity-token)
+
+# Search for guides:
+curl -X POST \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "authentication", "top_k": 5}' \
+  https://mcp-server-375955300575.us-central1.run.app/search | jq
+
+# List divisions:
+curl -H "Authorization: Bearer $TOKEN" \
+  https://mcp-server-375955300575.us-central1.run.app/divisions | jq
 ```
+
+**Windows PowerShell:**
+```powershell
+# Get a token:
+$token = gcloud auth print-identity-token
+
+# Search for guides:
+$headers = @{
+    "Authorization" = "Bearer $token"
+    "Content-Type" = "application/json"
+}
+$body = @{
+    query = "authentication"
+    top_k = 5
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "https://mcp-server-375955300575.us-central1.run.app/search" `
+    -Method Post -Headers $headers -Body $body | ConvertTo-Json
+
+# List divisions:
+Invoke-RestMethod -Uri "https://mcp-server-375955300575.us-central1.run.app/divisions" `
+    -Headers @{"Authorization" = "Bearer $token"} | ConvertTo-Json
+```
+
+See [API Reference](api-reference.md) for complete endpoint documentation.
+
+---
+
+**Questions or issues?** Check the troubleshooting section above or run `uv run mcp dev mcp/guides_mcp_server.py` to debug locally.
 
 ### 2. `list_guides_by_division`
 Lists all guides in a specific division.

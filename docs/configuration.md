@@ -472,7 +472,7 @@ def check_domain():
     if request.path.startswith('/api/'):
         token = request.headers.get('Authorization')
         user_info = verify_token(token)
-        if not user_info['email'].endswith('@yoursource.ph'):
+        if not user_info['email'].endswith('@you-source.com'):
             abort(403, 'Access denied')
 ```
 
