@@ -55,7 +55,7 @@ python mcp/guides_mcp_http_server.py
 {
   "github.copilot.chat.mcp.enabled": true,
   "github.copilot.chat.mcp.servers": {
-    "implementation-guides": {
+    "ys-req-list": {
       "type": "http",
       "url": "http://127.0.0.1:8080/mcp"
     }

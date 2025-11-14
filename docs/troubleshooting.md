@@ -352,15 +352,17 @@ type %LOCALAPPDATA%\Claude\logs\mcp*.log
 1. **Verify VS Code settings**:
 ```json
 // .vscode/settings.json
+```json
 {
   "github.copilot.chat.mcp.enabled": true,
   "github.copilot.chat.mcp.servers": {
-    "implementation-guides": {
+    "ys-req-list": {
       "type": "http",
       "url": "http://127.0.0.1:8080/mcp"
     }
   }
 }
+```
 ```
 
 2. **Ensure local server running**:
