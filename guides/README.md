@@ -33,6 +33,8 @@ This repository contains the official, curated implementation guides for all eng
 - **[CRUD Grid Module - Introduction I - PM Implementation](./pm/crud-grid-module---introduction-i---pm-implementation/)**
 - **[CRUD Grid Module - Introduction II - PM Implementation](./pm/crud-grid-module---introduction-ii---pm-implementation/)**
 - **[Dashboard](./pm/dashboard/)**
+- **[FAQ Page Module - Growth I - PM Implementation](./pm/faq-page-module---growth-i---pm-implementation/)**
+- **[FAQ Page Module - Introduction I - PM Implementation](./pm/faq-page-module---introduction-i---pm-implementation/)**
 - **[File Upload and Download Module - Growth I - PM Implementation](./pm/file-upload-and-download-module---growth-i---pm-implementation/)**
 - **[File Upload and Download Module - Introduction I - PM Implementation](./pm/file-upload-and-download-module---introduction-i---pm-implementation/)**
 - **[File Upload and Download Module - Introduction II - PM Implementation](./pm/file-upload-and-download-module---introduction-ii---pm-implementation/)**
