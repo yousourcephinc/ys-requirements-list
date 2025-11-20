@@ -5,7 +5,6 @@ maturity: "Growth 1"
 source_url: https://www.notion.so/Feedback-Module-Growth-1-1aba172b65a380bbb64df43c77ea898e
 ---
 
-
 ## Module Requirements
 ### **Functional Requirements**
   - **Bug Reporting System**
@@ -33,6 +32,7 @@ source_url: https://www.notion.so/Feedback-Module-Growth-1-1aba172b65a380bbb64df
   - Add **multi-language support** for chat and feedback modules.
   - Allow users to **attach multiple files** when submitting bug reports.
   - Provide **dark mode compatibility** for better UX.
+
 ## Applicable Architectural Patterns
   - CQRS for handling bug tracking queries separately from write operations.
   - Event-driven architecture for **real-time chat updates**.
