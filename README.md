@@ -50,20 +50,52 @@ python mcp/guides_mcp_http_server.py
 # Server runs on http://localhost:8080
 ```
 
-3. **Add to your `.vscode/settings.json`**:
-```json
-{
-  "github.copilot.chat.mcp.enabled": true,
-  "github.copilot.chat.mcp.servers": {
-    "ys-req-list": {
-      "type": "http",
-      "url": "http://127.0.0.1:8080/mcp"
-    }
-  }
-}
-```
+3. **Configure VS Code MCP settings**:
 
-4. **Use in Copilot Chat**:
+   **a) Workspace Settings** (`.vscode/settings.json`):
+   
+   - Open Command Palette: `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux)
+   - Type: "Preferences: Open Workspace Settings (JSON)"
+   - Add the configuration:
+   
+   ```json
+   {
+     "github.copilot.chat.mcp.enabled": true,
+     "github.copilot.chat.mcp.servers": {
+       "ys-req-list": {
+         "type": "http",
+         "url": "http://127.0.0.1:8080/mcp"
+       }
+     }
+   }
+   ```
+
+   **b) User Profile MCP Configuration** (`mcp.json`):
+   
+   - Open Command Palette: `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux)
+   - Type: "GitHub Copilot: Open MCP Configuration (JSON)"
+   - Add the server entry:
+   
+   ```json
+   {
+     "servers": {
+       "ys-requirements-list": {
+         "type": "http",
+         "url": "http://127.0.0.1:8080/mcp"
+       }
+     }
+   }
+   ```
+   
+   > **File locations** (if opening manually):
+   > - **macOS/Linux**: `~/Library/Application Support/Code/User/profiles/<profile-id>/mcp.json`
+   > - **Windows**: `%APPDATA%\Code\User\profiles\<profile-id>\mcp.json`
+   
+   > **Note**: Both files are required. The workspace settings enable MCP for Copilot, while the user profile `mcp.json` registers the server for VS Code's MCP system.
+
+4. **Reload VS Code**: Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux), then select "Developer: Reload Window"
+
+5. **Use in Copilot Chat**:
 ```
 @workspace Search for authentication guides
 @workspace Show me all SE guides
