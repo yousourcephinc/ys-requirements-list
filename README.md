@@ -77,9 +77,11 @@ python mcp/guides_mcp_http_server.py
 
    **b) User Profile MCP Configuration** (`mcp.json`):
    
-   - Open Command Palette: `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux)
-   - Type: "GitHub Copilot: Open MCP Configuration (JSON)"
-   - Add the server entry:
+   Create or edit the `mcp.json` file at:
+   - **macOS/Linux**: `~/Library/Application Support/Code/User/profiles/<profile-id>/mcp.json`
+   - **Windows**: `%APPDATA%\Code\User\profiles\<profile-id>\mcp.json`
+   
+   Add the server entry:
    
    ```json
    {
@@ -91,10 +93,6 @@ python mcp/guides_mcp_http_server.py
      }
    }
    ```
-   
-   > **File locations** (if opening manually):
-   > - **macOS/Linux**: `~/Library/Application Support/Code/User/profiles/<profile-id>/mcp.json`
-   > - **Windows**: `%APPDATA%\Code\User\profiles\<profile-id>\mcp.json`
    
    > **Note**: Both files are required. The workspace settings enable MCP for Copilot, while the user profile `mcp.json` registers the server for VS Code's MCP system.
 
