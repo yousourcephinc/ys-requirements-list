@@ -43,14 +43,19 @@ specify init --ai copilot --script sh
 gcloud auth login
 ```
 
-2. **Start the local MCP server**:
+2. **Install dependencies**:
 ```bash
 cd ~/code/ys-requirements-list
+pip install -r requirements.txt
+```
+
+3. **Start the local MCP server**:
+```bash
 python mcp/guides_mcp_http_server.py
 # Server runs on http://localhost:8080
 ```
 
-3. **Configure VS Code MCP settings**:
+4. **Configure VS Code MCP settings**:
 
    **a) Workspace Settings** (`.vscode/settings.json`):
    
@@ -93,9 +98,9 @@ python mcp/guides_mcp_http_server.py
    
    > **Note**: Both files are required. The workspace settings enable MCP for Copilot, while the user profile `mcp.json` registers the server for VS Code's MCP system.
 
-4. **Reload VS Code**: Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux), then select "Developer: Reload Window"
+5. **Reload VS Code**: Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux), then select "Developer: Reload Window"
 
-5. **Use in Copilot Chat**:
+6. **Use in Copilot Chat**:
 ```
 @workspace Search for authentication guides
 @workspace Show me all SE guides
