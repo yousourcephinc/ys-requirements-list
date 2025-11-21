@@ -79,7 +79,7 @@ python mcp/guides_mcp_http_server.py
    
    Create or edit the `mcp.json` file at:
    - **macOS/Linux**: `~/Library/Application Support/Code/User/profiles/<profile-id>/mcp.json`
-   - **Windows**: `%APPDATA%\Code\User\profiles\<profile-id>\mcp.json`
+   - **Windows**: `%APPDATA%\Code\User\profiles\<profile-id>\mcp.json` or `%APPDATA%\Roaming\Code\User\profiles\<profile-id>\mcp.json`
    
    Add the server entry:
    
