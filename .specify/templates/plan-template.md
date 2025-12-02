@@ -36,12 +36,14 @@
 ## Guide Alignment
 Use the `GUIDE_REQUIREMENTS` payload from the setup script as your primary source. Summarize each guide with numbered requirements so waivers or follow-up tasks can reference them.
 
+**Fallback**: If `GUIDE_REQUIREMENTS` is empty, use the `search_guides` tool to find relevant guides based on the requirements in `spec.md`.
+
 - *Example format:*
    1. **Guide Title** (`context/references/...`)
        - Requirement 1
        - Requirement 2
 
-If no guide requirements were discovered, state "No guide requirements surfaced yet" and flag a follow-up action to locate the appropriate guides manually.
+If no guide requirements were discovered after search, state "No guide requirements surfaced yet" and flag a follow-up action to locate the appropriate guides manually.
 
 ## Technical Context
 **Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  

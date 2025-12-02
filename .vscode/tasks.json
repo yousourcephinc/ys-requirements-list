@@ -1,35 +1,17 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Start MCP Server",
-      "type": "shell",
-      "command": "python3",
-      "args": [
-        "${workspaceFolder}/mcp/guides_mcp_http_server.py"
-      ],
-      "isBackground": true,
-      "problemMatcher": {
-        "pattern": {
-          "regexp": "^$",
-          "file": 1,
-          "location": 2,
-          "message": 3
-        },
-        "background": {
-          "activeOnStart": true,
-          "beginsPattern": "^.*Serving Flask app.*$",
-          "endsPattern": "^.*Running on.*$"
-        }
-      },
-      "presentation": {
-        "reveal": "silent",
-        "panel": "dedicated",
-        "close": false
-      },
-      "runOptions": {
-        "runOn": "folderOpen"
-      }
-    }
-  ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start MCP Server",
+			"type": "shell",
+			"command": "/bin/sh",
+			"args": [
+				"-c",
+				"pip3 install -r requirements.txt && cd mcp && python3 guides_mcp_http_server.py"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "none"
+		}
+	]
 }

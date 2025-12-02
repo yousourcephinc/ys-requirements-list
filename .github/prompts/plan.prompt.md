@@ -13,6 +13,7 @@ Given the implementation details provided as an argument, do this:
 1. Run `.specify/scripts/bash/setup-plan.sh --json` from the repo root and parse JSON for `FEATURE_SPEC`, `IMPL_PLAN`, `SPECS_DIR`, `BRANCH`, `GUIDE_REQUIREMENTS`. All future file paths must be absolute.
    - BEFORE proceeding, inspect FEATURE_SPEC for a `## Clarifications` section with at least one `Session` subheading. If missing or clearly ambiguous areas remain (vague adjectives, unresolved critical choices), PAUSE and instruct the user to run `/clarify` first to reduce rework. Only continue if: (a) Clarifications exist OR (b) an explicit user override is provided (e.g., "proceed without clarification"). Do not attempt to fabricate clarifications yourself.
    - `GUIDE_REQUIREMENTS` contains requirements sourced from the Implementation Guides MCP service (with local fallback). Use them to seed the `Guide Alignment` section and drive phase planning; preserve the delivered order.
+   - **Fallback Strategy**: If `GUIDE_REQUIREMENTS` is empty or insufficient, analyze the `FEATURE_SPEC` to extract key technical requirements (e.g., "authentication", "payment processing", "file upload"). Use the `search_guides` tool to find matching implementation guides and incorporate them into the `Guide Alignment` section.
 2. Read and analyze the feature specification to understand:
    - The feature requirements and user stories
    - Functional and non-functional requirements
