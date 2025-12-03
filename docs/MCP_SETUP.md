@@ -360,6 +360,104 @@ Ask Copilot:
 
 Copilot should use the MCP server to fetch divisions.
 
+## Using with Claude Code CLI
+
+Claude Code supports project-scope MCP configuration via `.mcp.json`. If you initialized your project with `specify init --ai claude --with-mcp`, the configuration is already set up.
+
+### Automatic Setup (Recommended)
+
+When you run `specify init --ai claude --with-mcp local` (or `--with-mcp cloud`), the CLI creates:
+
+- `.mcp.json` - MCP server configuration (project root)
+- `.claude/settings.json` - Auto-approval settings (committed to git for team consistency)
+
+Just open your project with Claude Code:
+```bash
+claude .
+```
+
+### Manual Setup
+
+**Step 1: Create `.mcp.json` in your project root:**
+
+For local mode (requires running the server locally):
+```json
+{
+  "mcpServers": {
+    "implementation-guides": {
+      "type": "http",
+      "url": "http://127.0.0.1:8080/mcp"
+    }
+  }
+}
+```
+
+For cloud mode (no local server needed):
+```json
+{
+  "mcpServers": {
+    "implementation-guides": {
+      "type": "http",
+      "url": "https://mcp-server-375955300575.us-central1.run.app/mcp"
+    }
+  }
+}
+```
+
+**Step 2: Create `.claude/settings.json` for auto-approval:**
+
+This file should be committed to git for team consistency:
+```json
+{
+  "enableAllProjectMcpServers": true
+}
+```
+
+**Step 3: Start the local server (if using local mode):**
+
+```bash
+cd context/mcp-server
+python3 mcp/guides_mcp_http_server.py
+```
+
+**Step 4: Open your project with Claude Code:**
+
+```bash
+claude .
+```
+
+The MCP server will be automatically available. Try asking:
+```
+Search for authentication guides
+```
+
+### Using Claude CLI Commands
+
+Alternatively, use the Claude CLI to add the MCP server:
+
+```bash
+# Add local HTTP server (project scope)
+claude mcp add --transport http --scope project implementation-guides http://127.0.0.1:8080/mcp
+
+# Or add cloud server (project scope)
+claude mcp add --transport http --scope project implementation-guides https://mcp-server-375955300575.us-central1.run.app/mcp
+
+# List configured servers
+claude mcp list
+
+# Remove a server
+claude mcp remove implementation-guides
+```
+
+### Verify It's Working
+
+In Claude Code, ask:
+```
+What guide divisions are available?
+```
+
+You should see Claude use the `list_guide_divisions` tool and return the available divisions (SE with 70+ guides).
+
 ## Manual Configuration (Alternative Method)
 
 If the `uv run mcp install` command doesn't work, configure manually:
