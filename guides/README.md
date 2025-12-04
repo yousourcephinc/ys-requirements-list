@@ -110,6 +110,9 @@ This repository contains the official, curated implementation guides for all eng
 - **[Environment Configuration](./se/environment-configuration/)**
 - **[Environment Configuration](./se/environment-configuration/)**
 - **[Exception Handling](./se/exception-handling/)**
+- **[Experience API Module - Growth 1](./se/experience-api-module---growth-1/)**
+- **[Experience API Module - Introduction 1](./se/experience-api-module---introduction-1/)**
+- **[Experience API Module - Introduction 2](./se/experience-api-module---introduction-2/)**
 - **[FAQ Page Module - Growth 1](./se/faq-page-module---growth-1/)**
 - **[FAQ Page Module - Introduction 1](./se/faq-page-module---introduction-1/)**
 - **[Feedback Module - Growth 1](./se/feedback-module---growth-1/)**
