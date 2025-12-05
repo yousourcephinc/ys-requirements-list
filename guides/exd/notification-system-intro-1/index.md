@@ -9,7 +9,7 @@ source_url: https://www.notion.so/Notification-System-Intro-1-28ea172b65a3808a95
 ## User Flow
 ## **Design Principles & Best Practices**
   - [ ] **Layout & Structure**
-    - [ ] Clear visual hierarchy using static templates
+    - [ ] Clear visual hierarchy
     - [ ] Separation of unread vs read notification states
     - [ ] Consistent rendering across notification types
   - [ ] **Visual Design & Branding**
