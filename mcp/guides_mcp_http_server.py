@@ -400,6 +400,83 @@ def check_auth():
     logger.info(f"Request to {request.path} - Authentication disabled.")
     return None
 
+# --- REST API Endpoints ---
+# These provide direct REST access to guide functionality without MCP protocol
+
+@app.route("/divisions", methods=["GET"])
+def api_list_divisions():
+    """REST API: List all guide divisions with counts."""
+    try:
+        divisions = do_list_guide_divisions()
+        return jsonify(divisions)
+    except Exception as e:
+        logger.error(f"Error listing divisions: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route("/divisions/<division>/guides", methods=["GET"])
+def api_list_guides(division: str):
+    """REST API: List all guides in a specific division."""
+    try:
+        guides = do_list_guides_by_division(division)
+        return jsonify(guides)
+    except Exception as e:
+        logger.error(f"Error listing guides for {division}: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route("/guides/<path:guide_path>", methods=["GET"])
+def api_get_guide(guide_path: str):
+    """REST API: Get full content of a specific guide."""
+    try:
+        content = do_get_guide_content(guide_path)
+        return jsonify(content)
+    except FileNotFoundError as e:
+        return jsonify({"error": str(e)}), 404
+    except Exception as e:
+        logger.error(f"Error getting guide {guide_path}: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route("/search", methods=["POST"])
+def api_search_guides():
+    """REST API: Search guides using semantic search."""
+    try:
+        data = request.get_json() or {}
+        query = data.get("query", "")
+        top_k = data.get("top_k", 5)
+        
+        if not query:
+            return jsonify({"error": "query parameter is required"}), 400
+        
+        results = do_search_guides(query, top_k=top_k)
+        return jsonify({"results": results, "query": query, "count": len(results)})
+    except Exception as e:
+        logger.error(f"Error searching guides: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route("/recommendations", methods=["POST"])
+def api_get_recommendations():
+    """REST API: Get guide recommendations based on topics."""
+    try:
+        data = request.get_json() or {}
+        topics = data.get("topics", [])
+        division = data.get("division", "se")
+        top_k = data.get("top_k", 5)
+        
+        if not topics:
+            return jsonify({"error": "topics parameter is required"}), 400
+        
+        # Combine topics into search query
+        query = " ".join(topics)
+        results = do_search_guides(query, top_k=top_k)
+        
+        # Filter by division if specified
+        if division:
+            results = [r for r in results if r.get("division", "").lower() == division.lower()]
+        
+        return jsonify({"recommendations": results[:top_k], "topics": topics})
+    except Exception as e:
+        logger.error(f"Error getting recommendations: {e}")
+        return jsonify({"error": str(e)}), 500
+
 @app.route("/mcp", methods=["GET", "POST"])
 def mcp_endpoint():
     """MCP endpoint to handle JSON-RPC requests (POST) and SSE connections (GET)."""
@@ -542,8 +619,15 @@ def index():
     """Service information endpoint."""
     return jsonify({
         "service": "Implementation Guides MCP Server",
-        "version": "0.2.0",
-        "mcp_endpoint": "/mcp"
+        "version": "0.3.0",
+        "mcp_endpoint": "/mcp",
+        "rest_endpoints": {
+            "GET /divisions": "List all guide divisions",
+            "GET /divisions/<division>/guides": "List guides in a division",
+            "GET /guides/<path>": "Get guide content",
+            "POST /search": "Search guides (body: {query, top_k})",
+            "POST /recommendations": "Get recommendations (body: {topics, division, top_k})"
+        }
     })
 
 @app.route("/health", methods=["GET"])
