@@ -5,9 +5,10 @@ maturity: "Introduction 1"
 source_url: https://www.notion.so/Diagnostics-Module-Introduction-1-1c2a172b65a380199a45e7568055bbe1
 ---
 
-### Functional Requirements
 1. Implement **centralized structured logging**:
+### Functional Requirements
   - Logs must follow a consistent format (e.g., JSON or key-value pairs)
+
   - Output must be machine-readable and searchable
 1. Log key application-level events:
   - API requests and responses (excluding full payloads)
