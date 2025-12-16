@@ -47,3 +47,5 @@ source_url: https://www.notion.so/Diagnostics-Module-Growth-1-1c2a172b65a38069be
 - Integration with incident and messaging tools is in place
 - Streaming and replay features support root cause analysis
 - Security and role-based access controls are enforced
+
+User Stories

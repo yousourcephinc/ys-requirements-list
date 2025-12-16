@@ -42,3 +42,5 @@ source_url: https://www.notion.so/Diagnostics-Module-Introduction-2-1c2a172b65a3
 - Request/response timings and DB/API latency are tracked
 - Logging system integrates with external observability tools
 - Dashboards or filters are available for operational monitoring
+
+# **User stories**

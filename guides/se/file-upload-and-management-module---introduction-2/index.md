@@ -49,3 +49,4 @@ source_url: https://www.notion.so/File-Upload-and-Management-Module-Introduction
   - Soft delete functionality extends to **all file versions**, allowing recovery.
   - System correctly **invalidates outdated cache entries** when a new version is uploaded.
 
+User Stories

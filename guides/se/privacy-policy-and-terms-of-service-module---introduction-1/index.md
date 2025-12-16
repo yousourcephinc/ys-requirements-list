@@ -46,3 +46,6 @@ Key concepts: Static content using MD files, accepting/checkboxes of Privacy Pol
 - Performance optimizations (lazy loading, caching) are implemented.
 - Checkboxes are clearly visible and accessible.
 - Last updated timestamp is displayed.
+
+
+**User Stories**
