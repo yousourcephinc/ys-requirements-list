@@ -55,4 +55,4 @@ source_url: https://www.notion.so/Feedback-Module-Introduction-2-1aba172b65a3800
   - Live chat widget is **functional, asynchronous, and doesn’t slow down page load**.
   - Feedback form allows users to **rate experiences and submit feature requests**.
   - Admins **receive notifications** when bugs or feedback are submitted.
-
+## User Stories

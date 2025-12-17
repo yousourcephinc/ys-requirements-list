@@ -43,4 +43,4 @@ source_url: https://www.notion.so/Diagnostics-Module-Introduction-2-1c2a172b65a3
 - Logging system integrates with external observability tools
 - Dashboards or filters are available for operational monitoring
 
-# **User stories**
+## **User stories**
