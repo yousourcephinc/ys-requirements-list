@@ -6,9 +6,6 @@ source_url: https://www.notion.so/Dashboard-1a8a172b65a380158043df7ebf330365
 ---
 
 ## Module Requirements
-  Establish or Prepare the design system and align it with the client’s branding.
-  - [ ] Set up the Figma _design system to align with the project branding.
-  - [ ] Identify the type of dashboard required
 ## Execution Checklist
   - [ ] **Data Visualization & Information Hierarchy**
     - [x] **Group related information logically** (e.g., KPIs at the top, details below).
