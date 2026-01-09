@@ -74,13 +74,24 @@ This repository contains the official, curated implementation guides for all eng
 - **[Dashboard Growth 1](./qa/dashboard-growth-1/)**
 - **[Dashboard Intro 1](./qa/dashboard-intro-1/)**
 - **[Dashboard Intro 2](./qa/dashboard-intro-2/)**
+- **[Payment Processing](./qa/payment-processing/)**
 - **[QA -User Management Intro 1](./qa/qa--user-management-intro-1/)**
+- **[QA- FAQ Module Intro](./qa/qa--faq-module-intro/)**
 - **[QA- Navigation Menu Growth 1](./qa/qa--navigation-menu-growth-1/)**
 - **[QA- Navigation Menu Intro 1](./qa/qa--navigation-menu-intro-1/)**
 - **[QA- Navigation Menu Intro 2](./qa/qa--navigation-menu-intro-2/)**
+- **[QA- Notification Settings Module](./qa/qa--notification-settings-module/)**
+- **[QA- Privacy Terms and Condition Module](./qa/qa--privacy-terms-and-condition-module/)**
+- **[QA- Secure File Upload & Sharing](./qa/qa--secure-file-upload--sharing/)**
+- **[QA- Support Module](./qa/qa--support-module/)**
 - **[QA- User Profile Growth 1](./qa/qa--user-profile-growth-1/)**
 - **[QA- User Profile Intro 1](./qa/qa--user-profile-intro-1/)**
 - **[QA- User Profile Intro 2](./qa/qa--user-profile-intro-2/)**
+- **[Requirements List API Integration Module (QA)](./qa/requirements-list-api-integration-module-qa/)**
+- **[Responsive Design Module](./qa/responsive-design-module/)**
+- **[Search Module](./qa/search-module/)**
+- **[Secure FIle Upload and Sharing](./qa/secure-file-upload-and-sharing/)**
+- **[Subscription Management](./qa/subscription-management/)**
 - **[User Management Growth 1](./qa/user-management-growth-1/)**
 - **[User Management Intro 2](./qa/user-management-intro-2/)**
 
