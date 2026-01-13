@@ -23,7 +23,7 @@ source_url: https://www.notion.so/User-Management-Intro-2-1aba172b65a380048bbbf6
     - [x] Display **access restriction messages** when a user attempts unauthorized actions
   **3. Password Recovery UI/UX**
     - [x] Provide a **clear, easy-to-follow “Forgot Password” link** on the login screen
-    - [x] Use a **multi-step recovery process** (enter email → check email → reset password)
+    - [x] Use a **multi-step recovery process** (enter email -> check email -> reset password)
     - [x] Display **security hints** for password creation (e.g., “Use at least 8 characters, including symbols”)
     - [x] Show **countdown timers** for reset token expiration (e.g., “Link expires in 15 minutes”)
     - [x] Provide a **success message** after password reset completion (e.g., “Your password has been changed”)

@@ -31,10 +31,10 @@ $ARGUMENTS
      * **Polish tasks [P]**: Unit tests, performance, docs
 
 4. Task generation rules:
-   - Each contract file → contract test task marked [P]
-   - Each entity in data-model → model creation task marked [P]
-   - Each endpoint → implementation task (not parallel if shared files)
-   - Each user story → integration test marked [P]
+   - Each contract file -> contract test task marked [P]
+   - Each entity in data-model -> model creation task marked [P]
+   - Each endpoint -> implementation task (not parallel if shared files)
+   - Each user story -> integration test marked [P]
    - Different files = can be parallel [P]
    - Same file = sequential (no [P])
 

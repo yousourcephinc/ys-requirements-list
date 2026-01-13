@@ -312,7 +312,7 @@ echo -n "new-secret-value" | gcloud secrets versions add notion-api-key \
 
 ### Repository Secrets
 
-**Location**: Settings → Secrets and variables → Actions
+**Location**: Settings -> Secrets and variables -> Actions
 
 **Required Secrets**:
 

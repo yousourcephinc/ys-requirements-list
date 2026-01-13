@@ -310,10 +310,10 @@ gcloud auth print-identity-token
 
 **Fix:**
 1. Verify `.vscode/settings.json` exists and contains the MCP config
-2. Reload VS Code window (`Cmd+Shift+P` → "Developer: Reload Window")
+2. Reload VS Code window (`Cmd+Shift+P` -> "Developer: Reload Window")
 3. Check server is running: `curl http://127.0.0.1:8080/health`
 4. Enable verbose logging:
-   - `Cmd+Shift+P` → "GitHub Copilot: Enable Debug Output"
+   - `Cmd+Shift+P` -> "GitHub Copilot: Enable Debug Output"
    - Check Output panel for MCP connection logs
 
 ### ❌ "Connection refused" errors
@@ -410,7 +410,7 @@ launchctl load ~/Library/LaunchAgents/com.yoursource.mcp-server.plist
 **Windows (using Task Scheduler):**
 
 1. Open Task Scheduler
-2. Create Basic Task → Name: "MCP Server"
+2. Create Basic Task -> Name: "MCP Server"
 3. Trigger: "At log on"
 4. Action: "Start a program"
 5. Program: `python`
@@ -482,7 +482,7 @@ GitHub Copilot automatically selects the right tool based on your question:
            ▼
 ┌─────────────────────┐
 │  Local HTTP Server  │  http://127.0.0.1:8080/mcp
-│ guides_mcp_http_    │  Translates MCP → REST API
+│ guides_mcp_http_    │  Translates MCP -> REST API
 │    server.py        │  Gets gcloud token
 └──────────┬──────────┘
            │ HTTPS + Google OAuth

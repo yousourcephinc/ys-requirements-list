@@ -10,7 +10,7 @@ source_url: https://www.notion.so/Payments-and-Recurring-Payments-Intro-1-1f1a17
 ## **Design Principles & Best Practices**
     1. Layout & Structure
       - [ ] Use a consistent layout and visual structure across all screens.
-      - [ ] Organize flows logically: e.g. **Plan selection → Details → Payment → Confirmation**.
+      - [ ] Organize flows logically: e.g. **Plan selection -> Details -> Payment -> Confirmation**.
       - [ ] Group related actions (pause, resume, cancel) distinctly from billing info.
       - [ ] Separate **current status**, **payment history**, and **actions** for clarity.
       - [ ] Use **cards**, **dividers**, or **sections** to manage visual hierarchy.
@@ -37,21 +37,21 @@ source_url: https://www.notion.so/Payments-and-Recurring-Payments-Intro-1-1f1a17
       - [ ] Menu structure is documented for dev handoff and future scaling
 ## **Execution Checklist**
   - **Is the one-time payment flow visually intuitive and confirmable?**
-    → Design ensures a clear CTA, visible payment summary, and confirmation feedback.
+    -> Design ensures a clear CTA, visible payment summary, and confirmation feedback.
   - **Is the checkout page layout optimized for form usability?**
-    → Inputs are grouped logically, keyboard-friendly, with labeled fields and validation messages.
+    -> Inputs are grouped logically, keyboard-friendly, with labeled fields and validation messages.
   - **Are all payment statuses (success, pending, failed) represented with proper visual states?**
-    → Use color-coded alerts, icons, and state-specific messaging for each outcome.
+    -> Use color-coded alerts, icons, and state-specific messaging for each outcome.
   - **Are feedback/loading indicators shown during payment processing?**
-    → Include spinners, skeleton screens, or progress bars to reassure users during backend checks.
+    -> Include spinners, skeleton screens, or progress bars to reassure users during backend checks.
   - **Are sensitive data inputs (e.g., card number) visually treated securely?**
-    → Use masked fields, input restrictions, and don’t show full card info post-submission.
+    -> Use masked fields, input restrictions, and don’t show full card info post-submission.
   - **Is access to payment views/components conditionally shown based on user roles?**
-    → UI should hide or disable payment management actions unless permitted (based on RBAC logic).
+    -> UI should hide or disable payment management actions unless permitted (based on RBAC logic).
   - **Are error states easy to notice and provide actionable next steps?**
-    → Use red alerts with iconography, human-readable error messages, and guidance links/tooltips.
+    -> Use red alerts with iconography, human-readable error messages, and guidance links/tooltips.
   - **Is the interface performant and responsive during heavy payment interactions?**
-    → Design avoids unnecessary transitions or bloated assets; layout adapts fluidly across devices.
+    -> Design avoids unnecessary transitions or bloated assets; layout adapts fluidly across devices.
 ## Prototype
   [prototype link here]
 ## Examples

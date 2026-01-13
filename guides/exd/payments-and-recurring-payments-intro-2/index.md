@@ -10,7 +10,7 @@ source_url: https://www.notion.so/Payments-and-Recurring-Payments-Intro-2-1f1a17
 ## **Design Principles & Best Practices**
     1. Layout & Structure
       - [ ] Use a consistent layout and visual structure across all screens.
-      - [ ] Organize flows logically: e.g. **Plan selection → Details → Payment → Confirmation**.
+      - [ ] Organize flows logically: e.g. **Plan selection -> Details -> Payment -> Confirmation**.
       - [ ] Group related actions (pause, resume, cancel) distinctly from billing info.
       - [ ] Separate **current status**, **payment history**, and **actions** for clarity.
       - [ ] Use **cards**, **dividers**, or **sections** to manage visual hierarchy.
@@ -37,19 +37,19 @@ source_url: https://www.notion.so/Payments-and-Recurring-Payments-Intro-2-1f1a17
       - [ ] Menu structure is documented for dev handoff and future scaling
 ## Execution Checklist
   - [ ] **Are invoices visually structured for clarity and accuracy?**
-    → Layout should include invoice number, date, plan, itemized charges, taxes, and total. Use typographic hierarchy and visual grouping (e.g., borders, spacing).
+    -> Layout should include invoice number, date, plan, itemized charges, taxes, and total. Use typographic hierarchy and visual grouping (e.g., borders, spacing).
   - [ ] **Is the UI for managing payment methods user-friendly and secure?**
-    → Include clear CTAs for **Add**, **Edit**, **Remove** with masked card info, icons for card types, and visual confirmation on changes.
+    -> Include clear CTAs for **Add**, **Edit**, **Remove** with masked card info, icons for card types, and visual confirmation on changes.
   - [ ] **Is usage-based billing data easy to understand in the UI?**
-    → Display usage breakdown (e.g., API calls, seat count) with tooltips, graphs, or expandable details where needed.
+    -> Display usage breakdown (e.g., API calls, seat count) with tooltips, graphs, or expandable details where needed.
   - [ ] **Is the prepaid balance clearly shown and applied during checkout?**
-    → Use progress bars, deducted line items, or balance summaries in real time during checkout flows.
+    -> Use progress bars, deducted line items, or balance summaries in real time during checkout flows.
   - [ ] **Is tax breakdown clearly shown for the user’s region?**
-    → Localized currency and tax fields (e.g., VAT, GST) with region flag/icon, and subtotal/tax/total breakdown per region.
+    -> Localized currency and tax fields (e.g., VAT, GST) with region flag/icon, and subtotal/tax/total breakdown per region.
   - [ ] **Is the transaction history view optimized for scale?**
-    → Use **lazy loading**, filters (e.g., date, status), and searchable fields. Use consistent card/table design with status badges.
+    -> Use **lazy loading**, filters (e.g., date, status), and searchable fields. Use consistent card/table design with status badges.
   - [ ] **Are visual cues present that reinforce trust and security compliance (e.g., PCI-DSS)?**
-    → Add lock icons, tooltips, and **PCI-DSS badge** or messaging near card entry points. Use masked fields and “secure payment” hints to reassure users.
+    -> Add lock icons, tooltips, and **PCI-DSS badge** or messaging near card entry points. Use masked fields and “secure payment” hints to reassure users.
 ## Prototype
   [prototype link here]
 ## Examples

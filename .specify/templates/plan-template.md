@@ -7,22 +7,22 @@
 ## Execution Flow (/plan command scope)
 ```
 1. Load feature spec from Input path
-   → If not found: ERROR "No feature spec at {path}"
+   -> If not found: ERROR "No feature spec at {path}"
 2. Fill Technical Context (scan for NEEDS CLARIFICATION)
-   → Detect Project Type from file system structure or context (web=frontend+backend, mobile=app+api)
-   → Set Structure Decision based on project type
+   -> Detect Project Type from file system structure or context (web=frontend+backend, mobile=app+api)
+   -> Set Structure Decision based on project type
 3. Fill the Constitution Check section based on the content of the constitution document.
 4. Evaluate Constitution Check section below
-   → If violations exist: Document in Complexity Tracking
-   → If no justification possible: ERROR "Simplify approach first"
-   → Update Progress Tracking: Initial Constitution Check
-5. Execute Phase 0 → research.md 
-   → If NEEDS CLARIFICATION remain: ERROR "Resolve unknowns"
-6. Execute Phase 1 → contracts, data-model.md, quickstart.md, agent-specific template file (e.g., `CLAUDE.md` for Claude Code, `.github/copilot-instructions.md` for GitHub Copilot, `GEMINI.md` for Gemini CLI, `QWEN.md` for Qwen Code, or `AGENTS.md` for all other agents).
+   -> If violations exist: Document in Complexity Tracking
+   -> If no justification possible: ERROR "Simplify approach first"
+   -> Update Progress Tracking: Initial Constitution Check
+5. Execute Phase 0 -> research.md 
+   -> If NEEDS CLARIFICATION remain: ERROR "Resolve unknowns"
+6. Execute Phase 1 -> contracts, data-model.md, quickstart.md, agent-specific template file (e.g., `CLAUDE.md` for Claude Code, `.github/copilot-instructions.md` for GitHub Copilot, `GEMINI.md` for Gemini CLI, `QWEN.md` for Qwen Code, or `AGENTS.md` for all other agents).
 7. Re-evaluate Constitution Check section
-   → If new violations: Refactor design, return to Phase 1
-   → Update Progress Tracking: Post-Design Constitution Check
-8. Plan Phase 2 → Describe task generation approach (DO NOT create tasks.md)
+   -> If new violations: Refactor design, return to Phase 1
+   -> Update Progress Tracking: Post-Design Constitution Check
+8. Plan Phase 2 -> Describe task generation approach (DO NOT create tasks.md)
 9. STOP - Ready for /tasks command
 ```
 
@@ -137,9 +137,9 @@ Separate the execution across two concurrent tracks. Each track must outline the
 
 ## Phase 0: Outline & Research
 1. **Extract unknowns from Technical Context** above:
-   - For each NEEDS CLARIFICATION → research task
-   - For each dependency → best practices task
-   - For each integration → patterns task
+   - For each NEEDS CLARIFICATION -> research task
+   - For each dependency -> best practices task
+   - For each integration -> patterns task
 
 2. **Generate and dispatch research agents**:
    ```
@@ -159,13 +159,13 @@ Separate the execution across two concurrent tracks. Each track must outline the
 ## Phase 1: Design & Contracts
 *Prerequisites: research.md complete*
 
-1. **Extract entities from feature spec** → `data-model.md`:
+1. **Extract entities from feature spec** -> `data-model.md`:
    - Entity name, fields, relationships
    - Validation rules from requirements
    - State transitions if applicable
 
 2. **Generate API contracts** from functional requirements:
-   - For each user action → endpoint
+   - For each user action -> endpoint
    - Use standard REST/GraphQL patterns
    - Output OpenAPI/GraphQL schema to `/contracts/`
 
@@ -175,7 +175,7 @@ Separate the execution across two concurrent tracks. Each track must outline the
    - Tests must fail (no implementation yet)
 
 4. **Extract test scenarios** from user stories:
-   - Each story → integration test scenario
+   - Each story -> integration test scenario
    - Quickstart test = story validation steps
 
 5. **Update agent file incrementally** (O(1) operation):
@@ -195,9 +195,9 @@ Separate the execution across two concurrent tracks. Each track must outline the
 **Task Generation Strategy**:
 - Load `.specify/templates/tasks-template.md` as base
 - Generate tasks from Phase 1 design docs (contracts, data model, quickstart)
-- Each contract → contract test task [P]
-- Each entity → model creation task [P] 
-- Each user story → integration test task
+- Each contract -> contract test task [P]
+- Each entity -> model creation task [P] 
+- Each user story -> integration test task
 - Implementation tasks to make tests pass
 
 **Ordering Strategy**:

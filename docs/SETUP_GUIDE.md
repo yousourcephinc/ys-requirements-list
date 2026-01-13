@@ -73,7 +73,7 @@ The workflow runs automatically:
 
 ### If the workflow fails:
 
-1. **Check secrets are configured correctly** - Go to Settings → Secrets
+1. **Check secrets are configured correctly** - Go to Settings -> Secrets
 2. **View workflow logs** - Click on the failed run to see detailed error messages
 3. **Test locally first** - Run `python3 sync_notion.py` locally to verify it works
 4. **Check Notion permissions** - Ensure the integration has access to your database

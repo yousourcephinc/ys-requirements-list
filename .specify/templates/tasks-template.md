@@ -6,29 +6,29 @@
 ## Execution Flow (main)
 ```
 1. Load plan.md from feature directory
-   → If not found: ERROR "No implementation plan found"
-   → Extract: tech stack, libraries, structure
+   -> If not found: ERROR "No implementation plan found"
+   -> Extract: tech stack, libraries, structure
 2. Load optional design documents:
-   → data-model.md: Extract entities → model tasks
-   → contracts/: Each file → contract test task
-   → research.md: Extract decisions → setup tasks
+   -> data-model.md: Extract entities -> model tasks
+   -> contracts/: Each file -> contract test task
+   -> research.md: Extract decisions -> setup tasks
 3. Generate tasks by category:
-   → Setup: project init, dependencies, linting
-   → Tests: contract tests, integration tests
-   → Core: models, services, CLI commands
-   → Integration: DB, middleware, logging
-   → Polish: unit tests, performance, docs
+   -> Setup: project init, dependencies, linting
+   -> Tests: contract tests, integration tests
+   -> Core: models, services, CLI commands
+   -> Integration: DB, middleware, logging
+   -> Polish: unit tests, performance, docs
 4. Apply task rules:
-   → Different files = mark [P] for parallel
-   → Same file = sequential (no [P])
-   → Tests before implementation (TDD)
+   -> Different files = mark [P] for parallel
+   -> Same file = sequential (no [P])
+   -> Tests before implementation (TDD)
 5. Number tasks sequentially (T001, T002...)
 6. Generate dependency graph
 7. Create parallel execution examples
 8. Validate task completeness:
-   → All contracts have tests?
-   → All entities have models?
-   → All endpoints implemented?
+   -> All contracts have tests?
+   -> All entities have models?
+   -> All endpoints implemented?
 9. Return: SUCCESS (tasks ready for execution)
 ```
 
@@ -101,19 +101,19 @@ Task: "Integration test auth in tests/integration/test_auth.py"
 *Applied during main() execution*
 
 1. **From Contracts**:
-   - Each contract file → contract test task [P]
-   - Each endpoint → implementation task
+   - Each contract file -> contract test task [P]
+   - Each endpoint -> implementation task
    
 2. **From Data Model**:
-   - Each entity → model creation task [P]
-   - Relationships → service layer tasks
+   - Each entity -> model creation task [P]
+   - Relationships -> service layer tasks
    
 3. **From User Stories**:
-   - Each story → integration test [P]
-   - Quickstart scenarios → validation tasks
+   - Each story -> integration test [P]
+   - Quickstart scenarios -> validation tasks
 
 4. **Ordering**:
-   - Setup → Tests → Models → Services → Endpoints → Polish
+   - Setup -> Tests -> Models -> Services -> Endpoints -> Polish
    - Dependencies block parallel execution
 
 ## Validation Checklist

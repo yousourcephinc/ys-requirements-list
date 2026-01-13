@@ -11,9 +11,9 @@ source_url: https://www.notion.so/User-Management-Intro-1-1aba172b65a3806abe47de
 ## User flow
 ### Existing user flow
   1. **Login screen**
-    - **Login with Email & Password** → Proceeds to login form.
-    - **Sign Up (Create Account)** → Proceeds to registration form.
-    - **Login with Social Accounts (Google, Apple, etc.)** → Proceeds to social login.
+    - **Login with Email & Password** -> Proceeds to login form.
+    - **Sign Up (Create Account)** -> Proceeds to registration form.
+    - **Login with Social Accounts (Google, Apple, etc.)** -> Proceeds to social login.
   1. **Forgot password**
     - User clicks **“Forgot Password?”** and enters their email.
     - A **password reset link** is sent.
@@ -44,8 +44,8 @@ source_url: https://www.notion.so/User-Management-Intro-1-1aba172b65a3806abe47de
     - Options available:
       - **Resend OTP** if the code does not arrive.
       - **Change phone number/email** if entered incorrectly.
-    - If the OTP is correct → Proceeds to account confirmation.
-    - If incorrect → Displays an **error message** with retry options.
+    - If the OTP is correct -> Proceeds to account confirmation.
+    - If incorrect -> Displays an **error message** with retry options.
 
 ## Execution Checklist
   1. Registration & Login Screen

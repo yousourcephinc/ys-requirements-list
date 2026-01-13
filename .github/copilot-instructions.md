@@ -10,7 +10,7 @@ This is a **dual-purpose implementation guides platform** that serves as both a 
 - **Content Layer**: Markdown guides organized by division (`se/`, `pm/`, `qa/`, `exd/`) and maturity level
 - **MCP Server**: Unified Flask app (`mcp/guides_mcp_http_server.py`) serving both REST API and MCP endpoints
 - **Semantic Search**: Google Vertex AI embeddings with Firestore storage, graceful fallback to text search
-- **Content Pipeline**: Daily Notion sync via GitHub Actions → Markdown files → Vector embeddings
+- **Content Pipeline**: Daily Notion sync via GitHub Actions -> Markdown files -> Vector embeddings
 
 ### Key Integration Points
 - **VS Code MCP**: Configured in `.vscode/settings.json` with hardcoded `test-key` for Copilot compatibility
@@ -35,8 +35,8 @@ make test-mcp
 ```
 
 ### Deployment Pipeline
-- Push to `main` → Automatic Cloud Run deployment via GitHub Actions
-- Content updates → Auto-sync from Notion daily at 2 AM UTC
+- Push to `main` -> Automatic Cloud Run deployment via GitHub Actions
+- Content updates -> Auto-sync from Notion daily at 2 AM UTC
 - No manual deployment steps required
 
 ## GitHub Copilot MCP Integration

@@ -133,16 +133,16 @@ Get personalized recommendations based on topics and filters with maturity aware
 In Claude Desktop, you can now ask:
 
 - **"What implementation guides are available for software engineers?"**
-  → Uses `list_guides_by_division` with division="se"
+  -> Uses `list_guides_by_division` with division="se"
 
 - **"Search for authentication guides"**
-  → Uses `search_guides` with semantic search
+  -> Uses `search_guides` with semantic search
 
 - **"Show me Introduction 1 guides about payments"**
-  → Uses `get_guide_recommendations` with filters
+  -> Uses `get_guide_recommendations` with filters
 
 - **"Get the user management guide content"**
-  → Uses `get_guide_content` to retrieve full markdown
+  -> Uses `get_guide_content` to retrieve full markdown
 
 Claude automatically selects the right tools and presents results in natural language.
 

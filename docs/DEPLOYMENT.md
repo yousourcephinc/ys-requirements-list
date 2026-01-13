@@ -199,7 +199,7 @@ gcloud iam service-accounts keys create github-actions-key.json \
 ```
 
 2. Add to GitHub Secrets:
-   - Go to repository Settings → Secrets and variables → Actions
+   - Go to repository Settings -> Secrets and variables -> Actions
    - Add secret `GCP_SA_KEY` with contents of `github-actions-key.json`
    - Add secrets: `NOTION_API_KEY`, `NOTION_DATABASE_ID`, `NOTION_VIEW_ID`
 

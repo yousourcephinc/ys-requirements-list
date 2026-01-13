@@ -14,7 +14,7 @@ source_url: https://www.notion.so/Form-Module-Introduction-2-1c2a172b65a38043ae1
   - Show or hide form groups or fields based on values selected in previous inputs (e.g., toggle extra fields if a checkbox is selected)
   - UI updates in real time without reload
 1. Implement **field dependencies**:
-  - Inputs can be conditionally enabled, disabled, or populated based on other input values (e.g., country → state → city)
+  - Inputs can be conditionally enabled, disabled, or populated based on other input values (e.g., country -> state -> city)
   - Handle chained or nested dependencies cleanly
 ### Security Requirements
 1. Ensure hidden or disabled fields are also ignored/validated securely on the backend.

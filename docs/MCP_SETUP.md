@@ -5,10 +5,10 @@ Get AI coding assistants (Claude, VS Code Copilot, etc.) connected to your compa
 ## What You'll Get
 
 Once set up, you can ask your AI assistant:
-- **"Search for authentication guides"** → Finds relevant SE guides with code patterns
-- **"Show me payment module requirements"** → Returns functional & security requirements
-- **"What divisions exist?"** → Lists PM, QA, SE, EXD with guide counts
-- **"Recommend guides for user management"** → Suggests relevant guides by maturity level
+- **"Search for authentication guides"** -> Finds relevant SE guides with code patterns
+- **"Show me payment module requirements"** -> Returns functional & security requirements
+- **"What divisions exist?"** -> Lists PM, QA, SE, EXD with guide counts
+- **"Recommend guides for user management"** -> Suggests relevant guides by maturity level
 
 ## Quick Start (3 Steps)
 
@@ -254,7 +254,7 @@ Get-Content "$env:APPDATA\Claude\claude_desktop_config.json"
 
 **Fix:**
 - **Wait 10-15 seconds** and try again
-- Cloud Run scales from 0 → 1 instance on first request
+- Cloud Run scales from 0 -> 1 instance on first request
 - Subsequent requests are fast (<200ms)
 
 ### ❌ Windows: "uv.exe is not recognized"
@@ -613,9 +613,9 @@ This opens a web UI at `http://localhost:5173` where you can:
 tail -f ~/Library/Logs/Claude/mcp*.log
 
 # Look for:
-# - Authentication errors → gcloud auth login
-# - Connection errors → Check internet connection
-# - Tool errors → Run uv run mcp dev to debug
+# - Authentication errors -> gcloud auth login
+# - Connection errors -> Check internet connection
+# - Tool errors -> Run uv run mcp dev to debug
 ```
 
 **Windows PowerShell:**
@@ -627,9 +627,9 @@ Get-Content "$env:APPDATA\Claude\logs\mcp-*.log" -Tail 50
 Get-Content "$env:APPDATA\Claude\logs\mcp-*.log" -Wait -Tail 50
 
 # Look for:
-# - Authentication errors → gcloud auth login
-# - Connection errors → Check internet connection
-# - Tool errors → Run uv run mcp dev to debug
+# - Authentication errors -> gcloud auth login
+# - Connection errors -> Check internet connection
+# - Tool errors -> Run uv run mcp dev to debug
 ```
 
 **Still stuck?**
@@ -764,16 +764,16 @@ Recommend guides about authentication and security at the Introduction 1 level f
 Once configured, you can ask Claude:
 
 - **"What guide divisions are available?"**
-  → Calls `list_guide_divisions`
+  -> Calls `list_guide_divisions`
 
 - **"Show me all SE guides"**
-  → Calls `list_guides_by_division` with division="se"
+  -> Calls `list_guides_by_division` with division="se"
 
 - **"Search for authentication guides"**
-  → Calls `search_guides` with query="authentication"
+  -> Calls `search_guides` with query="authentication"
 
 - **"Recommend payment guides at Introduction 1 level"**
-  → Calls `get_guide_recommendations` with topics=["payment"], maturity_level="Introduction 1"
+  -> Calls `get_guide_recommendations` with topics=["payment"], maturity_level="Introduction 1"
 
 Claude automatically selects and executes the appropriate tools.
 

@@ -20,11 +20,11 @@ source_url: https://www.notion.so/Onboarding-Growth-1-299a172b65a3805e95c5e332d4
   - [ ] **Cross-Channel Consistency**
     - [ ] Maintain brand tone and visuals across web, mobile, and email
     - [ ] Ensure icons, colors, and terminology remain identical
-    - [ ] Use consistent messaging hierarchy (headline → benefit → CTA)
+    - [ ] Use consistent messaging hierarchy (headline -> benefit -> CTA)
   - [ ] **Engagement & Motivation**
     - [ ] Use gamification thoughtfully (badges, streaks, progress milestones)
     - [ ] Highlight user achievements visually
-    - [ ] Offer personalized next steps ("Explore analytics" → "Invite teammates")
+    - [ ] Offer personalized next steps ("Explore analytics" -> "Invite teammates")
   - [ ] **Empathy & Emotional Design**
     - [ ] Create conversational onboarding — anticipate user emotions (confusion, excitement, hesitation)
     - [ ] Use encouraging microcopy ("You're doing great")

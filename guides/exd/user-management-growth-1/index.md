@@ -36,7 +36,7 @@ source_url: https://www.notion.so/User-Management-Growth-1-1aba172b65a380a29955d
   - [ ] **Navigation & Flow Optimization**
     - [x] Keep MFA setup **within the user settings page** and avoid excessive redirections
     - [x] Ensure **quick access to API keys, analytics, and MFA settings** from a centralized dashboard
-    - [x] Maintain a **logical flow** in the analytics dashboard (overview → filters → detailed reports)
+    - [x] Maintain a **logical flow** in the analytics dashboard (overview -> filters -> detailed reports)
     - [x] Offer a **search or filter feature** in API logs for better usability
     - [x] Keep navigation **consistent with the rest of the app’s UI**
   - [ ] **Accessibility & Mobile Responsiveness**
