@@ -1,6 +1,7 @@
 ---
 title: "User Management Intro 2"
 division: "QA"
+maturity: "Introduction 2"
 source_url: https://www.notion.so/QA-User-Management-Intro-2-1aea172b65a38025b85dd7f5505bf4ef
 ---
 

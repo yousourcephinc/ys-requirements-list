@@ -1,6 +1,7 @@
 ---
 title: "User Management Growth 1"
 division: "QA"
+maturity: "Growth 1"
 source_url: https://www.notion.so/QA-User-Management-Growth-1-1aea172b65a380b98820c2b8e4712975
 ---
 
