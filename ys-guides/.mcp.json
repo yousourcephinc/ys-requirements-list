@@ -1,0 +1,9 @@
+{
+  "ys-guides": {
+    "command": "python3",
+    "args": ["${CLAUDE_PLUGIN_ROOT}/mcp-proxy.py"],
+    "env": {
+      "MCP_SERVER_URL": "https://mcp-server-375955300575.us-central1.run.app/mcp"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "ys-guides",
+  "version": "0.1.0",
+  "description": "Connect to the YS Implementation Guides MCP server for semantic search across SE, PM, QA, and EXD guides.",
+  "hooks": [
+    {
+      "event": "SessionStart",
+      "type": "command",
+      "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/check-setup.sh"
+    },
+    {
+      "event": "SessionStart",
+      "type": "prompt",
+      "prompt": "IMPORTANT — YS Guides Plugin Auto-Setup:\nBefore handling the user's request, check the SessionStart hook output for setup status:\n\n- If you see AUTH_NEEDED: Immediately run `gcloud auth login` (this opens the user's browser for Google OAuth). After it completes, verify auth succeeded by running `gcloud auth print-identity-token --audiences=https://mcp-server-375955300575.us-central1.run.app/mcp`. Tell the user authentication is complete.\n- If you see MISSING_GCLOUD: Tell the user to install the Google Cloud SDK from https://cloud.google.com/sdk/docs/install and restart Claude.\n- If you see MISSING_PYTHON or PYTHON_TOO_OLD: Tell the user to install Python 3.10+ and restart Claude.\n- If you see PIP_INSTALL_FAILED: Tell the user the exact pip install command to run manually.\n- If you see YS_GUIDES_READY: Everything is set up — proceed normally with the user's request.\n\nOnly perform this check once per session. Be brief about it — don't over-explain unless something is wrong."
+    }
+  ]
+}

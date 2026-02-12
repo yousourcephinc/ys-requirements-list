@@ -1,0 +1,3 @@
+httpx
+google-auth
+google-auth-httplib2
