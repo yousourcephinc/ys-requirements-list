@@ -2,10 +2,14 @@
 title: "QA-"
 division: "QA"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/QA-Secure-File-Access-Role-Based-Controls-Intro-2-2fba172b65a38025a8f1c053cd0eb5ce
+source_url: https://www.notion.so/QA-Secure-File-Access-Role-Based-Controls-Intro-2-2fba172b65a380c3b671c35c4ca57565
 ---
 
 ### Functional Requirements
+  - Check that users only see files they’re allowed to access.
+  - Verify that role-based access is working (Admin, Viewer, etc.).
+  - Confirm file visibility updates right after a user’s role changes.
+  - Ensure users from other clients or groups can’t see unrelated files.
 ### Security Requirements
   - Test that access links expire correctly and block late access.
   - Attempt to access files across groups/tenants and confirm rejection.
