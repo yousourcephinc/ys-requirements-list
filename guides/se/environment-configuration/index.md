@@ -2,7 +2,7 @@
 title: "Environment Configuration"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Environment-Configuration-2a4a172b65a38126bf66cd2165252f6a
+source_url: https://www.notion.so/SE-Environment-Configuration-2a4a172b65a381749f44f82d30945843
 ---
 
 - Do use the recommended configuration technique by ASP.NET: appsettings.json files
