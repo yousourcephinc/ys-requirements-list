@@ -15,6 +15,12 @@ source_url: https://www.notion.so/Third-Party-API-Integration-Intro-1-1aea172b65
     - [ ] Does the user need to sync data across multiple platforms (e.g., calendars, messaging apps)?
     - [ ] Is there an existing industry-standard API that fulfills the required functionality?
   - [ ] **Identifying Key Functional Dependencies**
+    - [ ] Does the feature involve user authentication (e.g., Google, Apple Sign-In, OAuth)?
+    - [ ] Does it require real-time updates from external sources (e.g., live sports scores, financial market data)?
+    - [ ] Does the system need external payment processing (e.g., PayPal, Stripe, Apple Pay)?
+    - [ ] Are users expected to share, import, or export data (e.g., Google Drive, Dropbox, APIs for exporting reports)?
+    - [ ] Does the feature need external communication services (e.g., Twilio for SMS, WhatsApp API for messaging)?
+    - [ ] Will the platform require AI, machine learning, or automation features from third-party APIs?
   - [ ] **Data & Security Considerations**
     - [ ] Is the data sensitive or regulated (e.g., financial transactions, medical records, user authentication)?
     - [ ] Are there data privacy laws (e.g., GDPR, CCPA) affecting how information is shared or stored?
