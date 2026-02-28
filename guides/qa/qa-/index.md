@@ -2,7 +2,7 @@
 title: "QA-"
 division: "QA"
 maturity: "Growth 1"
-source_url: https://www.notion.so/QA-External-File-Sharing-Advanced-Controls-Growth-1-2fba172b65a380fcb7d4f68b213b7e08
+source_url: https://www.notion.so/QA-External-File-Sharing-Advanced-Controls-Growth-1-2fba172b65a3800e84bcc7fd60850a93
 ---
 
 ### Functional Requirements
