@@ -57,6 +57,36 @@ source_url: https://www.notion.so/Dashboard-1a8a172b65a380158043df7ebf330365
     - [ ] Provide **undo options** where possible (e.g., restoring a deleted chart) x
     - [x] Use **non-intrusive alerts (toasts, banners) for minor updates**
 ## Common and basic charts
+  **1. Bar Chart 📊**
+  - **Use when:** Comparing different categories or groups.
+  - **Example:** Sales performance of different products.
+  **2. Column Chart 📊**
+  - **Use when:** Showing trends over time with categories on the x-axis.
+  - **Example:** Monthly revenue growth.
+  **3. Line Chart 📈**
+  - **Use when:** Displaying trends or changes over time.
+  - **Example:** Stock prices over the past year.
+  **4. Pie Chart 🥧**
+  - **Use when:** Showing proportions or percentages of a whole (adds up to 100%).
+  - **Example:** Market share of different brands.
+  **5. Donut Chart 🍩**
+  - **Use when:** Similar to a pie chart but with a central hole for aesthetics.
+  - **Example:** Budget allocation for a project.
+  **6. Area Chart 📈**
+  - **Use when:** Showing trends over time but emphasizing volume/magnitude.
+  - **Example:** Website traffic growth over a year.
+  **7. Scatter Plot 🔵**
+  - **Use when:** Showing relationships between two variables.
+  - **Example:** Hours studied vs. exam scores.
+  **8. Histogram 📉**
+  - **Use when:** Showing frequency distribution of data (e.g., age groups).
+  - **Example:** Distribution of employee salaries.
+  **9. Stacked Bar/Column Chart 📊**
+  - **Use when:** Showing part-to-whole relationships while comparing multiple categories.
+  - **Example:** Sales breakdown by region and product type.
+  **10. Heatmap 🔥**
+  - **Use when:** Displaying intensity variations across two dimensions.
+  - **Example:** Website user activity by time of day.
 ## Prototype
   [Link here]
 ## Examples
