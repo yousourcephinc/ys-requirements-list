@@ -32,7 +32,6 @@ source_url: https://www.notion.so/Experience-API-Module-Introduction-2-2bea172b6
 - Keep OpenAPI serving lightweight:
   - Serve large OpenAPI documents from static storage or a CDN.
 - Ensure monitoring does not add significant latency:
-  - Use asynchronous or batched metrics exporters.
 ## 4. Usability Requirements (API UX)
 - Keep the **OpenAPI spec developer-friendly**:
   - Group endpoints by feature or domain (e.g., `Dashboard`, `Profile`, `Orders`).
