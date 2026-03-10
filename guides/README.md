@@ -55,6 +55,7 @@ This repository contains the official, curated implementation guides for all eng
 - **[Settings & Preferences Module - Growth I - PM Implementation](./pm/settings--preferences-module---growth-i---pm-implementation/)**
 - **[Settings & Preferences Module - Introduction I - PM Implementation](./pm/settings--preferences-module---introduction-i---pm-implementation/)**
 - **[Settings & Preferences Module - Introduction II - PM Implementation](./pm/settings--preferences-module---introduction-ii---pm-implementation/)**
+- **[Subscriptions Management Module - Growth I - PM Implementation](./pm/subscriptions-management-module---growth-i---pm-implementation/)**
 - **[Subscriptions Management Module - Introduction I - PM Implementation](./pm/subscriptions-management-module---introduction-i---pm-implementation/)**
 - **[Untitled](./pm/untitled/)**
 - **[User Management](./pm/user-management/)**
