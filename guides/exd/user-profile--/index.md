@@ -1,8 +1,8 @@
 ---
 title: "User Profile -"
 division: "EXD"
-maturity: "Introduction 2"
-source_url: https://www.notion.so/User-Profile-Intro-2-1e8a172b65a380daade8faedf196455a
+maturity: "Growth 1"
+source_url: https://www.notion.so/User-Profile-Growth-1-1e8a172b65a380189017dd370fd516fe
 ---
 
 ## Module Requirements
@@ -34,16 +34,16 @@ source_url: https://www.notion.so/User-Profile-Intro-2-1e8a172b65a380daade8faedf
     - Design system components used for consistency across flows
     - Annotated designs explain conditional logic, validation rules, and tooltip behaviors
 ## Prototype Checklist
-  - [ ] Design includes **username/password login option** alongside social login buttons.
-  - [ ] Add a **“Forgot password?” flow** with modal/page navigation.
-  - [ ] Include **email input field with feedback** for valid/invalid address in reset flow.
-  - [ ] Visualize the **token expired/success/error screen** in reset journey.
-  - [ ] Create a screen for **“Enter new password”** with confirm password and strength indicator.
-  - [ ] Display **rate-limit notice UI** after repeated reset attempts.
-  - [ ] Design a **change password form** with current and new password fields.
-  - [ ] Clearly separate **authentication and profile** sections in navigation/IA.
-  - [ ] All flows should account for **success, error, loading, and disabled** states.
-  - [ ] Designs follow **best practices for password UX** (e.g., show/hide toggle, strength meter).
+  - [ ] Add **SSO login screen** with branding for supported identity providers.
+  - [ ] Clearly label the **“Login with Org Account”** option for SAML-based flows.
+  - [ ] UI adjusts dynamically based on **selected login method** (e.g., username/password vs. SSO).
+  - [ ] Display **post-login role or organization-specific visual cues** (e.g., company name, badge).
+  - [ ] Show **logout confirmation modal** and link session management to user profile.
+  - [ ] Include screen for **“You’ve been logged out due to inactivity”** with re-login options.
+  - [ ] Add a **role-based dashboard preview** to confirm proper access (if applicable).
+  - [ ] Visualize **authentication logs or login activity** (basic timeline or last login alert).
+  - [ ] Ensure prototype is **responsive and optimized for mobile**.
+  - [ ] Include guidance for **empty/error states on login or access screens**.
 ## Prototype
   [prototype link here]
 ## Examples
