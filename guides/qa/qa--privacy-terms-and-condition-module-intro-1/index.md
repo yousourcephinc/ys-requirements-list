@@ -16,6 +16,8 @@ source_url: https://www.notion.so/QA-Privacy-Terms-and-Condition-Module-Intro-1-
   - Check that the content shown doesn’t allow any unwanted popups, scripts, or broken formatting.
   - Confirm the system saves the user’s agreement along with the date and time it was accepted.
 ### **Performance**
+  - Open the popup and see if it loads quickly.
+  - Scroll through the content and confirm it works smoothly.
 ### **Accessibility**
   - Use only the keyboard to move through the popup and checkboxes.
   - Test with screen reader to make sure all content is read clearly.
