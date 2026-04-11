@@ -17,6 +17,9 @@ source_url: https://www.notion.so/QA-Subscription-Management-Growth-1-2fba172b65
   - Confirm that no payment or card data is exposed in billing pages or invoice files.
   - Test webhook or notification systems for each payment provider and confirm secure processing.
 ### **Performance Requirements**
+  - Measure how long it takes to load the billing page and download invoices.
+  - Confirm the app doesn’t slow down when switching between multiple billing providers.
+  - Validate that searches or filters in the billing page respond quickly (e.g., find a past invoice by month).
 ### **Usability Requirements**
   - Check that the billing page is clean and easy to navigate on all devices.
   - Validate that the invoice layout is clear and readable (on screen and in download).
