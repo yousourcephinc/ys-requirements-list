@@ -10,9 +10,6 @@ source_url: https://www.notion.so/QA-FAQ-Module-Growth-1-2fba172b65a3809c8330e4b
   - Confirm that embedded content and FAQs fit the design and do not block any other part of the page.
   - Make sure there's a message or backup content when external content or FAQ fails to load.
 ### **Security**
-  - Confirm users cannot access or change content they are not allowed to.
-  - Check that links, embedded tools, and FAQ items cannot be used to break the system.
-  - Make sure no private details or settings appear to users who shouldn’t see them.
 ### **Performance**
   - Check that embedded content and FAQ sections load quickly without freezing the rest of the page.
   - Confirm that old content is not shown after updates unless intended.
