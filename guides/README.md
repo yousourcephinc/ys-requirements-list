@@ -60,7 +60,6 @@ This repository contains the official, curated implementation guides for all eng
 - **[Untitled](./pm/untitled/)**
 - **[User Management](./pm/user-management/)**
 - **[User Profile Module - Growth I - PM Implementation](./pm/user-profile-module---growth-i---pm-implementation/)**
-- **[User Profile Module - Introduction I - PM Implementation](./pm/user-profile-module---introduction-i---pm-implementation/)**
 - **[User Profile Module - Introduction II - PM Implementation](./pm/user-profile-module---introduction-ii---pm-implementation/)**
 
 ## QA
