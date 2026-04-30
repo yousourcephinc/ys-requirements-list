@@ -2,7 +2,7 @@
 title: "Cors"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Cors-2a4a172b65a381b2934ff145dafff00f
+source_url: https://app.notion.com/p/SE-Cors-2a4a172b65a381b2934ff145dafff00f
 ---
 
 Do configure CORS; it allows requests only for certain origins (like a Frontend). In your Startup.cs (API project), you will have a line similar to this.

@@ -2,7 +2,7 @@
 title: "Diagnostics Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/Diagnostics-Module-Growth-1-1c2a172b65a38069be8cdf1243000313
+source_url: https://app.notion.com/p/Diagnostics-Module-Growth-1-1c2a172b65a38069be8cdf1243000313
 ---
 
 ### Functional Requirements

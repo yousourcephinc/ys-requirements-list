@@ -2,7 +2,7 @@
 title: "Dashboard Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/SE-Dashboard-Module-Introduction-1-1c2a172b65a3804591eccffcf53546f0
+source_url: https://app.notion.com/p/SE-Dashboard-Module-Introduction-1-1c2a172b65a3804591eccffcf53546f0
 ---
 
 ## Module Requirements

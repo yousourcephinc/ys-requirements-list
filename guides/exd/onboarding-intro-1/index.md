@@ -2,7 +2,7 @@
 title: "Onboarding Intro 1"
 division: "EXD"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Onboarding-Intro-1-299a172b65a3807283deef38671d828c
+source_url: https://app.notion.com/p/Onboarding-Intro-1-299a172b65a3807283deef38671d828c
 ---
 
 

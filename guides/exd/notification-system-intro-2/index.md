@@ -2,7 +2,7 @@
 title: "Notification System Intro 2"
 division: "EXD"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/Notification-System-Intro-2-28ea172b65a380b09439dbde1858816e
+source_url: https://app.notion.com/p/Notification-System-Intro-2-28ea172b65a380b09439dbde1858816e
 ---
 
 ## Module Requirements

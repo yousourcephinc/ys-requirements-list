@@ -2,7 +2,7 @@
 title: "Privacy Policy and Terms of Service Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Privacy-Policy-and-Terms-of-Service-Module-Introduction-1-1aba172b65a380198c79e89b5a5516d2
+source_url: https://app.notion.com/p/Privacy-Policy-and-Terms-of-Service-Module-Introduction-1-1aba172b65a380198c79e89b5a5516d2
 ---
 
 Key concepts: Static content using MD files, accepting/checkboxes of Privacy Policy/ToS

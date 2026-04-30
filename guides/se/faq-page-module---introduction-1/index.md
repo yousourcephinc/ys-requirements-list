@@ -2,7 +2,7 @@
 title: "FAQ Page Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/FAQ-Page-Module-Introduction-1-1a8a172b65a3807ea7e3e16937c79bb0
+source_url: https://app.notion.com/p/FAQ-Page-Module-Introduction-1-1a8a172b65a3807ea7e3e16937c79bb0
 ---
 
 Key concepts: Static content using MD files

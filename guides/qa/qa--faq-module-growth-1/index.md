@@ -2,7 +2,7 @@
 title: "QA- FAQ Module Growth 1"
 division: "QA"
 maturity: "Growth 1"
-source_url: https://www.notion.so/QA-FAQ-Module-Growth-1-2fba172b65a3809c8330e4bb0e96b0e9
+source_url: https://app.notion.com/p/QA-FAQ-Module-Growth-1-2fba172b65a3809c8330e4bb0e96b0e9
 ---
 
 ### **Functional**

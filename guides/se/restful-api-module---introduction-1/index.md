@@ -2,7 +2,7 @@
 title: "RESTFul API Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/RESTFul-API-Module-Introduction-1-1bca172b65a38098abf0e1e7d42b4b76
+source_url: https://app.notion.com/p/RESTFul-API-Module-Introduction-1-1bca172b65a38098abf0e1e7d42b4b76
 ---
 
 Functional Requirements

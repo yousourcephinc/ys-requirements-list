@@ -2,7 +2,7 @@
 title: "Search Module - Introduction 2 - SE Implementation"
 division: "SE"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/Search-Module-Introduction-2-SE-Implementation-1ada172b65a380e999abfade4b96d3f4
+source_url: https://app.notion.com/p/Search-Module-Introduction-2-SE-Implementation-1ada172b65a380e999abfade4b96d3f4
 ---
 
 ### Functional Requirements

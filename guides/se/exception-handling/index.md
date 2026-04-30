@@ -2,7 +2,7 @@
 title: "Exception Handling"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Exception-Handling-2a4a172b65a381c88ca0e716ed8e8fd5
+source_url: https://app.notion.com/p/SE-Exception-Handling-2a4a172b65a381c88ca0e716ed8e8fd5
 ---
 
 Exception handling should be in place for every layer or module in the system. Ensure that exceptions don't bubble out of their respective module or layer as this will create coupling between the modules.&#x20;

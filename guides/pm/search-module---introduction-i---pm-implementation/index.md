@@ -2,7 +2,7 @@
 title: "Search Module - Introduction I - PM Implementation"
 division: "PM"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Search-Module-Introduction-I-PM-Implementation-207a172b65a3803d957ac16d1d25aa11
+source_url: https://app.notion.com/p/Search-Module-Introduction-I-PM-Implementation-207a172b65a3803d957ac16d1d25aa11
 ---
 
 ## **✅ Planning Checklist**

@@ -2,7 +2,7 @@
 title: "Dependency Injection"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Dependency-Injection-2a4a172b65a381069c7ae5dbfd198b68
+source_url: https://app.notion.com/p/SE-Dependency-Injection-2a4a172b65a381069c7ae5dbfd198b68
 ---
 
 - Do create extension methods/classes to contain related dependency injection

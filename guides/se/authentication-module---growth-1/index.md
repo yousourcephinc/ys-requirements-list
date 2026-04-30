@@ -2,7 +2,7 @@
 title: "Authentication Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/Authentication-Module-Growth-1-1d5a172b65a38070b3c3c97a70864d0b
+source_url: https://app.notion.com/p/Authentication-Module-Growth-1-1d5a172b65a38070b3c3c97a70864d0b
 ---
 
 ## Module Requirements

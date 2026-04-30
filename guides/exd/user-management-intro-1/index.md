@@ -2,7 +2,7 @@
 title: "User Management Intro 1"
 division: "EXD"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/User-Management-Intro-1-1aba172b65a3806abe47de948746e025
+source_url: https://app.notion.com/p/User-Management-Intro-1-1aba172b65a3806abe47de948746e025
 ---
 
 ## Module Requirements

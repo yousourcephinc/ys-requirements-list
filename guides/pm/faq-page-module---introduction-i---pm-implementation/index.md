@@ -1,7 +1,7 @@
 ---
 title: "FAQ Page Module - Introduction I - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/FAQ-Page-Module-Introduction-I-PM-Implementation-2afa172b65a38021be1af0be254747bb
+source_url: https://app.notion.com/p/FAQ-Page-Module-Introduction-I-PM-Implementation-2afa172b65a38021be1af0be254747bb
 ---
 
 ## **Planning**

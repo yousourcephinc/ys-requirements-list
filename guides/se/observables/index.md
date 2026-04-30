@@ -2,7 +2,7 @@
 title: "Observables"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Observables-2a4a172b65a38134bfb3fb413b50904d
+source_url: https://app.notion.com/p/SE-Observables-2a4a172b65a38134bfb3fb413b50904d
 ---
 
 As a publisher, you create an **Observable** instance that defines a subscriber function. This is the function that is executed when a consumer calls the **subscribe()** method. The subscriber function defines how to obtain or generate values or messages to be published.

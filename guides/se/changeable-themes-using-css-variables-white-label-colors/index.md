@@ -2,7 +2,7 @@
 title: "Changeable Themes Using Css Variables (White Label Colors)"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Changeable-Themes-Using-Css-Variables-White-Label-Colors-2a4a172b65a3815390ddc301216ae5c7
+source_url: https://app.notion.com/p/SE-Changeable-Themes-Using-Css-Variables-White-Label-Colors-2a4a172b65a3815390ddc301216ae5c7
 ---
 
 When implementing changeable themes for your web pages, the code should already be built to use primary and secondary colors via SCSS variables. Since sass variables are only applied when the application is built, they cannot be changed in real time. This is a problem when integrating themes.

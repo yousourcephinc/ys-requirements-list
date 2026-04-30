@@ -2,7 +2,7 @@
 title: "Models"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Models-2a4a172b65a3812fb5b6c3d742177991
+source_url: https://app.notion.com/p/SE-Models-2a4a172b65a3812fb5b6c3d742177991
 ---
 
 *General*

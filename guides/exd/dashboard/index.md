@@ -2,7 +2,7 @@
 title: "Dashboard"
 division: "EXD"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Dashboard-1a8a172b65a380158043df7ebf330365
+source_url: https://app.notion.com/p/Dashboard-1a8a172b65a380158043df7ebf330365
 ---
 
 ## Module Requirements

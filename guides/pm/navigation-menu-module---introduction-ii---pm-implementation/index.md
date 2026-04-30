@@ -1,7 +1,7 @@
 ---
 title: "Navigation Menu Module - Introduction II - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/Navigation-Menu-Module-Introduction-II-PM-Implementation-1e6a172b65a380e3add4c3ffee4c6221
+source_url: https://app.notion.com/p/Navigation-Menu-Module-Introduction-II-PM-Implementation-1e6a172b65a380e3add4c3ffee4c6221
 ---
 
 ## **✅ Planning Checklist**

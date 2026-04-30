@@ -2,7 +2,7 @@
 title: "User Management Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/User-Management-Module-Growth-1-1d5a172b65a3803aa18adb740805d274
+source_url: https://app.notion.com/p/User-Management-Module-Growth-1-1d5a172b65a3803aa18adb740805d274
 ---
 
 ## **Phase I – Growth**

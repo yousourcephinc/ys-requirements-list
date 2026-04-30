@@ -2,7 +2,7 @@
 title: "User Profile - Intro 1"
 division: "EXD"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/User-Profile-Intro-1-1e8a172b65a3804a8f7bf7beb84b709e
+source_url: https://app.notion.com/p/User-Profile-Intro-1-1e8a172b65a3804a8f7bf7beb84b709e
 ---
 
 ## Module Requirements

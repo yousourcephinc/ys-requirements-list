@@ -2,7 +2,7 @@
 title: "CSharp - General"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-CSharp-General-2a4a172b65a3812a9a19e0f79e14839d
+source_url: https://app.notion.com/p/SE-CSharp-General-2a4a172b65a3812a9a19e0f79e14839d
 ---
 
 - Do configure CORS to only allow valid origins such as your SPA (Frontend)

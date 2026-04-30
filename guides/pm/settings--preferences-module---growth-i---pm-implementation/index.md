@@ -1,7 +1,7 @@
 ---
 title: "Settings & Preferences Module - Growth I - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/Settings-Preferences-Module-Growth-I-PM-Implementation-25ea172b65a38083abe2f4ee592a7144
+source_url: https://app.notion.com/p/Settings-Preferences-Module-Growth-I-PM-Implementation-25ea172b65a38083abe2f4ee592a7144
 ---
 
 # **✅ Implementation Guide – Settings and Preferences Module (Growth 1)**

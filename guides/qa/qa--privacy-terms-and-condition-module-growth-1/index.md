@@ -2,7 +2,7 @@
 title: "QA- Privacy Terms and Condition Module Growth 1"
 division: "QA"
 maturity: "Growth 1"
-source_url: https://www.notion.so/QA-Privacy-Terms-and-Condition-Module-Growth-1-2fba172b65a380a18ef0d8ff9e62368a
+source_url: https://app.notion.com/p/QA-Privacy-Terms-and-Condition-Module-Growth-1-2fba172b65a380a18ef0d8ff9e62368a
 ---
 
 ### **Functional**

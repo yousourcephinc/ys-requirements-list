@@ -2,7 +2,7 @@
 title: "User Management Growth 1"
 division: "EXD"
 maturity: "Growth 1"
-source_url: https://www.notion.so/User-Management-Growth-1-1aba172b65a380a29955d10b1267d2bb
+source_url: https://app.notion.com/p/User-Management-Growth-1-1aba172b65a380a29955d10b1267d2bb
 ---
 
 ## Module Requirements

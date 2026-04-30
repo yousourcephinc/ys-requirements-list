@@ -2,7 +2,7 @@
 title: "Settings and Preferences Intro 2"
 division: "EXD"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/Settings-and-Preferences-Intro-2-1f1a172b65a38087bda9e39f9902075c
+source_url: https://app.notion.com/p/Settings-and-Preferences-Intro-2-1f1a172b65a38087bda9e39f9902075c
 ---
 
 ## Module Requirements

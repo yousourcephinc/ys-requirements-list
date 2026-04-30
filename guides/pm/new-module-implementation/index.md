@@ -1,7 +1,7 @@
 ---
 title: "New Module Implementation"
 division: "PM"
-source_url: https://www.notion.so/New-Module-Implementation-1f2a172b65a38023861eef7bb1f046e2
+source_url: https://app.notion.com/p/New-Module-Implementation-1f2a172b65a38023861eef7bb1f046e2
 ---
 
 ## Module Requirements

@@ -2,7 +2,7 @@
 title: "Notification System Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Notification-System-Module-Introduction-1-1c2a172b65a380ccbdf1e2cada8aa0fb
+source_url: https://app.notion.com/p/Notification-System-Module-Introduction-1-1c2a172b65a380ccbdf1e2cada8aa0fb
 ---
 
 ### Functional Requirements

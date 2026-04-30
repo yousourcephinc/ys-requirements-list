@@ -2,7 +2,7 @@
 title: "QA- Navigation Menu Intro 1"
 division: "QA"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/QA-Navigation-Menu-Intro-1-21da172b65a380a2a74df72393d8261e
+source_url: https://app.notion.com/p/QA-Navigation-Menu-Intro-1-21da172b65a380a2a74df72393d8261e
 ---
 
 ## Module Requirements

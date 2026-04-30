@@ -2,7 +2,7 @@
 title: "QA- Navigation Menu Growth 1"
 division: "QA"
 maturity: "Growth 1"
-source_url: https://www.notion.so/QA-Navigation-Menu-Growth-1-21da172b65a380d98ce6f7b8eb786f77
+source_url: https://app.notion.com/p/QA-Navigation-Menu-Growth-1-21da172b65a380d98ce6f7b8eb786f77
 ---
 
 ## Module Requirements

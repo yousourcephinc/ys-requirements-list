@@ -2,7 +2,7 @@
 title: "Navigation Menu Growth 1"
 division: "EXD"
 maturity: "Growth 1"
-source_url: https://www.notion.so/Navigation-Menu-Growth-1-1dfa172b65a380c280acde0e5f5a0078
+source_url: https://app.notion.com/p/Navigation-Menu-Growth-1-1dfa172b65a380c280acde0e5f5a0078
 ---
 
 ## Module Requirements

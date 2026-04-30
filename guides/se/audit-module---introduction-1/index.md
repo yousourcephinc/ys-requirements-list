@@ -2,7 +2,7 @@
 title: "Audit Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Audit-Module-Introduction-1-1c2a172b65a3803eaf5bc9a226ba6e11
+source_url: https://app.notion.com/p/Audit-Module-Introduction-1-1c2a172b65a3803eaf5bc9a226ba6e11
 ---
 
 ### Functional Requirements

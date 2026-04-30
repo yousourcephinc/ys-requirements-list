@@ -2,7 +2,7 @@
 title: "QA- User Profile Growth 1"
 division: "QA"
 maturity: "Growth 1"
-source_url: https://www.notion.so/QA-User-Profile-Growth-1-21da172b65a3808e926bf367aa6fb437
+source_url: https://app.notion.com/p/QA-User-Profile-Growth-1-21da172b65a3808e926bf367aa6fb437
 ---
 
 ## Module Requirements

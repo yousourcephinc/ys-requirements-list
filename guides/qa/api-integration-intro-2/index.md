@@ -2,7 +2,7 @@
 title: "API Integration Intro 2"
 division: "QA"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/QA-API-Integration-Intro-2-1b5a172b65a380d09f1ddab2757e4730
+source_url: https://app.notion.com/p/QA-API-Integration-Intro-2-1b5a172b65a380d09f1ddab2757e4730
 ---
 
 ## Module Requirements

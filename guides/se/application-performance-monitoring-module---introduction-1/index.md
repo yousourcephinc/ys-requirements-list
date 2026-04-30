@@ -2,7 +2,7 @@
 title: "Application Performance Monitoring Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Application-Performance-Monitoring-Module-Introduction-1-1c2a172b65a380a99a60e7ef85ee68ee
+source_url: https://app.notion.com/p/Application-Performance-Monitoring-Module-Introduction-1-1c2a172b65a380a99a60e7ef85ee68ee
 ---
 
 ### Functional Requirements

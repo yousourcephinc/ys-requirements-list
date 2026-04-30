@@ -2,7 +2,7 @@
 title: "Reporting Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Reporting-Module-Introduction-1-1c1a172b65a380468826dff53e649a6f
+source_url: https://app.notion.com/p/Reporting-Module-Introduction-1-1c1a172b65a380468826dff53e649a6f
 ---
 
 ### Functional Requirements

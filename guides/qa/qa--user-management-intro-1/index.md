@@ -2,7 +2,7 @@
 title: "QA -User Management Intro 1"
 division: "QA"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/QA-User-Management-Intro-1-1aea172b65a380d7b246c9f6473e836f
+source_url: https://app.notion.com/p/QA-User-Management-Intro-1-1aea172b65a380d7b246c9f6473e836f
 ---
 
 ## Module Requirements

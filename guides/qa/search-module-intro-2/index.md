@@ -2,7 +2,7 @@
 title: "Search Module Intro 2"
 division: "QA"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/QA-Search-Module-Intro-2-2fba172b65a380b4b098dde3ce094958
+source_url: https://app.notion.com/p/QA-Search-Module-Intro-2-2fba172b65a380b4b098dde3ce094958
 ---
 
 ### **Functional Requirements**

@@ -2,7 +2,7 @@
 title: "Base Module"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Base-Module-1aba172b65a38041ae63c5e99a8beb62
+source_url: https://app.notion.com/p/Base-Module-1aba172b65a38041ae63c5e99a8beb62
 ---
 
 ## **Authentication & Authorization**

@@ -2,7 +2,7 @@
 title: "QA- User Profile Intro 2"
 division: "QA"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/QA-User-Profile-Intro-2-21da172b65a38080bc83f43600168e18
+source_url: https://app.notion.com/p/QA-User-Profile-Intro-2-21da172b65a38080bc83f43600168e18
 ---
 
 ## Module Requirements

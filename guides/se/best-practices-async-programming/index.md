@@ -2,7 +2,7 @@
 title: "Best Practices  Async Programming"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Best-Practices-Async-Programming-2a4a172b65a381fd90f3f774574e1947
+source_url: https://app.notion.com/p/SE-Best-Practices-Async-Programming-2a4a172b65a381fd90f3f774574e1947
 ---
 
 The content below was extracted from the official Microsoft documentation. Their explanation is better than us trying to create our own.

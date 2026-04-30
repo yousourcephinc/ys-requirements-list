@@ -2,7 +2,7 @@
 title: "Payments and Recurring Payments Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Payments-and-Recurring-Payments-Module-Introduction-1-1a7a172b65a3802f8d0bd543a22b0192
+source_url: https://app.notion.com/p/Payments-and-Recurring-Payments-Module-Introduction-1-1a7a172b65a3802f8d0bd543a22b0192
 ---
 
 ## Module Requirements

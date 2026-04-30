@@ -2,7 +2,7 @@
 title: "Feedback Module - Introduction 2"
 division: "SE"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/Feedback-Module-Introduction-2-1aba172b65a380039491ccc80802604f
+source_url: https://app.notion.com/p/Feedback-Module-Introduction-2-1aba172b65a380039491ccc80802604f
 ---
 
 ## Module Requirements

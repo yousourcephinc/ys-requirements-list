@@ -1,7 +1,7 @@
 ---
 title: "Settings & Preferences Module - Introduction I - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/Settings-Preferences-Module-Introduction-I-PM-Implementation-24ea172b65a380aab4d7f638c28362d6
+source_url: https://app.notion.com/p/Settings-Preferences-Module-Introduction-I-PM-Implementation-24ea172b65a380aab4d7f638c28362d6
 ---
 
 # **✅ Implementation Guide – Settings and Preferences Module (Introduction 1)**

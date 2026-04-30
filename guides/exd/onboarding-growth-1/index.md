@@ -2,7 +2,7 @@
 title: "Onboarding Growth 1"
 division: "EXD"
 maturity: "Growth 1"
-source_url: https://www.notion.so/Onboarding-Growth-1-299a172b65a3805e95c5e332d4513853
+source_url: https://app.notion.com/p/Onboarding-Growth-1-299a172b65a3805e95c5e332d4513853
 ---
 
 

@@ -2,7 +2,7 @@
 title: "Image Pre-Processing Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Image-Pre-Processing-Module-Introduction-1-1a8a172b65a3801aaf66f275f47d5125
+source_url: https://app.notion.com/p/Image-Pre-Processing-Module-Introduction-1-1a8a172b65a3801aaf66f275f47d5125
 ---
 
 ## Module Requirements

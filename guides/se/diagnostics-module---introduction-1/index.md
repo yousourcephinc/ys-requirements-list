@@ -2,7 +2,7 @@
 title: "Diagnostics Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Diagnostics-Module-Introduction-1-1c2a172b65a380199a45e7568055bbe1
+source_url: https://app.notion.com/p/Diagnostics-Module-Introduction-1-1c2a172b65a380199a45e7568055bbe1
 ---
 
 1. Implement **centralized structured logging**:

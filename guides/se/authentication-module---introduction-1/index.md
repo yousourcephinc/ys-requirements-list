@@ -2,7 +2,7 @@
 title: "Authentication Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Authentication-Module-Introduction-1-1d5a172b65a380338dc2d7daa773e7c2
+source_url: https://app.notion.com/p/Authentication-Module-Introduction-1-1d5a172b65a380338dc2d7daa773e7c2
 ---
 
 ## Module Requirements

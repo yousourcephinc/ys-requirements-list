@@ -2,7 +2,7 @@
 title: "Subscription Management Growth 1"
 division: "QA"
 maturity: "Growth 1"
-source_url: https://www.notion.so/QA-Subscription-Management-Growth-1-2fba172b65a380fd9dc5d5e5a5f16b70
+source_url: https://app.notion.com/p/QA-Subscription-Management-Growth-1-2fba172b65a380fd9dc5d5e5a5f16b70
 ---
 
 ### **Functional Requirements**

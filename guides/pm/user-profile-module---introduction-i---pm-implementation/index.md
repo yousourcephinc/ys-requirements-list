@@ -2,7 +2,7 @@
 title: "User Profile Module - Introduction I - PM Implementation"
 division: "PM"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/User-Profile-Module-Introduction-I-PM-Implementation-1f5a172b65a380b3b071c4614c0828cb
+source_url: https://app.notion.com/p/User-Profile-Module-Introduction-I-PM-Implementation-1f5a172b65a380b3b071c4614c0828cb
 ---
 
 ## **✅ Planning Checklist**

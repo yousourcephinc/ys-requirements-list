@@ -1,7 +1,7 @@
 ---
 title: "FAQ Page Module - Growth I - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/FAQ-Page-Module-Growth-I-PM-Implementation-2afa172b65a380ca9534c0c6b8881232
+source_url: https://app.notion.com/p/FAQ-Page-Module-Growth-I-PM-Implementation-2afa172b65a380ca9534c0c6b8881232
 ---
 
 ## **Planning**

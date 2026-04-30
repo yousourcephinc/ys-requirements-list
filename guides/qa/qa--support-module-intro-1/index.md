@@ -2,7 +2,7 @@
 title: "QA- Support Module Intro 1"
 division: "QA"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/QA-Support-Module-Intro-1-2e2a172b65a38049a1e4f2046971d402
+source_url: https://app.notion.com/p/QA-Support-Module-Intro-1-2e2a172b65a38049a1e4f2046971d402
 ---
 
 ### **Functional Requirements**

@@ -1,7 +1,7 @@
 ---
 title: "Navigation Menu Module - Introduction I - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/Navigation-Menu-Module-Introduction-I-PM-Implementation-1e4a172b65a380528b37f23881a9e6fd
+source_url: https://app.notion.com/p/Navigation-Menu-Module-Introduction-I-PM-Implementation-1e4a172b65a380528b37f23881a9e6fd
 ---
 
 ## **Planning**

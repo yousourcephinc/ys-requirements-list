@@ -1,7 +1,7 @@
 ---
 title: "CRUD Grid Module - Growth I - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/CRUD-Grid-Module-Growth-I-PM-Implementation-2a2a172b65a380c7a059ed2370c27cac
+source_url: https://app.notion.com/p/CRUD-Grid-Module-Growth-I-PM-Implementation-2a2a172b65a380c7a059ed2370c27cac
 ---
 
 ### **Functional Planning**

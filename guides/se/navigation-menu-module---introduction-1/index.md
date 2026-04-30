@@ -2,7 +2,7 @@
 title: "Navigation Menu Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Navigation-Menu-Module-Introduction-1-1aba172b65a3807eb907c7a5d0b0c0e2
+source_url: https://app.notion.com/p/Navigation-Menu-Module-Introduction-1-1aba172b65a3807eb907c7a5d0b0c0e2
 ---
 
 Key focus: Static Menu Item, Role-aware ready

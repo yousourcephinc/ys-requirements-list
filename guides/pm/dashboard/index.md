@@ -1,7 +1,7 @@
 ---
 title: "Dashboard"
 division: "PM"
-source_url: https://www.notion.so/PM-Dashboard-19da172b65a38035ba79d2bb2f7bdefb
+source_url: https://app.notion.com/p/PM-Dashboard-19da172b65a38035ba79d2bb2f7bdefb
 ---
 
 # Planning

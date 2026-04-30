@@ -2,7 +2,7 @@
 title: "Performance"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Performance-2a4a172b65a381bea366dd5b94993941
+source_url: https://app.notion.com/p/SE-Performance-2a4a172b65a381bea366dd5b94993941
 ---
 
 The following items are kept high level and must be researched further for implementation. Most of the content are practices that we use that also came from Microsoft

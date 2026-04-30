@@ -1,7 +1,7 @@
 ---
 title: "Navigation Menu Module - Growth I - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/Navigation-Menu-Module-Growth-I-PM-Implementation-1e6a172b65a380419f90ef72e2f1d53a
+source_url: https://app.notion.com/p/Navigation-Menu-Module-Growth-I-PM-Implementation-1e6a172b65a380419f90ef72e2f1d53a
 ---
 
 ## **✅ Planning – Checklist (Framed as Questions)**

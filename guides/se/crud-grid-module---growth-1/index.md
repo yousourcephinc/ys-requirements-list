@@ -2,7 +2,7 @@
 title: "CRUD Grid Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/CRUD-Grid-Module-Growth-1-1a7a172b65a38048a18be7ee691a6f12
+source_url: https://app.notion.com/p/CRUD-Grid-Module-Growth-1-1a7a172b65a38048a18be7ee691a6f12
 ---
 
 ### **Functional Requirements**

@@ -2,7 +2,7 @@
 title: "Navigation Menu Intro 1"
 division: "EXD"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Navigation-Menu-Intro-1-1dfa172b65a380a98106c39819439a7a
+source_url: https://app.notion.com/p/Navigation-Menu-Intro-1-1dfa172b65a380a98106c39819439a7a
 ---
 
 ## Module Requirements

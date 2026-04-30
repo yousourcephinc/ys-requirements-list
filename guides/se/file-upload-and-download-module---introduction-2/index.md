@@ -2,7 +2,7 @@
 title: "File Upload and Download Module - Introduction 2"
 division: "SE"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/File-Upload-and-Download-Module-Introduction-2-1bca172b65a3801ca969f88811c1f0dc
+source_url: https://app.notion.com/p/File-Upload-and-Download-Module-Introduction-2-1bca172b65a3801ca969f88811c1f0dc
 ---
 
 Key focus: Authorization on Account-wide access

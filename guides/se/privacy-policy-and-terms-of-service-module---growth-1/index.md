@@ -2,7 +2,7 @@
 title: "Privacy Policy and Terms of Service Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/Privacy-Policy-and-Terms-of-Service-Module-Growth-1-1baa172b65a380b68764c877153c6e9b
+source_url: https://app.notion.com/p/Privacy-Policy-and-Terms-of-Service-Module-Growth-1-1baa172b65a380b68764c877153c6e9b
 ---
 
 Key focus: Content versioning, Reacceptance of terms

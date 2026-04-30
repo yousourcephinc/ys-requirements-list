@@ -2,7 +2,7 @@
 title: "Data Gateways"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Data-Gateways-2a4a172b65a38161b3d1c003b99066a5
+source_url: https://app.notion.com/p/SE-Data-Gateways-2a4a172b65a38161b3d1c003b99066a5
 ---
 
 - Do return models (abstract) from data gateways

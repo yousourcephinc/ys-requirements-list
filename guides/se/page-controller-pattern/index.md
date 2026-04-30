@@ -2,7 +2,7 @@
 title: "Page Controller Pattern"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Page-Controller-Pattern-2a4a172b65a381169300c747b3ab5e74
+source_url: https://app.notion.com/p/SE-Page-Controller-Pattern-2a4a172b65a381169300c747b3ab5e74
 ---
 
 > An object that handles a request for a specific page or action on a Web site. ***Martin Fowler***

@@ -2,7 +2,7 @@
 title: "User Management Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/User-Management-Module-Introduction-1-1d5a172b65a380e28d6cd41e0647ed40
+source_url: https://app.notion.com/p/User-Management-Module-Introduction-1-1d5a172b65a380e28d6cd41e0647ed40
 ---
 
 ## **Phase I – Introduction**

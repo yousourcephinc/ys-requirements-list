@@ -2,7 +2,7 @@
 title: "Payments and Recurring Payments Intro 2"
 division: "EXD"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/Payments-and-Recurring-Payments-Intro-2-1f1a172b65a3803ebb08e5c18ec4a2b8
+source_url: https://app.notion.com/p/Payments-and-Recurring-Payments-Intro-2-1f1a172b65a3803ebb08e5c18ec4a2b8
 ---
 
 ## Module Requirements

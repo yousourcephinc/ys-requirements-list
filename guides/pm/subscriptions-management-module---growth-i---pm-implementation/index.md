@@ -1,7 +1,7 @@
 ---
 title: "Subscriptions Management Module - Growth I - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/Subscriptions-Management-Module-Growth-I-PM-Implementation-25ea172b65a38043ab4deb3ed4fe3160
+source_url: https://app.notion.com/p/Subscriptions-Management-Module-Growth-I-PM-Implementation-25ea172b65a38043ab4deb3ed4fe3160
 ---
 
 # **✅ Implementation Guide – Subscription Management Module (Growth 1)**

@@ -2,7 +2,7 @@
 title: "Subscription Management Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Subscription-Management-Module-Introduction-1-1e3a172b65a3805fb44ffdf5755432b7
+source_url: https://app.notion.com/p/Subscription-Management-Module-Introduction-1-1e3a172b65a3805fb44ffdf5755432b7
 ---
 
 ## Module Requirements

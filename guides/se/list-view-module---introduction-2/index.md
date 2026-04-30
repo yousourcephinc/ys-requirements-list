@@ -2,7 +2,7 @@
 title: "List View Module - Introduction 2"
 division: "SE"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/List-View-Module-Introduction-2-1c1a172b65a380248e72ecb4d4452e67
+source_url: https://app.notion.com/p/List-View-Module-Introduction-2-1c1a172b65a380248e72ecb4d4452e67
 ---
 
 ### Functional Requirements

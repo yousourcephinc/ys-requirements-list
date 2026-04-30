@@ -2,7 +2,7 @@
 title: "Navigation Menu Module - Introduction 2"
 division: "SE"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/Navigation-Menu-Module-Introduction-2-1baa172b65a380a1bb65c64977fec11a
+source_url: https://app.notion.com/p/Navigation-Menu-Module-Introduction-2-1baa172b65a380a1bb65c64977fec11a
 ---
 
 Key focus: Platform-optimized navigation menu items

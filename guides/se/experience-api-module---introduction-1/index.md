@@ -2,7 +2,7 @@
 title: "Experience API Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Experience-API-Module-Introduction-1-2bea172b65a38072b021df84dd2cd02e
+source_url: https://app.notion.com/p/Experience-API-Module-Introduction-1-2bea172b65a38072b021df84dd2cd02e
 ---
 
 ## 1. Functional Requirements

@@ -2,7 +2,7 @@
 title: "QA- Notification Settings Module Intro 1"
 division: "QA"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/QA-Notification-Settings-Module-Intro-1-2e2a172b65a380c2a047ede2ad691f7c
+source_url: https://app.notion.com/p/QA-Notification-Settings-Module-Intro-1-2e2a172b65a380c2a047ede2ad691f7c
 ---
 
 ### **Functional Requirements**

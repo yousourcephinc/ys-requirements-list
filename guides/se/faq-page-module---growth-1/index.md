@@ -2,7 +2,7 @@
 title: "FAQ Page Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/FAQ-Page-Module-Growth-1-1baa172b65a3801e89bae988f76f5cd7
+source_url: https://app.notion.com/p/FAQ-Page-Module-Growth-1-1baa172b65a3801e89bae988f76f5cd7
 ---
 
 Key focus: Dynamic content using external services like FreshDesk

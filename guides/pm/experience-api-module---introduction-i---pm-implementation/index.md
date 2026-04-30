@@ -1,7 +1,7 @@
 ---
 title: "Experience API Module - Introduction I - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/Experience-API-Module-Introduction-I-PM-Implementation-2c6a172b65a380afa9acc36490871378
+source_url: https://app.notion.com/p/Experience-API-Module-Introduction-I-PM-Implementation-2c6a172b65a380afa9acc36490871378
 ---
 
 ## **PLANNING**

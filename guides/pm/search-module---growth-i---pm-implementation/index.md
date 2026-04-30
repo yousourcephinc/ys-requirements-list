@@ -2,7 +2,7 @@
 title: "Search Module - Growth I - PM Implementation"
 division: "PM"
 maturity: "Growth 1"
-source_url: https://www.notion.so/Search-Module-Growth-I-PM-Implementation-207a172b65a3802a92c5e4f9597a48e2
+source_url: https://app.notion.com/p/Search-Module-Growth-I-PM-Implementation-207a172b65a3802a92c5e4f9597a48e2
 ---
 
 ## **✅ Planning Checklist**

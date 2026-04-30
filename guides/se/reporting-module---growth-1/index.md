@@ -2,7 +2,7 @@
 title: "Reporting Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/Reporting-Module-Growth-1-1c1a172b65a380738616df06e6c37d7b
+source_url: https://app.notion.com/p/Reporting-Module-Growth-1-1c1a172b65a380738616df06e6c37d7b
 ---
 
 ### Functional Requirements

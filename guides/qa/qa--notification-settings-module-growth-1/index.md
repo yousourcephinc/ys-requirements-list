@@ -2,7 +2,7 @@
 title: "QA- Notification Settings Module Growth 1"
 division: "QA"
 maturity: "Growth 1"
-source_url: https://www.notion.so/QA-Notification-Settings-Module-Growth-1-2fba172b65a380bba0c8c53923aa3497
+source_url: https://app.notion.com/p/QA-Notification-Settings-Module-Growth-1-2fba172b65a380bba0c8c53923aa3497
 ---
 
 ### **Functional Requirements**

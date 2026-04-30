@@ -2,7 +2,7 @@
 title: "Payments and Recurring Payments Growth 1"
 division: "EXD"
 maturity: "Growth 1"
-source_url: https://www.notion.so/Payments-and-Recurring-Payments-Growth-1-1f1a172b65a380198bb4e864f2c43010
+source_url: https://app.notion.com/p/Payments-and-Recurring-Payments-Growth-1-1f1a172b65a380198bb4e864f2c43010
 ---
 
 ## Module Requirements

@@ -2,7 +2,7 @@
 title: "Requirements List API Integration Module (QA) Intro 1"
 division: "QA"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Requirements-List-API-Integration-Module-QA-Intro-1-2e2a172b65a380f28e99f49886524f54
+source_url: https://app.notion.com/p/Requirements-List-API-Integration-Module-QA-Intro-1-2e2a172b65a380f28e99f49886524f54
 ---
 
 ### **1. Functional Requirements**

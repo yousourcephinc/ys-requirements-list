@@ -1,7 +1,7 @@
 ---
 title: "Subscriptions Management Module - Introduction I - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/Subscriptions-Management-Module-Introduction-I-PM-Implementation-25ea172b65a380898fadd828beab174a
+source_url: https://app.notion.com/p/Subscriptions-Management-Module-Introduction-I-PM-Implementation-25ea172b65a380898fadd828beab174a
 ---
 
 # **✅ Implementation Guide – Subscription Management Module (Introduction 1)**

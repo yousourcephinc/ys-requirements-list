@@ -2,7 +2,7 @@
 title: "User Profile Module - Growth I - PM Implementation"
 division: "PM"
 maturity: "Growth 1"
-source_url: https://www.notion.so/User-Profile-Module-Growth-I-PM-Implementation-1f5a172b65a38037a1aae9adf396abad
+source_url: https://app.notion.com/p/User-Profile-Module-Growth-I-PM-Implementation-1f5a172b65a38037a1aae9adf396abad
 ---
 
 ## **✅ Planning Checklist**

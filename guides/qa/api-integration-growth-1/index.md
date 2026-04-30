@@ -2,7 +2,7 @@
 title: "API Integration Growth 1"
 division: "QA"
 maturity: "Growth 1"
-source_url: https://www.notion.so/QA-API-Integration-Growth-1-1b5a172b65a380dfa3a5e7dadf7b02da
+source_url: https://app.notion.com/p/QA-API-Integration-Growth-1-1b5a172b65a380dfa3a5e7dadf7b02da
 ---
 
 ## Module Requirements

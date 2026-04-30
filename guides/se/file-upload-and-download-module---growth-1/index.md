@@ -2,7 +2,7 @@
 title: "File Upload and Download Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/File-Upload-and-Download-Module-Growth-1-1bca172b65a3807496f4cd1fd7c1f77d
+source_url: https://app.notion.com/p/File-Upload-and-Download-Module-Growth-1-1bca172b65a3807496f4cd1fd7c1f77d
 ---
 
 Key focus: Shareable files (thru Link), and Security around Special File Formats (examples include **application packages (APK, APPX, etc.), compressed archives (ZIP, WAX, etc.), and data files (CSV, JSON)**. 

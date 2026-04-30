@@ -2,7 +2,7 @@
 title: "Diagnostics Module - Introduction 2"
 division: "SE"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/Diagnostics-Module-Introduction-2-1c2a172b65a38081a728f5ffaa287e2e
+source_url: https://app.notion.com/p/Diagnostics-Module-Introduction-2-1c2a172b65a38081a728f5ffaa287e2e
 ---
 
 ### Functional Requirements

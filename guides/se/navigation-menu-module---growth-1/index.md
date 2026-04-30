@@ -2,7 +2,7 @@
 title: "Navigation Menu Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/Navigation-Menu-Module-Growth-1-1aba172b65a380ee84bfd82670102a45
+source_url: https://app.notion.com/p/Navigation-Menu-Module-Growth-1-1aba172b65a380ee84bfd82670102a45
 ---
 
 Key focus: Role-aware Menu Items

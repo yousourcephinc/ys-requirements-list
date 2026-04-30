@@ -2,7 +2,7 @@
 title: "User Profile Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/User-Profile-Module-Growth-1-1cba172b65a38028ae40d3a78eb47f4b
+source_url: https://app.notion.com/p/User-Profile-Module-Growth-1-1cba172b65a38028ae40d3a78eb47f4b
 ---
 
 ### Functional Requirements

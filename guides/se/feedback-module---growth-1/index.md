@@ -2,7 +2,7 @@
 title: "Feedback Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/Feedback-Module-Growth-1-1aba172b65a380bbb64df43c77ea898e
+source_url: https://app.notion.com/p/Feedback-Module-Growth-1-1aba172b65a380bbb64df43c77ea898e
 ---
 
 ## Module Requirements

@@ -2,7 +2,7 @@
 title: "User Profile Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/User-Profile-Module-Introduction-1-1a7a172b65a380ecafbdca9268c5ac98
+source_url: https://app.notion.com/p/User-Profile-Module-Introduction-1-1a7a172b65a380ecafbdca9268c5ac98
 ---
 
 ### Functional Requirements

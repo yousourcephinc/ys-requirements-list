@@ -1,7 +1,7 @@
 ---
 title: "Experience API Module - Growth I - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/Experience-API-Module-Growth-I-PM-Implementation-2c6a172b65a38071b498f5ffeb01768e
+source_url: https://app.notion.com/p/Experience-API-Module-Growth-I-PM-Implementation-2c6a172b65a38071b498f5ffeb01768e
 ---
 
 ## **PLANNING**

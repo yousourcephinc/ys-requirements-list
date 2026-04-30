@@ -2,7 +2,7 @@
 title: "Subscription Management Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/Subscription-Management-Module-Growth-1-1e3a172b65a3802d8a7ee82bf8450bb7
+source_url: https://app.notion.com/p/Subscription-Management-Module-Growth-1-1e3a172b65a3802d8a7ee82bf8450bb7
 ---
 
 ## Module Requirements

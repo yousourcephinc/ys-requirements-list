@@ -2,7 +2,7 @@
 title: "Payment Processing Intro 1"
 division: "QA"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/QA-Payment-Processing-Intro-1-2e2a172b65a38067a32bff0bbc07b05c
+source_url: https://app.notion.com/p/QA-Payment-Processing-Intro-1-2e2a172b65a38067a32bff0bbc07b05c
 ---
 
 ### Functional Requirements

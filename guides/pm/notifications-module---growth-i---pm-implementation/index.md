@@ -1,7 +1,7 @@
 ---
 title: "Notifications Module - Growth I - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/Notifications-Module-Growth-I-PM-Implementation-23ba172b65a3802c8f24d74c1574c7b4
+source_url: https://app.notion.com/p/Notifications-Module-Growth-I-PM-Implementation-23ba172b65a3802c8f24d74c1574c7b4
 ---
 
 ## **📌 Planning – Checklist**

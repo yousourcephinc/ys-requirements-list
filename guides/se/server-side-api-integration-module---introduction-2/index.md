@@ -2,7 +2,7 @@
 title: "Server-Side API Integration Module - Introduction 2"
 division: "SE"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/Server-Side-API-Integration-Module-Introduction-2-1c0a172b65a380279218d5b288e09368
+source_url: https://app.notion.com/p/Server-Side-API-Integration-Module-Introduction-2-1c0a172b65a380279218d5b288e09368
 ---
 
 ### Functional Requirements

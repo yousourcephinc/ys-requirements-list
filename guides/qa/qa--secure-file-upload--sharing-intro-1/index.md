@@ -2,7 +2,7 @@
 title: "QA- Secure File Upload & Sharing Intro 1"
 division: "QA"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/QA-Secure-File-Upload-Sharing-Intro-1-2fba172b65a380b88a3fdccf6e476426
+source_url: https://app.notion.com/p/QA-Secure-File-Upload-Sharing-Intro-1-2fba172b65a380b88a3fdccf6e476426
 ---
 
 ### Functional Requirements

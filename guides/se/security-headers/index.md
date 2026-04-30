@@ -2,7 +2,7 @@
 title: "Security Headers"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Security-Headers-2a4a172b65a38198a6b8f99f110affcb
+source_url: https://app.notion.com/p/SE-Security-Headers-2a4a172b65a38198a6b8f99f110affcb
 ---
 
 From OWASP Top 10, in order to prevent malicious attacks, it is advised to add additional headers as well as to include in your API responses to keep the application secure.

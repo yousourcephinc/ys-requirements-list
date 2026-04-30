@@ -1,7 +1,7 @@
 ---
 title: "Notifications Module - Introduction II - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/Notifications-Module-Introduction-II-PM-Implementation-23ba172b65a3805ab661c1559f06de68
+source_url: https://app.notion.com/p/Notifications-Module-Introduction-II-PM-Implementation-23ba172b65a3805ab661c1559f06de68
 ---
 
 ## **📌 Planning – Checklist**

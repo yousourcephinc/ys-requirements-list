@@ -2,7 +2,7 @@
 title: "QA- Privacy Terms and Condition Module Intro 1"
 division: "QA"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/QA-Privacy-Terms-and-Condition-Module-Intro-1-2e2a172b65a3808d9b62fd57fe50c4bf
+source_url: https://app.notion.com/p/QA-Privacy-Terms-and-Condition-Module-Intro-1-2e2a172b65a3808d9b62fd57fe50c4bf
 ---
 
 ### **Functional**

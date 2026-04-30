@@ -2,7 +2,7 @@
 title: "Payments and Recurring Payments Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/Payments-and-Recurring-Payments-Module-Growth-1-1a7a172b65a3805ea2c0ec3ea4f3b752
+source_url: https://app.notion.com/p/Payments-and-Recurring-Payments-Module-Growth-1-1a7a172b65a3805ea2c0ec3ea4f3b752
 ---
 
 ## Module Requirements

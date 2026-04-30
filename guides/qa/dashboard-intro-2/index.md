@@ -2,7 +2,7 @@
 title: "Dashboard Intro 2"
 division: "QA"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/QA-Dashboard-Intro-2-1b5a172b65a3801982bff5ef96b94ad6
+source_url: https://app.notion.com/p/QA-Dashboard-Intro-2-1b5a172b65a3801982bff5ef96b94ad6
 ---
 
 ## Module Requirements

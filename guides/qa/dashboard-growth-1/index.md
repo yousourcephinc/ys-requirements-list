@@ -2,7 +2,7 @@
 title: "Dashboard Growth 1"
 division: "QA"
 maturity: "Growth 1"
-source_url: https://www.notion.so/QA-Dashboard-Growth-1-1b5a172b65a380ed836fc75c172310b5
+source_url: https://app.notion.com/p/QA-Dashboard-Growth-1-1b5a172b65a380ed836fc75c172310b5
 ---
 
 ## Module Requirements

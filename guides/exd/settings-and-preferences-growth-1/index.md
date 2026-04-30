@@ -2,7 +2,7 @@
 title: "Settings and Preferences Growth 1"
 division: "EXD"
 maturity: "Growth 1"
-source_url: https://www.notion.so/Settings-and-Preferences-Growth-1-1f1a172b65a3801cbeb2dcf1b4459ad3
+source_url: https://app.notion.com/p/Settings-and-Preferences-Growth-1-1f1a172b65a3801cbeb2dcf1b4459ad3
 ---
 
 ## Module Requirements

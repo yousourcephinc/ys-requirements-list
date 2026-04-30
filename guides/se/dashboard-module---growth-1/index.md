@@ -2,7 +2,7 @@
 title: "Dashboard Module - Growth 1"
 division: "SE"
 maturity: "Growth 1"
-source_url: https://www.notion.so/SE-Dashboard-Module-Growth-1-1c2a172b65a380fd9089f795efa04b5f
+source_url: https://app.notion.com/p/SE-Dashboard-Module-Growth-1-1c2a172b65a380fd9089f795efa04b5f
 ---
 
 ### Functional Requirements

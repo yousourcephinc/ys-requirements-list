@@ -2,7 +2,7 @@
 title: "Payment Processing Module - Introduction 1"
 division: "SE"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Payment-Processing-Module-Introduction-1-1c2a172b65a380bca662c3a5cba4e5be
+source_url: https://app.notion.com/p/Payment-Processing-Module-Introduction-1-1c2a172b65a380bca662c3a5cba4e5be
 ---
 
 ### Functional Requirements

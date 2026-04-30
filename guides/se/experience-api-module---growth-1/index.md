@@ -2,7 +2,7 @@
 title: "Experience API Module - Growth 1"
 division: "SE"
 maturity: "Growth 2"
-source_url: https://www.notion.so/Experience-API-Module-Growth-1-2bea172b65a3807ebdb3d430c5207cb0
+source_url: https://app.notion.com/p/Experience-API-Module-Growth-1-2bea172b65a3807ebdb3d430c5207cb0
 ---
 
 ## 1. Functional Requirements

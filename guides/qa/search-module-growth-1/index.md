@@ -2,7 +2,7 @@
 title: "Search Module Growth 1"
 division: "QA"
 maturity: "Growth 1"
-source_url: https://www.notion.so/QA-Search-Module-Growth-1-2fba172b65a38070a3badb9c71dcc18a
+source_url: https://app.notion.com/p/QA-Search-Module-Growth-1-2fba172b65a38070a3badb9c71dcc18a
 ---
 
 ### **Functional Requirements**

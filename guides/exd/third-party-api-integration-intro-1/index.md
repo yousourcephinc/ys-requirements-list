@@ -2,7 +2,7 @@
 title: "Third-Party API Integration Intro 1"
 division: "EXD"
 maturity: "Introduction 1"
-source_url: https://www.notion.so/Third-Party-API-Integration-Intro-1-1aea172b65a380bea7c2c222a0469b6a
+source_url: https://app.notion.com/p/Third-Party-API-Integration-Intro-1-1aea172b65a380bea7c2c222a0469b6a
 ---
 
 ## Module Requirements

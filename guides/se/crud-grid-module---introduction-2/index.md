@@ -2,7 +2,7 @@
 title: "CRUD Grid Module - Introduction 2"
 division: "SE"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/CRUD-Grid-Module-Introduction-2-1a7a172b65a3806db441e2478361e920
+source_url: https://app.notion.com/p/CRUD-Grid-Module-Introduction-2-1a7a172b65a3806db441e2478361e920
 ---
 
 ### **Functional Requirements**

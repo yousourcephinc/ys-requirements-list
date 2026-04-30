@@ -2,7 +2,7 @@
 title: "Service Layer"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Service-Layer-2a4a172b65a38151a518ea0e8de22ff3
+source_url: https://app.notion.com/p/SE-Service-Layer-2a4a172b65a38151a518ea0e8de22ff3
 ---
 
 Is simply where the logic is placed. Keep reusability or SRP in mind when creating services. A good example is Email Service for reusability, and Order Service for applying SRP i.e. isolating the complexity of the ordering process into a service.

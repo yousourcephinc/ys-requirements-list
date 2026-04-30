@@ -2,7 +2,7 @@
 title: "Support Module - Introduction 2"
 division: "SE"
 maturity: "Introduction 2"
-source_url: https://www.notion.so/Support-Module-Introduction-2-1c1a172b65a3805ba008f3cf67649684
+source_url: https://app.notion.com/p/Support-Module-Introduction-2-1c1a172b65a3805ba008f3cf67649684
 ---
 
 ### Functional Requirements

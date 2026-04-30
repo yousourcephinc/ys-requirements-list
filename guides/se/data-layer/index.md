@@ -2,7 +2,7 @@
 title: "Data Layer"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Data-Layer-2a4a172b65a381129794ec9bb67085cc
+source_url: https://app.notion.com/p/SE-Data-Layer-2a4a172b65a381129794ec9bb67085cc
 ---
 
 Also, more often the data gateways are just an abstraction layer for data access.

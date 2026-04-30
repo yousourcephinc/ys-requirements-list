@@ -2,7 +2,7 @@
 title: "Security   General"
 division: "SE"
 maturity: "Foundational 1"
-source_url: https://www.notion.so/SE-Security-General-2a4a172b65a381eca682c4dc5d6073f8
+source_url: https://app.notion.com/p/SE-Security-General-2a4a172b65a381eca682c4dc5d6073f8
 ---
 
 - Do configure CORS to only allow valid origins such as your SPA (Frontend)

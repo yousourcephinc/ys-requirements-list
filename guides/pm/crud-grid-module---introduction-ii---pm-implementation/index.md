@@ -1,7 +1,7 @@
 ---
 title: "CRUD Grid Module - Introduction II - PM Implementation"
 division: "PM"
-source_url: https://www.notion.so/CRUD-Grid-Module-Introduction-II-PM-Implementation-2a2a172b65a380a6b554c4ae9ba6da36
+source_url: https://app.notion.com/p/CRUD-Grid-Module-Introduction-II-PM-Implementation-2a2a172b65a380a6b554c4ae9ba6da36
 ---
 
 ### **Functional Planning**
